@@ -17,7 +17,7 @@ body {
 
     .videoTranslationAndMap {
       border: 1px solid black;
-      min-height: 50%;
+      height: 50%;
       display: flex;
       flex-direction: row;
       justify-content: space-around;
@@ -26,6 +26,9 @@ body {
         border: 1px solid red;
         margin: 1em;
         flex: auto;
+        .testVideo {
+        background: url("../a30c642217c5759a3973f2aebbeb66b1.gif");
+        }
       }
 
 
@@ -36,10 +39,16 @@ body {
       display: flex;
       flex-direction: row;
       justify-content: space-around;
+      overflow: auto;
+      //Временные css плохо отображается скрол страници при переполнении
+      position: fixed;
+      width: inherit;
+      max-width: 74%;
       .testdata {
         flex: auto;
         border: 1px solid red;
         margin: 1em;
+        min-width: 12em;
       }
     }
 
@@ -55,10 +64,13 @@ body {
       flex-direction: column;
       margin: 1em;
       border: 1px solid black;
+      overflow: auto;
+      height: 0;
       .testElement {
         flex: auto;
         margin: 1em;
         border: 1px solid red;
+        min-height: 5em;
       }
     }
   }
