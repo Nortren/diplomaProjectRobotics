@@ -29,9 +29,9 @@ state={
         // );
         const border = {border: '1px solid black'};
         return(
-            <div className="container ">
+            <div className="container-fluid ">
                 <div className="row jumbotron ">
-                    <div className=" col-8 card ">
+                    <div className=" col-8 card  ">
                         <div className="row  card-body ">
                             <div className="dataVisualisation card col-6" >
                                 realTimeVideoTranslation
@@ -41,19 +41,18 @@ state={
                                 realTimeVideoTranslation
                             </div>
                         </div>
-                        <div className=" row  " >
+                        <ul className="row   card-body ">
 
-                            <div className="testdata card card-body">testdata</div>
-                            <div className="testdata card card-body">testdata</div>
-                            <div className="testdata card card-body">testdata</div>
-                            <div className="testdata card card-body">testdata</div>
-                            <div className="testdata card card-body">testdata</div>
-                            <div className="testdata card card-body">testdata</div>
-                            <div className="testdata card card-body">testdata</div>
-                            <div className="testdata card card-body">testdata</div>
-                            <div className="testdata card card-body">testdata</div>
+                            <li className=" card card-body">testdata</li>
+                            <li className=" card card-body">testdata</li>
+                            <li className=" card card-body">testdata</li>
+                            <li className=" card card-body">testdata</li>
+                            <li className=" card card-body">testdata</li>
+                            <li className=" card card-body">testdata</li>
+                            <li className=" card card-body">testdata</li>
 
-                        </div>
+
+                        </ul>
                     </div>
                     <div className="col-4  ">
                         <div className="card-header">
