@@ -4,14 +4,28 @@ class VisualDisplay extends Component {
 
     render(){
         return(
-            <div className="videoTranslationAndMap">
-                <div className="dataVisualisation">
-                    <img className="testVideo" src="../a30c642217c5759a3973f2aebbeb66b1.gif" alt=""/>
-                </div>
-                <div className="dataVisualisation">
-                    realTimeVideoTranslation
-                </div>
+            <div className=" col-8 card  ">
+                <div className="row  card-body ">
+                    <div className="dataVisualisation card col-6" >
+                        realTimeVideoTranslation
+                    </div>
 
+                    <div className="dataVisualisation card col-6" >
+                        realTimeVideoTranslation
+                    </div>
+                </div>
+                <ul className="row   card-body ">
+
+                    <li className=" card card-body">testdata</li>
+                    <li className=" card card-body">testdata</li>
+                    <li className=" card card-body">testdata</li>
+                    <li className=" card card-body">testdata</li>
+                    <li className=" card card-body">testdata</li>
+                    <li className=" card card-body">testdata</li>
+                    <li className=" card card-body">testdata</li>
+
+
+                </ul>
             </div>
         );
     }
