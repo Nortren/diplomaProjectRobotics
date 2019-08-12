@@ -1,5 +1,5 @@
 import React, {Component, PureComponent} from "react";
-
+import MyElementsSlider from "../MyElementsSlider/MyElementsSlider";
 class VisualDisplay extends Component {
 
     render(){
@@ -14,18 +14,9 @@ class VisualDisplay extends Component {
                         realTimeVideoTranslation
                     </div>
                 </div>
-                <ul className="row   card-body ">
-
-                    <li className=" card card-body">testdata</li>
-                    <li className=" card card-body">testdata</li>
-                    <li className=" card card-body">testdata</li>
-                    <li className=" card card-body">testdata</li>
-                    <li className=" card card-body">testdata</li>
-                    <li className=" card card-body">testdata</li>
-                    <li className=" card card-body">testdata</li>
-
-
-                </ul>
+                <div className=' card-body'>
+         <MyElementsSlider/>
+					 </div>
             </div>
         );
     }
