@@ -18,7 +18,7 @@ class App extends Component {
     render() {
         const border = {border: '1px solid black'};
         return (
-            <div className="container-fluid ">
+            <div className="container-fluid w-100">
                 <div className="row jumbotron ">
                     <VisualDisplay/>
                     <VisualParams/>
