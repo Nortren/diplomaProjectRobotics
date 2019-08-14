@@ -1,22 +1,20 @@
 import React, {Component, PureComponent} from "react";
 import MyElementsSlider from "../MyElementsSlider/MyElementsSlider";
+import VideoTranslation from "../VideoTranslation/VideoTranslation";
+import MapDisplay from "../MapDisplay/MapDisplay";
+
 class VisualDisplay extends Component {
 
-    render(){
-        return(
+    render() {
+        return (
             <div className=" col-8 card  ">
                 <div className="row  card-body ">
-                    <div className="dataVisualisation card col-6" >
-                        realTimeVideoTranslation
-                    </div>
-
-                    <div className="dataVisualisation card col-6" >
-                        realTimeVideoTranslation
-                    </div>
+                    <VideoTranslation/>
+                   <MapDisplay/>
                 </div>
                 <div className=' card-body'>
-         <MyElementsSlider/>
-					 </div>
+                    <MyElementsSlider/>
+                </div>
             </div>
         );
     }

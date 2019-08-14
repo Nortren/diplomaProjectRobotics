@@ -19,7 +19,7 @@ class App extends Component {
         const border = {border: '1px solid black'};
         return (
             <div className="container-fluid ">
-                <div className="row">
+                <div className="row jumbotron ">
                     <VisualDisplay/>
                     <VisualParams/>
                 </div>
