@@ -1,19 +1,39 @@
 import React, {Component, PureComponent} from "react";
-// import './MyElementsSlider.css'
+import './MyElementsSlider.css'
 import ReactDOM from 'react-dom';
 import InfiniteCarousel from 'react-leaf-carousel';
 class MyElementsSlider extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            stripBg: 0
+        };
+    }
 
+    sliderRight() {
+    this.setState({ stripBg: this.state.stripBg+128 });
+    if(this.state.stripBg >= 0){
+        this.setState({ stripBg:0 });
+    }
+}
+    sliderLeft() {
+        this.setState({ stripBg: this.state.stripBg-128 });
+        if(this.state.stripBg <= -3000){
+            this.setState({ stripBg:0 });
+        }
+    }
     render() {
-
-
-
-
+        const style = { left: this.state.stripBg };
         return (
-
-            <div id="slider">
-                <div id="polosa" className="row">
+            <div id="slider" className="card-body card col-12">
+                <div id="polosa" style={ style } className="row">
+                    <div className="card card-body">123</div>
+                    <div className="card card-body">123</div>
+                    <div className="card card-body">123</div>
+                    <div className="card card-body">123</div>
+                    <div className="card card-body">123</div>
+                    <div className="card card-body">123</div>
                     <div className="card card-body">123</div>
                     <div className="card card-body">123</div>
                     <div className="card card-body">123</div>
@@ -21,7 +41,11 @@ class MyElementsSlider extends Component {
                     <div className="card card-body">123</div>
                     <div className="card card-body">123</div>
                 </div>
-                <button id="slider-left">left</button>
+                <div className="row ">
+                    <button id="slider-left" className="col-6" onClick={e => this.sliderLeft()}>left</button>
+                <button id="slider-left" className="col-6" onClick={e => this.sliderRight()}>right</button>
+
+                </div>
             </div>
 
 
@@ -29,6 +53,8 @@ class MyElementsSlider extends Component {
     }
 
 }
+
+
 
 export default MyElementsSlider
 
