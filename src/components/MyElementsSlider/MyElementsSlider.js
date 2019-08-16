@@ -42,8 +42,8 @@ class MyElementsSlider extends Component {
                     <div className="card card-body">123</div>
                 </div>
                 <div className="row ">
-                    <button id="slider-left" className="col-6" onClick={e => this.sliderLeft()}>left</button>
-                <button id="slider-left" className="col-6" onClick={e => this.sliderRight()}>right</button>
+                    <button id="slider-left" className="col-6" onClick={e => this.sliderRight()}>left</button>
+                <button id="slider-left" className="col-6" onClick={e => this.sliderLeft()}>right</button>
 
                 </div>
             </div>
