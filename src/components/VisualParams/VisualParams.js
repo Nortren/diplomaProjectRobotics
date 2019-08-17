@@ -1,4 +1,5 @@
 import React, {Component, PureComponent} from "react";
+import ElementsSliderVertical from '../ElementsSliderVertical/ElementsSliderVertical'
 class VisualParams extends Component {
 
     render(){
@@ -7,16 +8,7 @@ class VisualParams extends Component {
                 <div className="card-header">
                     Список параметров
                 </div>
-                <div className="sensorsList list-group list-group-flush ">
-                    <div className="list-group-item ">testElement</div>
-                    <div className="list-group-item ">testElement</div>
-                    <div className="list-group-item ">testElement</div>
-                    <div className="list-group-item ">testElement</div>
-                    <div className="list-group-item ">testElement</div>
-                    <div className="list-group-item ">testElement</div>
-                    <div className="list-group-item ">testElement</div>
-
-                </div>
+               <ElementsSliderVertical/>
             </div>
         );
     }
