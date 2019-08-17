@@ -1,5 +1,5 @@
 import React, {Component, PureComponent} from "react";
-import MyElementsSlider from "../MyElementsSlider/MyElementsSlider";
+import ElementsSliderHorizontal from "../ElementsSliderHorizontal/ElementsSliderHorizontal";
 import VideoTranslation from "../VideoTranslation/VideoTranslation";
 import MapDisplay from "../MapDisplay/MapDisplay";
 
@@ -13,7 +13,7 @@ class VisualDisplay extends Component {
                    <MapDisplay/>
                 </div>
                 <div className=' card-body'>
-                    <MyElementsSlider/>
+                    <ElementsSliderHorizontal/>
                 </div>
             </div>
         );

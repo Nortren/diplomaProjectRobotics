@@ -4,7 +4,7 @@ import  articles from '../fixtures'
 import VisualDisplay from './VisualDisplay/VisualDisplay'
 
 import 'bootstrap/dist/css/bootstrap.css'
-import '../styles/index.css'
+
 
 import '../styles/App.css';
 import VisualParams from "./VisualParams/VisualParams";

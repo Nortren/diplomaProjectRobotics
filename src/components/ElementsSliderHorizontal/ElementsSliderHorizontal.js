@@ -1,8 +1,8 @@
 import React, {Component, PureComponent} from "react";
-import './MyElementsSlider.css'
+import './ElementsSliderHorizontal.css'
 import ReactDOM from 'react-dom';
 import InfiniteCarousel from 'react-leaf-carousel';
-class MyElementsSlider extends Component {
+class ElementsSliderHorizontal extends Component {
 
     constructor(props) {
         super(props);
@@ -56,7 +56,7 @@ class MyElementsSlider extends Component {
 
 
 
-export default MyElementsSlider
+export default ElementsSliderHorizontal
 
 
 /*
