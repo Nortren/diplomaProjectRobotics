@@ -1,14 +1,13 @@
 .carousel_vertical {
-  max-height: 700px;
-
-  overflow: hidden;//почитать
+  max-height: 50em;
+  overflow: hidden; //почитать
 
   &_line {
     hidden: 5000px;
     min-width: 200px;
     position: relative;
     left: 0;
-    transition: all ease 1s;//почитать
+    transition: all ease 1s; //почитать
 
     &_elements::after {
       content: "";
@@ -16,7 +15,55 @@
       clear: both;
     }
     &_element {
+margin-bottom: 1em;
+    }
+  }
+  .carousel-control {
+
+    width: 3.5em;
+    filter: none;
+    opacity: 1;
+    text-shadow: none;
+    &:hover {
+      filter: none;
+      opacity: 1;
+      text-shadow: none;
+    }
+
+    .buttonSettings {
+      background-image: none;
+      position: inherit;
+      &_glyphicon_chevron {
+        background-color: rgba(30, 30, 30, 0.13);
+        font-size: 16px;
+        height: 32px;
+        line-height: 32px;
+        width: 32px;
+        &:hover {
+          background-color: rgba(13, 6, 6, 0.5);
+        }
+        @media (min-width: 768px) {
+          font-size: 20px;
+          height: 50px;
+          line-height: 50px;
+          margin-top: -25px;
+          width: 50px;
+        }
+      }
+    }
+    &_right {
+      .buttonSettings;
+      margin: 1em;
+    }
+    &_left {
+      .buttonSettings;
+      margin: 1em;
 
     }
   }
+}
+.control_position {
+  justify-content: space-between ;
+  display: flex ;
+
 }

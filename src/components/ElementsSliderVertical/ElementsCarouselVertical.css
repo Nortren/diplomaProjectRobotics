@@ -1,5 +1,5 @@
 .carousel_vertical {
-  max-height: 700px;
+  max-height: 50em;
   overflow: hidden;
 }
 .carousel_vertical_line {
@@ -13,4 +13,93 @@
   content: "";
   display: block;
   clear: both;
+}
+.carousel_vertical_line_element {
+  margin-bottom: 1em;
+}
+.carousel_vertical .carousel-control {
+  width: 3.5em;
+  filter: none;
+  opacity: 1;
+  text-shadow: none;
+}
+.carousel_vertical .carousel-control:hover {
+  filter: none;
+  opacity: 1;
+  text-shadow: none;
+}
+.carousel_vertical .carousel-control .buttonSettings {
+  background-image: none;
+  position: inherit;
+}
+.carousel_vertical .carousel-control .buttonSettings_glyphicon_chevron {
+  background-color: rgba(30, 30, 30, 0.13);
+  font-size: 16px;
+  height: 32px;
+  line-height: 32px;
+  width: 32px;
+}
+.carousel_vertical .carousel-control .buttonSettings_glyphicon_chevron:hover {
+  background-color: rgba(13, 6, 6, 0.5);
+}
+@media (min-width: 768px) {
+  .carousel_vertical .carousel-control .buttonSettings_glyphicon_chevron {
+    font-size: 20px;
+    height: 50px;
+    line-height: 50px;
+    margin-top: -25px;
+    width: 50px;
+  }
+}
+.carousel_vertical .carousel-control_right {
+  background-image: none;
+  position: inherit;
+  margin: 1em;
+}
+.carousel_vertical .carousel-control_right_glyphicon_chevron {
+  background-color: rgba(30, 30, 30, 0.13);
+  font-size: 16px;
+  height: 32px;
+  line-height: 32px;
+  width: 32px;
+}
+.carousel_vertical .carousel-control_right_glyphicon_chevron:hover {
+  background-color: rgba(13, 6, 6, 0.5);
+}
+@media (min-width: 768px) {
+  .carousel_vertical .carousel-control_right_glyphicon_chevron {
+    font-size: 20px;
+    height: 50px;
+    line-height: 50px;
+    margin-top: -25px;
+    width: 50px;
+  }
+}
+.carousel_vertical .carousel-control_left {
+  background-image: none;
+  position: inherit;
+  margin: 1em;
+}
+.carousel_vertical .carousel-control_left_glyphicon_chevron {
+  background-color: rgba(30, 30, 30, 0.13);
+  font-size: 16px;
+  height: 32px;
+  line-height: 32px;
+  width: 32px;
+}
+.carousel_vertical .carousel-control_left_glyphicon_chevron:hover {
+  background-color: rgba(13, 6, 6, 0.5);
+}
+@media (min-width: 768px) {
+  .carousel_vertical .carousel-control_left_glyphicon_chevron {
+    font-size: 20px;
+    height: 50px;
+    line-height: 50px;
+    margin-top: -25px;
+    width: 50px;
+  }
+}
+.control_position {
+  justify-content: space-between;
+  display: flex ;
 }

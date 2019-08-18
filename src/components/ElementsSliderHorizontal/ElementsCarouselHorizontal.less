@@ -3,7 +3,7 @@
   overflow: hidden; //почитать
 
   &_line {
-    width: 150em;
+    width: 1500em;
     min-width: 200px;
     position: relative;
     left: 0;
@@ -17,15 +17,7 @@
     &_element {
       margin-right: 1em;
       width: 10em;
-      height: 3em;
-    }
-  }
-  &_button {
-    &_right {
-      content: "";
-    }
-    &_left {
-      content: "";
+      height: 10em;
     }
   }
 
@@ -40,14 +32,13 @@
       text-shadow: none;
     }
 
-    .buttonSettings() {
+    .buttonSettings {
       background-image: none;
       &_glyphicon_chevron {
         background-color: rgba(30, 30, 30, 0.13);
         font-size: 16px;
         height: 32px;
         line-height: 32px;
-        margin-top: -16px;
         width: 32px;
         margin: -1em;
         &:hover {
@@ -62,12 +53,11 @@
         }
       }
     }
-
     &_right {
-      .buttonSettings();
+      .buttonSettings
     }
     &_left {
-      .buttonSettings();
+      .buttonSettings
     }
   }
 }

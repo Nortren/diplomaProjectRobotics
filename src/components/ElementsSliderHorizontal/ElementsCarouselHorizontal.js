@@ -35,6 +35,22 @@ class ElementsSliderHorizontal extends Component {
                     <div className="card  carousel_horizontal_line_element">123</div>
                     <div className="card  carousel_horizontal_line_element">123</div>
                     <div className="card  carousel_horizontal_line_element">123</div>
+                    <div className="card  carousel_horizontal_line_element">123</div>
+                    <div className="card  carousel_horizontal_line_element">123</div>
+                    <div className="card  carousel_horizontal_line_element">123</div>
+                    <div className="card  carousel_horizontal_line_element">123</div>
+                    <div className="card  carousel_horizontal_line_element">123</div>
+                    <div className="card  carousel_horizontal_line_element">123</div>
+                    <div className="card  carousel_horizontal_line_element">123</div>
+                    <div className="card  carousel_horizontal_line_element">123</div>
+                    <div className="card  carousel_horizontal_line_element">123</div>
+                    <div className="card  carousel_horizontal_line_element">123</div>
+                    <div className="card  carousel_horizontal_line_element">123</div>
+                    <div className="card  carousel_horizontal_line_element">123</div>
+                    <div className="card  carousel_horizontal_line_element">123</div>
+                    <div className="card  carousel_horizontal_line_element">123</div>
+
+
                 </div>
                 <div className="row ">
                     <a class="carousel-control_left left carousel-control" href="#carousel-id" role="button" data-slide="prev">
