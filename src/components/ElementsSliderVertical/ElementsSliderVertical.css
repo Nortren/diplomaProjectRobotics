@@ -1,18 +1,15 @@
-#slider {
+.slider_vertical {
+  max-height: 700px;
   overflow: hidden;
 }
-#polosa {
-  background: pink;
-  width: 5000px;
+.slider_vertical_line {
+  hidden: 5000px;
   min-width: 200px;
   position: relative;
   left: 0;
   transition: all ease 1s;
 }
-#polosa img {
-  float: left;
-}
-#polosa::after {
+.slider_vertical_line_elements::after {
   content: "";
   display: block;
   clear: both;

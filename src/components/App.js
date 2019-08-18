@@ -1,6 +1,4 @@
 import React, {Component} from "react";
-import ArticleList from './ArticleList/ArticleList'
-import  articles from '../fixtures'
 import VisualDisplay from './VisualDisplay/VisualDisplay'
 
 import 'bootstrap/dist/css/bootstrap.css'

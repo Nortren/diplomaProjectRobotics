@@ -12,14 +12,14 @@ class ElementsSliderVertical extends Component {
     }
 
     sliderRight() {
-    this.setState({ stripBg: this.state.stripBg+128 });
+    this.setState({ stripBg: this.state.stripBg-128 });
     if(this.state.stripBg <= -3000){
         this.setState({ stripBg:0 });
     }
 }
     sliderLeft() {
         this.setState({ stripBg: this.state.stripBg-128 });
-        if(this.state.stripBg  >= 0){
+        if(this.state.stripBg  <= 0){
             this.setState({ stripBg:0 });
         }
     }
@@ -27,16 +27,19 @@ class ElementsSliderVertical extends Component {
         const style = { top: this.state.stripBg };
         return (
             <div>
-            <div id="slider" className="card-body card col-12 sensorsList list-group list-group-flush">
-                <div id="polosa" style={ style } className="">
-                    <div className="list-group-item ">testElement</div>
-                    <div className="list-group-item ">testElement</div>
-                    <div className="list-group-item ">testElement</div>
-                    <div className="list-group-item ">testElement</div>
-                    <div className="list-group-item ">testElement</div>
-                    <div className="list-group-item ">testElement</div>
-                    <div className="list-group-item ">testElement</div>
-
+            <div className="slider_vertical card-body card col-12 sensorsList list-group list-group-flush">
+                <div style={ style } className="slider_vertical_line">
+                    <div className="list-group-item slider_vertical_line_element">testElement</div>
+                    <div className="list-group-item slider_vertical_line_element">testElement</div>
+                    <div className="list-group-item slider_vertical_line_element">testElement</div>
+                    <div className="list-group-item slider_vertical_line_element">testElement</div>
+                    <div className="list-group-item slider_vertical_line_element">testElement</div>
+                    <div className="list-group-item slider_vertical_line_element">testElement</div>
+                    <div className="list-group-item slider_vertical_line_element">testElement</div>
+                    <div className="list-group-item slider_vertical_line_element">testElement</div>
+                    <div className="list-group-item slider_vertical_line_element">testElement</div>
+                    <div className="list-group-item slider_vertical_line_element">testElement</div>
+                    <div className="list-group-item slider_vertical_line_element">testElement</div>
                 </div>
 
             </div>
