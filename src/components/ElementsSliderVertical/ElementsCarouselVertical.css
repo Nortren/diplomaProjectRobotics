@@ -1,15 +1,15 @@
-.slider_vertical {
+.carousel_vertical {
   max-height: 700px;
   overflow: hidden;
 }
-.slider_vertical_line {
+.carousel_vertical_line {
   hidden: 5000px;
   min-width: 200px;
   position: relative;
   left: 0;
   transition: all ease 1s;
 }
-.slider_vertical_line_elements::after {
+.carousel_vertical_line_elements::after {
   content: "";
   display: block;
   clear: both;

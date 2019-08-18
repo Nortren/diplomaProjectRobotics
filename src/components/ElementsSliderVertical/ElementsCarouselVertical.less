@@ -1,12 +1,14 @@
-.slider_horizontal {
-  overflow: hidden; //почитать
+.carousel_vertical {
+  max-height: 700px;
+
+  overflow: hidden;//почитать
 
   &_line {
-    width: 150em;
+    hidden: 5000px;
     min-width: 200px;
     position: relative;
     left: 0;
-    transition: all ease 1s; //почитать
+    transition: all ease 1s;//почитать
 
     &_elements::after {
       content: "";
@@ -14,8 +16,7 @@
       clear: both;
     }
     &_element {
-      margin-right: 1em;
-      width: 1em;
+
     }
   }
 }

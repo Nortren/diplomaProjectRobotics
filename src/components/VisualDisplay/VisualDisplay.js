@@ -1,5 +1,5 @@
 import React, {Component, PureComponent} from "react";
-import ElementsSliderHorizontal from "../ElementsSliderHorizontal/ElementsSliderHorizontal";
+import ElementsSliderHorizontal from "../ElementsSliderHorizontal/ElementsCarouselHorizontal";
 import VideoTranslation from "../VideoTranslation/VideoTranslation";
 import MapDisplay from "../MapDisplay/MapDisplay";
 
