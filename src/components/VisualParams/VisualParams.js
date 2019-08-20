@@ -1,5 +1,5 @@
 import React, {Component, PureComponent} from "react";
-import ElementsSliderVertical from '../ElementsSliderVertical/ElementsCarouselVertical'
+import ElementsSliderVertical from '../ElementsCarouselVertical/ElementsCarouselVertical'
 class VisualParams extends Component {
 
     render(){
