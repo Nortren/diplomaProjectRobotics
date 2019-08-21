@@ -16,6 +16,7 @@
 }
 .carousel_vertical_line_element {
   margin-bottom: 1em;
+  min-height: 50px;
 }
 .carousel_vertical .carousel-control {
   width: 3.5em;
@@ -101,5 +102,5 @@
 }
 .control_position {
   justify-content: space-between;
-  display: flex ;
+  display: flex;
 }

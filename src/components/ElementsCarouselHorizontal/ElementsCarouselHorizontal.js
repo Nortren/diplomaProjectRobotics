@@ -15,14 +15,15 @@ class ElementsCarouselHorizontal extends Component {
         this.setState({ elementShift:0 });
     }
 }
-    carouselMoveRight() {
+    carouselMoveRight(length) {
         this.setState({ elementShift: this.state.elementShift-128 });
-        if(this.state.elementShift <= -3000){
+        if(this.state.elementShift <= -length){
             this.setState({ elementShift:0 });
         }
     }
     render() {
-        const test = [1,2,3,4,5,6,7];
+        const test = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30];
+        const lengthArrayData = test.length*70;
 
         const style = { left: this.state.elementShift };
         return (
@@ -40,7 +41,7 @@ class ElementsCarouselHorizontal extends Component {
                         <span className="carousel-control_left_glyphicon_chevron  glyphicon glyphicon-chevron-left" aria-hidden="true" onClick={e => this.carouselMoveLeft()}></span>
                     </a>
                     <a className=" carousel-control_right  right carousel-control" href="#carousel-id" role="button" data-slide="next">
-                        <span className="carousel-control_right_glyphicon_chevron glyphicon glyphicon-chevron-right" aria-hidden="true" onClick={e => this.carouselMoveRight()}></span>
+                        <span className="carousel-control_right_glyphicon_chevron glyphicon glyphicon-chevron-right" aria-hidden="true" onClick={e => this.carouselMoveRight(lengthArrayData)}></span>
                     </a>
                 </div>
             </div>
