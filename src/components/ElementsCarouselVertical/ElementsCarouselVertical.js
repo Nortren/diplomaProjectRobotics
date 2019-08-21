@@ -7,24 +7,24 @@ class ElementsCarouselVertical extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            stripBg: 0
+            elementShift: 0
         };
     }
 
     carouselMoveDown(length) {
-    this.setState({ stripBg: this.state.stripBg-50 });
-    if(this.state.stripBg <= -length){
-        this.setState({ stripBg:0 });
+    this.setState({ elementShift: this.state.elementShift-50 });
+    if(this.state.elementShift <= -length){
+        this.setState({ elementShift:0 });
     }
 }
-    carouselMoveUp(length) {
-        this.setState({ stripBg: this.state.stripBg-50 });
-        if(this.state.stripBg  <= 0){
-            this.setState({ stripBg:0 });
+    carouselMoveUp() {
+        this.setState({ elementShift: this.state.elementShift-50 });
+        if(this.state.elementShift  <= 0){
+            this.setState({ elementShift:0 });
         }
     }
     render() {
-        const style = { top: this.state.stripBg };
+        const style = { top: this.state.elementShift };
         const test = [1,2];
         const lengthArrayData = test.length*50;
         return (
@@ -40,7 +40,7 @@ class ElementsCarouselVertical extends Component {
             </div >
                 <div className="control_position carousel_vertical card-body" >
                     <a className="carousel-control_left left carousel-control" href="#carousel-id" role="button" data-slide="prev">
-                        <span className="carousel-control_left_glyphicon_chevron  glyphicon glyphicon-chevron-up" aria-hidden="true" onClick={e => this.carouselMoveUp(lengthArrayData)}></span>
+                        <span className="carousel-control_left_glyphicon_chevron  glyphicon glyphicon-chevron-up" aria-hidden="true" onClick={e => this.carouselMoveUp()}></span>
                     </a>
                     <a className=" carousel-control_right  right carousel-control" href="#carousel-id" role="button" data-slide="next">
                         <span className="carousel-control_right_glyphicon_chevron glyphicon glyphicon-chevron-down" aria-hidden="true" onClick={e => this.carouselMoveDown(lengthArrayData)}></span>

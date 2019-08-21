@@ -6,25 +6,25 @@ class ElementsCarouselHorizontal extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            stripBg: 0
+            elementShift: 0
         };
     }
     carouselMoveLeft() {
-    this.setState({ stripBg: this.state.stripBg+128 });
-    if(this.state.stripBg >= 0){
-        this.setState({ stripBg:0 });
+    this.setState({ elementShift: this.state.elementShift+128 });
+    if(this.state.elementShift >= 0){
+        this.setState({ elementShift:0 });
     }
 }
     carouselMoveRight() {
-        this.setState({ stripBg: this.state.stripBg-128 });
-        if(this.state.stripBg <= -3000){
-            this.setState({ stripBg:0 });
+        this.setState({ elementShift: this.state.elementShift-128 });
+        if(this.state.elementShift <= -3000){
+            this.setState({ elementShift:0 });
         }
     }
     render() {
         const test = [1,2,3,4,5,6,7];
 
-        const style = { left: this.state.stripBg };
+        const style = { left: this.state.elementShift };
         return (
             <div>
             <div  className="carousel_horizontal card-body card col-12">
