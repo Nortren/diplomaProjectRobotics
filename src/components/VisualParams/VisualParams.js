@@ -4,7 +4,7 @@ class VisualParams extends Component {
 
     render(){
         return(
-            <div className="col-lg-4 col-12 card container m-1 p-0">
+            <div className="col-lg-3 col-12 card container  p-4 ">
                 <div className="card-header">
                     Список параметров
                 </div>
