@@ -7,9 +7,9 @@ class VisualDisplay extends Component {
 
     render() {
         return (
-            <div className=" col-8 card  ">
+            <div className=" col-lg-8 col-12 card  ">
                 <div className="row  card-body ">
-                    <VideoTranslation/>
+                    <VideoTranslation />
                    <MapDisplay/>
                 </div>
                 <div className=' card-body'>
