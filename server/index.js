@@ -1,9 +1,11 @@
-var http = require('http');
+var express = require('express');
+var app = express();
+const render = require('../src/index.html');
+app.use('./src/', express.static('src'));
 
-var server = http.createServer(function(req, res) {
-   res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
-   res.end('Тест '+ req.url);
+// Отслеживания ссылки урла и соотвественно иобработка
+app.get('/', function(req, res) {
+    res.render(render);
 });
 
-server.listen(3000, '127.0.0.1');
-console.log('port 3000');
+app.listen(3000,()=> console.log('server started'));
