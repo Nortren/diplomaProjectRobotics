@@ -9,9 +9,21 @@ import VisualParams from "./VisualParams/VisualParams";
 
 class App extends Component {
     state = {
-        reverted: false
+        customers: []
     };
 
+    componentDidMount() {
+    fetch('localhost:3000/api/customers', {
+
+    }, {
+        mode: 'no-cors',
+        method: 'get',
+        url: `http://localhost:3000`,
+        credentials: 'include'
+    })
+        .then(res => res.json())
+        .then(customers => this.setState({customers: customers},()=>console.log('Customers fetched')));
+    }
 
     render() {
         const border = {border: '1px solid black'};

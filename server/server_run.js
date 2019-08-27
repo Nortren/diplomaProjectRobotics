@@ -10,9 +10,19 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIO(server);
 
-app.use(express.static(publcPath));
+// app.use(express.static(publcPath));
 
 
-io.on('connection',()=>{console.log('IO connection')});
+app.get('/api/customers', (req, res) => {
+   const customers = [
+      { id: 1, firstName: 'Alex', lastName: 'Test' }
+   ];
+
+   res.json(customers);
+});
+
+io.on('connection', () => {
+   console.log('IO connection');
+});
 
 server.listen(port, () => console.log(`server started on port ${port}`));
