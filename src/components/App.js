@@ -6,20 +6,17 @@ import 'bootstrap/dist/css/bootstrap.css'
 
 import '../styles/App.css';
 import VisualParams from "./VisualParams/VisualParams";
-
+const proxyurl = "https://cors-anywhere.herokuapp.com/";
 class App extends Component {
     state = {
         customers: []
     };
 
     componentDidMount() {
-    fetch('localhost:3000/api/customers', {
+    fetch(proxyurl + 'https://localhost:3000/api/customers', {
 
     }, {
-        mode: 'no-cors',
-        method: 'get',
-        url: `http://localhost:3000`,
-        credentials: 'include'
+
     })
         .then(res => res.json())
         .then(customers => this.setState({customers: customers},()=>console.log('Customers fetched')));
