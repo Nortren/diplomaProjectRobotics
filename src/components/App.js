@@ -13,13 +13,14 @@ class App extends Component {
     };
 
     componentDidMount() {
-    fetch(proxyurl + 'https://localhost:3000/api/customers', {
+    fetch(
+        'http://localhost:3000/api/customers', {
 
     }, {
 
     })
         .then(res => res.json())
-        .then(customers => this.setState({customers: customers},()=>console.log('Customers fetched')));
+        .then(customers => this.setState({customers: customers},()=>console.log('Customers fetched ' + customers.id)));
     }
 
     render() {

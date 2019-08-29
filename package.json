@@ -8,6 +8,7 @@
     "start": "webpack-dev-server --mode development --open --hot",
     "server_run": "nodemon server/server_run.js"
   },
+  "proxy":"http://localhost:3000",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Nortren/diplomaProjectRobotics.git"

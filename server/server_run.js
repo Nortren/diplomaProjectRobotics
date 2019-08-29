@@ -14,11 +14,12 @@ const io = socketIO(server);
 
 
 app.get('/api/customers', (req, res) => {
-   const customers = [
-      { id: 1, firstName: 'Alex', lastName: 'Test' }
-   ];
-
+   const customers =
+      { id: 14566565, firstName: 'Alex', lastName: 'Test' }
+   ;
+    res.header('Access-Control-Allow-Origin', req.headers.origin);
    res.json(customers);
+   console.log(res)
 });
 
 io.on('connection', () => {
