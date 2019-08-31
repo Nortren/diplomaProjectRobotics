@@ -27,6 +27,7 @@ class App extends Component {
         const border = {border: '1px solid black'};
         return (
             <div className="container-fluid ">
+                <script src="socket.io/socket.io.js"></script>
                 <div className="row jumbotron p-2">
                     <VisualDisplay/>
                     <VisualParams/>
