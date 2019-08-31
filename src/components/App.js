@@ -1,6 +1,8 @@
 import React, {Component} from "react";
-import VisualDisplay from './VisualDisplay/VisualDisplay'
-
+import VisualDisplay from './VisualDisplay/VisualDisplay';
+import fs from 'fs';
+import uws from 'uws';
+import io from 'socket.io'
 import 'bootstrap/dist/css/bootstrap.css'
 
 
@@ -13,6 +15,18 @@ class App extends Component {
     };
 
     componentDidMount() {
+
+        // io.connect('connection',()=>{
+        //     console.log('connect',data);
+        // });
+const socket = io();
+
+
+        // io.on('connection', (data)=>{
+        //    console.log('connect',data);
+        // });
+
+
     fetch(
         'http://localhost:3000/api/customers', {
 
@@ -27,7 +41,7 @@ class App extends Component {
         const border = {border: '1px solid black'};
         return (
             <div className="container-fluid ">
-                <script src="socket.io/socket.io.js"></script>
+
                 <div className="row jumbotron p-2">
                     <VisualDisplay/>
                     <VisualParams/>

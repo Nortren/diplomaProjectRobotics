@@ -13,14 +13,14 @@ const io = socketIO.listen(server);
 
 app.get('/api/customers', (req, res) => {
    const customers =
-      { id: 14566565, firstName: 'Alex', lastName: 'Test' };
+      { id: 1165, firstName: 'Alex', lastName: 'Test' };
    res.header('Access-Control-Allow-Origin', req.headers.origin);
    res.json(customers);
 });
 
 const connections = [];
 
-io.sockets('connection', function(socket) {
+io.on('connection', function(socket) {
    console.log('Success connection');
    connections.push(socket);
 

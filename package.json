@@ -8,7 +8,7 @@
     "start": "webpack-dev-server --mode development --open --hot",
     "server_run": "nodemon server/server_run.js"
   },
-  "proxy":"http://localhost:3000",
+  "proxy": "http://localhost:3000",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Nortren/diplomaProjectRobotics.git"
@@ -40,10 +40,13 @@
   "dependencies": {
     "@tensor-corp/eslint-config": "^2.0.7",
     "express": "^4.17.1",
+    "fs": "0.0.1-security",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-hot-loader": "^4.12.10",
     "react-leaf-carousel": "^1.2.2",
-    "socket.io": "^2.2.0"
+    "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0",
+    "uws": "^100.0.1"
   }
 }
