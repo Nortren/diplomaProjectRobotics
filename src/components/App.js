@@ -1,14 +1,18 @@
 import React, {Component} from "react";
 import VisualDisplay from './VisualDisplay/VisualDisplay';
-import fs from 'fs';
-import uws from 'uws';
-import io from 'socket.io'
+import openSocket  from 'socket.io-client'
 import 'bootstrap/dist/css/bootstrap.css'
-
-
+//Почитать
+//https://habr.com/ru/company/ruvds/blog/333618/
 import '../styles/App.css';
 import VisualParams from "./VisualParams/VisualParams";
 const proxyurl = "https://cors-anywhere.herokuapp.com/";
+
+const socket = openSocket('http://localhost:3000');
+
+socket.on('connection', (data)=>{console.log('connection',data)});
+socket.emit('connection', 1000);
+
 class App extends Component {
     state = {
         customers: []
@@ -16,10 +20,12 @@ class App extends Component {
 
     componentDidMount() {
 
+
+
         // io.connect('connection',()=>{
         //     console.log('connect',data);
         // });
-const socket = io();
+// const socket = io();
 
 
         // io.on('connection', (data)=>{
