@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import VisualDisplay from './VisualDisplay/VisualDisplay';
-import openSocket  from 'socket.io-client'
+// import openSocket  from 'socket.io-client'
 import 'bootstrap/dist/css/bootstrap.css'
 //Почитать
 //https://habr.com/ru/company/ruvds/blog/333618/
@@ -8,10 +8,17 @@ import '../styles/App.css';
 import VisualParams from "./VisualParams/VisualParams";
 const proxyurl = "https://cors-anywhere.herokuapp.com/";
 
-const socket = openSocket('http://localhost:3000');
+import openSocket from 'socket.io-client';
+const  socket = openSocket('http://localhost:8010');
 
-socket.on('connection', (data)=>{console.log('connection',data)});
-socket.emit('connection', 1000);
+
+
+
+function subscribeToTimer(cb) {
+    socket.on('timer', timestamp => cb(null, timestamp));
+    socket.emit('subscribeToTimer', 1000);
+}
+export { subscribeToTimer };
 
 class App extends Component {
     state = {

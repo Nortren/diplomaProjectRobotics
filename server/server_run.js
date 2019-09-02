@@ -1,13 +1,25 @@
 const express = require('express');
-const socketIO = require('socket.io');
+const io = require('socket.io')();
 const http = require('http');
 const port = process.env.Port || 3000;
 
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIO.listen(server);
+// const io = socketIO.listen(server);
 
+io.on('connection', (client) => {
+    client.on('subscribeToTimer', (interval) => {
+        console.log('client is subscribing to timer with interval ', interval);
+        setInterval(() => {
+            client.emit('timer', new Date());
+        }, interval);
+    });
+});
+
+const portIO = 8010;
+io.listen(portIO);
+console.log('listening on port ', portIO);
 
 app.get('/api/customers', (req, res) => {
    const customers =
@@ -16,16 +28,6 @@ app.get('/api/customers', (req, res) => {
    res.json(customers);
 });
 
-const connections = [];
 
-io.on('connection', function(socket) {
-   console.log('Success connection');
-   connections.push(socket);
-
-   socket.on('disconnect', function(data) {
-      connections.splice(connections.indexOf(socket), 1);
-       console.log('Success disconnect');
-   });
-});
 
 server.listen(port, () => console.log(`server started on port ${port}`));
