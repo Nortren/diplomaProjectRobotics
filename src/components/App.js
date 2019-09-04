@@ -21,8 +21,17 @@ function subscribeToTimer(cb) {
 export { subscribeToTimer };
 
 class App extends Component {
+
+
+    constructor(props) {
+        super(props);
+        subscribeToTimer((err, timestamp) => this.setState({
+            timestamp
+        }));
+    }
     state = {
-        customers: []
+        customers: [],
+        timestamp: 'no timestamp yet'
     };
 
     componentDidMount() {
@@ -56,6 +65,7 @@ class App extends Component {
             <div className="container-fluid ">
 
                 <div className="row jumbotron p-2">
+                    This is the timer value: {this.state.timestamp}
                     <VisualDisplay/>
                     <VisualParams/>
                 </div>
