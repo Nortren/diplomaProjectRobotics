@@ -2,10 +2,7 @@ import React, {Component, PureComponent} from "react";
 import "./VideoTranslation.css"
 
 class VideoTranslation extends Component {
-
-
-
-    render() {
+    componentDidMount() {
         var video = document.querySelector("#vid"),
             canvas = document.querySelector('#canvas'),
             ctx = canvas.getContext('2d'),
@@ -19,6 +16,15 @@ class VideoTranslation extends Component {
             video.src = window.URL.createObjectURL(stream);
             localMediaStream = stream;
         }, onCameraFail);
+    }
+
+
+
+    render() {
+     
+
+
+
 
         return (
             <div className="dataVisualisation card-body card col-lg-6 col-12">
