@@ -16,12 +16,17 @@ class VideoTranslation extends Component {
             video.src = window.URL.createObjectURL(stream);
             localMediaStream = stream;
         }, onCameraFail);
+
+        var cameraInterval = setInterval(function(){ snapshot();}, 1);
+        function snapshot(){
+            if(localMediaStream){
+                ctx.drawImage(video, 0, 0);
+            }
+        }
     }
 
-
-
     render() {
-     
+
 
 
 
@@ -30,6 +35,8 @@ class VideoTranslation extends Component {
             <div className="dataVisualisation card-body card col-lg-6 col-12">
                 <video  id="vid" style={{display:'none'}}></video>
                 <canvas className="canvasVideo" id="canvas"></canvas><br/>
+                <button onclick="startBroadcasting()">Start Broadcasting</button>
+                <button onclick="stopBroadcasting()">Stop Broadcasting</button>
             </div>
         )
     }
