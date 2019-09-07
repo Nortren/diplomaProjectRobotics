@@ -23,6 +23,14 @@ class VideoTranslation extends Component {
                 ctx.drawImage(video, 0, 0);
             }
         }
+
+        // И добавим обработчики кнопок начала и завершения вещания
+        function startBroadcasting(){
+            broadcastingTimer = setInterval(sendSnapshot, 1);
+        }
+        function stopBroadcasting(){
+            clearInterval(broadcastingTimer);
+        }
     }
 
     render() {
@@ -35,8 +43,8 @@ class VideoTranslation extends Component {
             <div className="dataVisualisation card-body card col-lg-6 col-12">
                 <video  id="vid" style={{display:'none'}}></video>
                 <canvas className="canvasVideo" id="canvas"></canvas><br/>
-                <button onclick="startBroadcasting()">Start Broadcasting</button>
-                <button onclick="stopBroadcasting()">Stop Broadcasting</button>
+                <button onClick="startBroadcasting()">Start Broadcasting</button>
+                <button onClick="stopBroadcasting()">Stop Broadcasting</button>
             </div>
         )
     }
