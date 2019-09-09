@@ -65,7 +65,7 @@ class App extends Component {
             <div className="container-fluid ">
 
                 <div className="row jumbotron p-2">
-                    This is the timer value: {this.state.timestamp}
+
                     <VisualDisplay/>
                     <VisualParams/>
                 </div>

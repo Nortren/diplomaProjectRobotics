@@ -43,8 +43,11 @@ class VideoTranslation extends Component {
                 <video id="vid" style={{display: 'none'}}></video>
                 <canvas className="canvasVideo" id="canvas"></canvas>
                 <br/>
-                <button onClick="startBroadcasting()">Start Broadcasting</button>
-                <button onClick="stopBroadcasting()">Stop Broadcasting</button>
+
+
+
+                <button onClick={e => this.startBroadcasting()}>Start Broadcasting</button>
+                <button onClick={e => this.stopBroadcasting()}>Stop Broadcasting</button>
             </div>
         )
     }
