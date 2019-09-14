@@ -1,5 +1,6 @@
 import React, {Component, PureComponent} from "react";
-import "./VideoTranslation.css"
+import "./VideoTranslation.css";
+
 
 class VideoTranslation extends Component {
     componentDidMount() {
@@ -39,9 +40,9 @@ class VideoTranslation extends Component {
 
     render() {
         return (
-            <div className="dataVisualisation card-body card col-lg-6 col-12">
-                <video id="vid" style={{display: 'none'}}></video>
-                <canvas className="canvasVideo" id="canvas"></canvas>
+            <div className="dataVisualisation  card-body card col-lg-6 col-12">
+                <video id="vid"  style={{display: 'none'}}></video>
+                <img src={require('../../images/camera.png')} className="canvasVideo"  alt="fireSpot"/>
                 <br/>
 
 
