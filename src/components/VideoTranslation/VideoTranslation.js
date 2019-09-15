@@ -6,7 +6,7 @@ class VideoTranslation extends Component {
     componentDidMount() {
         var video = document.querySelector("#vid"),
             canvas = document.querySelector('#canvas'),
-            ctx = canvas.getContext('2d'),
+            // ctx = canvas.getContext('2d'),
             localMediaStream = null,
             onCameraFail = function (e) {
                 console.log('Camera did not work.', e); // Исключение на случай, если камера не работает
@@ -24,7 +24,7 @@ class VideoTranslation extends Component {
 
         function snapshot() {
             if (localMediaStream) {
-                ctx.drawImage(video, 0, 0);
+                // ctx.drawImage(video, 0, 0);
             }
         }
 
@@ -42,13 +42,14 @@ class VideoTranslation extends Component {
         return (
             <div className="dataVisualisation  card-body card col-lg-6 col-12">
                 <video id="vid"  style={{display: 'none'}}></video>
+                {/*<canvas className="canvasVideo" id="canvas"></canvas>*/}
                 <img src={require('../../images/camera.png')} className="canvasVideo"  alt="fireSpot"/>
                 <br/>
 
 
 
-                <button onClick={e => this.startBroadcasting()}>Start Broadcasting</button>
-                <button onClick={e => this.stopBroadcasting()}>Stop Broadcasting</button>
+                {/*<button onClick={e => this.startBroadcasting()}>Start Broadcasting</button>*/}
+                {/*<button onClick={e => this.stopBroadcasting()}>Stop Broadcasting</button>*/}
             </div>
         )
     }
