@@ -25,15 +25,20 @@ class ElementsCarouselVertical extends Component {
     }
     render() {
         const style = { top: this.state.elementShift };
-        const test = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30];
+        const test = [{id:1,name:'Test_1',value:1},{id:2,name:'Test_2',value:2},
+            {id:3,name:'Test_3',value:3},{id:4,name:'Test_4',value:4}];
         const elementContainerWidth = 70;
         const lengthArrayData = test.length*elementContainerWidth;
         return (
             <div>
             <div className="carousel_vertical card-body card col-12 sensorsList  list-group-flush">
                 <div style={ style } className="carousel_vertical_line">
-                    {test.map(function (num) {
-                        return <div key={num} className="list-group-item carousel_vertical_line_element">{num}</div>;
+
+                    {test.map(function (object) {
+                        return <div key={object.id} className="list-group-item carousel_vertical_line_element">
+                            <div className="carousel_vertical_line_element-name">{object.name}</div>
+                            <div className="carousel_vertical_line_element-value">{object.value}</div>
+                        </div>;
                     })}
 
                 </div>

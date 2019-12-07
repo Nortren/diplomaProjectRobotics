@@ -7,13 +7,13 @@ class VisualDisplay extends Component {
 
     render() {
         return (
-            <div className=" col-xl-8 col-md-12 col-12 card container p-4 ">
+            <div className=" col-xl-8 col-md-12 col-12  container p-4 VisualDisplay">
                 <div className="row  card-body ">
                     <VideoTranslation />
                    <MapDisplay/>
                 </div>
                 <div className=' card-body'>
-                    <ElementsCarouselHorizontal/>
+                    {/*<ElementsCarouselHorizontal/>*/}
                 </div>
             </div>
         );

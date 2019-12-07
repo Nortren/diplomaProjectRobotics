@@ -19,15 +19,16 @@ module.exports = {
             use: ['style-loader', 'css-loader']
          },
          {
-             test: /\.(jpg|jpeg|gif|png)$/,
-             include: path.resolve(__dirname, "src/images"),
-             loader:'url-loader?limit=1024&name=images/[name].[ext]'
+            test: /\.(jpg|jpeg|gif|png)$/,
+            include: path.resolve(__dirname, 'src/images'),
+            loader: 'url-loader?limit=1024&name=images/[name].[ext]'
          },
       ]
    },
    plugins: [
       new HtmlWebpackPlugin({
-         template: './src/index.html'
+         template: './src/index.html',
+         debug: true
       })
    ]
 };

@@ -18,13 +18,13 @@ class VideoTranslation extends Component {
             localMediaStream = stream;
         }, onCameraFail);
 
-        var cameraInterval = setInterval(function () {
+        var cameraInterval = setInterval(function (event,item) {
             snapshot();
         }, 1);
 
         function snapshot() {
             if (localMediaStream) {
-                // ctx.drawImage(video, 0, 0);
+                ctx.drawImage(video, 0, 0);
             }
         }
 
@@ -40,7 +40,7 @@ class VideoTranslation extends Component {
 
     render() {
         return (
-            <div className="dataVisualisation  card-body card col-lg-6 col-12">
+            <div className="dataVisualisation  card-body  col-lg-6 col-12">
                 <video id="vid"  style={{display: 'none'}}></video>
                 {/*<canvas className="canvasVideo" id="canvas"></canvas>*/}
                 <img src={require('../../images/camera.png')} className="canvasVideo"  alt="fireSpot"/>
