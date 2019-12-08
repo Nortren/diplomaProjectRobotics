@@ -24,7 +24,7 @@ class MapDisplay extends Component {
 
         setInterval((a,b) => {
             this.mapUpdate();
-        }, 100)
+        }, 500)
 
     }
 
@@ -32,7 +32,7 @@ class MapDisplay extends Component {
         console.log('componentDidUpdate');
     }
     getRandomInt(max) {
-        return Math.floor(Math.random() * Math.floor(max));
+        return Math.floor(Math.random(max) * Math.floor(max));
     }
     mapUpdate() {
 
@@ -56,10 +56,10 @@ class MapDisplay extends Component {
 
     }
     _returnArrayLine(){
-        let randomNumberX = this.getRandomInt(99);
-        let randomNumberY = this.getRandomInt(99);
-        const x = "55.824"+randomNumberX+"4";
-        const y = "37.648"+randomNumberY+"8";
+        let randomNumberX = this.getRandomInt(999);
+        let randomNumberY = this.getRandomInt(999);
+        const x = "55.824"+randomNumberX;
+        const y = "37.648"+randomNumberY;
         return [x,y]
     }
 
@@ -73,7 +73,7 @@ class MapDisplay extends Component {
                             geometry={this.state.coordinate}
                             options={{
                                 balloonCloseButton: false,
-                                strokeColor: '#000',
+                                strokeColor: '#2196f3',
                                 strokeWidth: 4,
                                 strokeOpacity: 0.5,
                             }}
