@@ -18,7 +18,7 @@ class ElementsCarouselHorizontal extends Component {
     },1000)
     }
 
-    createDiagrams(idCanvas) {
+    createDiagrams(idCanvas,valueName) {
         const canvas = document.getElementById(idCanvas);
         const context = canvas.getContext("2d");
 
@@ -26,7 +26,7 @@ class ElementsCarouselHorizontal extends Component {
         const size = {x: 150, y: 150};
         canvas.width = size.x;
         canvas.height = size.y;
-        context.font = "10px Verdana";
+        context.font = "15px Verdana";
         context.fillStyle = "#A0A1A6";
         context.textAlign="center"
 
@@ -34,7 +34,7 @@ class ElementsCarouselHorizontal extends Component {
         const s = [1, 2, 3, 4, 5, 6, 7, 8, 9];
             const dist = 0;
 
-        function circle(linewidth, radius, mod, test, number) {
+        function circle(linewidth, radius, mod, test, number,valueName) {
             const sum = test.reduce(function (pv, cv) {
                 return pv + cv;
             }, 0);
@@ -68,19 +68,19 @@ class ElementsCarouselHorizontal extends Component {
                 context.stroke();
                 context.closePath();
                 context.fillText(number || 0 , size.x * .5, size.y * .5);
-                context.fillText("Значение", size.x * .5, size.y * .6);
+                context.fillText(valueName, size.x * .5, size.y * .6);
             }
         }
 
-        circle(15, size.x * .5 - 30 * .5, -(0xff / s.length) * .5, this.state._testS,this.state.elementShift);
+        circle(15, size.x * .5 - 30 * .5, -(0xff / s.length) * .5, this.state._testS,this.state.elementShift,valueName);
 
     }
 
     updateCanvasDiagrams() {
-        this.createDiagrams('test1');
-        this.createDiagrams('test2');
-        this.createDiagrams('test3');
-        this.createDiagrams('test4');
+        this.createDiagrams('test1','Заряда');
+        this.createDiagrams('test2','Сигнал');
+        this.createDiagrams('test3','Дистанция');
+        this.createDiagrams('test4','Отклик мс');
     }
 
     diagramsUpdate() {

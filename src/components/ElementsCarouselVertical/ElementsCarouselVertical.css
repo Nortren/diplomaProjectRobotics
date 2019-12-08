@@ -1,5 +1,5 @@
 .carousel_vertical {
-  max-height: 50em;
+  max-height: 60em;
   overflow: hidden;
   background-color: #1C1F2B;
   border: 1px solid;
@@ -25,12 +25,20 @@
   justify-content: center;
   align-items: center;
 }
-.carousel_vertical_line_element-name {
+.carousel_vertical_line_element__dataContainer {
   border: 1px solid;
   border-radius: 5px;
   width: 100%;
+}
+.carousel_vertical_line_element__dataContainer-name {
+  color: rgba(255, 255, 255, 0.6);
   text-align: center;
   font-size: 20px;
+}
+.carousel_vertical_line_element__dataContainer-value {
+  color: white;
+  text-align: center;
+  font-size: 10px;
 }
 .carousel_vertical .carousel-control {
   width: 3.5em;
