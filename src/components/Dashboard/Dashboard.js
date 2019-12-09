@@ -1,5 +1,4 @@
 import React, {Component, PureComponent} from "react";
-import './Dashboard.css'
 import ReactDOM from 'react-dom';
 class ElementsCarouselHorizontal extends Component {
 

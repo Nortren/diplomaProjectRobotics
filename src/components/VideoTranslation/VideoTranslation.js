@@ -1,6 +1,4 @@
 import React, {Component, PureComponent} from "react";
-import "./VideoTranslation.css";
-
 
 class VideoTranslation extends Component {
     componentDidMount() {

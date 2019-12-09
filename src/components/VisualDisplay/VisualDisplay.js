@@ -13,7 +13,7 @@ class VisualDisplay extends Component {
                     <VideoTranslation />
                    <MapDisplay/>
                 </div>
-                <div className=' card-body'>
+                <div className=' card-body VisualDisplay-Dashboard'>
                     <Dashboard/>
                     {/*<ElementsCarouselHorizontal/>*/}
                 </div>

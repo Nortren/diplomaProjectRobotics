@@ -1,5 +1,4 @@
 import React, {Component, PureComponent} from "react";
-import "./MapDisplay.css"
 import {YMaps, Map, Placemark,Polyline} from "react-yandex-maps";
 
 const mapData = {
