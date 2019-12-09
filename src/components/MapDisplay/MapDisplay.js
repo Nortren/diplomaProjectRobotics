@@ -21,7 +21,7 @@ class MapDisplay extends Component {
 
     componentDidMount(prevProps) {
 
-        setInterval((a,b) => {
+        setInterval(() => {
             this.mapUpdate();
         }, 500)
 
