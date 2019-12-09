@@ -2,48 +2,40 @@ import React, { Component, PureComponent } from 'react';
 
 class VideoTranslation extends Component {
    componentDidMount() {
-      var video = document.querySelector('#vid'),
-         canvas = document.querySelector('#canvas'),
-         // ctx = canvas.getContext('2d'),
-         localMediaStream = null,
-         onCameraFail = function(e) {
-            console.log('Camera did not work.', e); // Исключение на случай, если камера не работает
-         };
-      // navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-      // window.URL = window.URL || window.webkitURL;
-      // navigator.getUserMedia({video: true}, function (stream) {
-      //     video.src = window.URL.createObjectURL(stream);
-      //     localMediaStream = stream;
-      // }, onCameraFail);
-      //
-      // var cameraInterval = setInterval(function (event,item) {
-      //     snapshot();
-      // }, 1);
-      //
-      // function snapshot() {
-      //     if (localMediaStream) {
-      //         ctx.drawImage(video, 0, 0);
-      //     }
-      // }
-      //
-      // // И добавим обработчики кнопок начала и завершения вещания
-      // function startBroadcasting() {
-      //    const broadcastingTimer = setInterval(sendSnapshot, 1);
-      // }
-      //
-      // function stopBroadcasting() {
-      //     clearInterval(broadcastingTimer);
-      // }
+      const canvas = document.querySelector('#canvas');
+      let ctx = canvas.getContext('2d');
+
       setInterval((a) => {
-         this.cameraRecording(canvas);
-      }, 1000)
+         this.cameraRecording(this.ctx);
+      }, 1000);
+      setInterval((a) => {
+         this.drawCanvasCamera(ctx);
+      }, 100);
+
    }
 
-   cameraRecording(canvas) {
-      if(navigator.webkitGetUserMedia!=null) {
+   drawCanvasCamera(ctx) {
+      let videoImg = document.querySelector('video');
+      ctx.drawImage(videoImg, 0, 0);
+      var data = ctx.getImageData(0, 0, canvas.width, canvas.height);
+// инвертируем каждый пиксель
+      for (let n = 0; n < data.width * data.height; n++) {
+         var index = n * 4;
+         data.data[index + 0] = 255 - data.data[index + 0];
+         data.data[index + 1] = 255 - data.data[index + 1];
+         data.data[index + 2] = 255 - data.data[index + 2];
+         //don't touch the alpha
+      }
+
+// устанавливаем данные обратно
+      ctx.putImageData(data, 0, 0);
+   }
+
+   cameraRecording() {
+      if (navigator.webkitGetUserMedia != null) {
          var options = {
-            video:true,
-            audio:true
+            video: true,
+            audio: true
          };
 
          // запрашиваем доступ к веб-камере
@@ -52,11 +44,13 @@ class VideoTranslation extends Component {
                // получаем тег video
                var video = document.querySelector('video');
                // включаем поток в магический URL
-               video.src = window.webkitURL.createObjectURL(stream);
-               canvas.draw(video, 0, 0);
+               video.srcObject = stream;
+               video.play();
+
+
             },
             function(e) {
-               console.log("error happened");
+               console.log('error happened');
             }
          );
       }
@@ -65,7 +59,7 @@ class VideoTranslation extends Component {
    render() {
       return (
          <div className="dataVisualisation  card-body  col-lg-6 col-12">
-            <video id="vid" style={{ display: 'none' }}></video>
+            <video width="100%" height="480" id="vid" style={{ display: 'none' }}></video>
             <canvas width="640" height="480" className="canvasVideo" id="canvas"></canvas>
             {/*<img src={require('../../images/camera.png')} className="canvasVideo"  alt="fireSpot"/>*/}
             <br/>
