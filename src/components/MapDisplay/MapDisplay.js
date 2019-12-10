@@ -28,7 +28,7 @@ class MapDisplay extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        console.log('componentDidUpdate');
+        // console.log('componentDidUpdate');
     }
     getRandomInt(max) {
         return Math.floor(Math.random(max) * Math.floor(max));

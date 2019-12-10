@@ -14,13 +14,13 @@ const socket = openSocket('http://localhost:8010');
 
 
 function subscribeToTimer(cb,item) {
-    socket.emit('subscribeToTimer', 5000, {test: 1111});
-    socket.on('timer', (interval, data) => {
-        console.log(event, data,1)
-        // setInterval(() => {
-        //     socket.emit('subscribeToTimer', 5000, {test: 1111});
-        // }, interval);
-    });
+    // socket.emit('subscribeToTimer', 5000, {test: 11111111});
+    // socket.on('timer', (interval, data) => {
+    //     console.log(event, data,1)
+    //     // setInterval(() => {
+    //     //     socket.emit('subscribeToTimer', 5000, {test: 1111});
+    //     // }, interval);
+    // });
 
 }
 export {subscribeToTimer};

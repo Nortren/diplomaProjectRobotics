@@ -2,6 +2,11 @@ import React, {Component, PureComponent} from "react";
 import './ElementsCarouselVertical.css'
 import ReactDOM from 'react-dom';
 import InfiniteCarousel from 'react-leaf-carousel';
+
+
+import openSocket from 'socket.io-client';
+const socket = openSocket('http://localhost:8010');
+
 class ElementsCarouselVertical extends Component {
 
     constructor(props) {
@@ -16,9 +21,16 @@ class ElementsCarouselVertical extends Component {
     }
 
     componentDidMount(prevProps) {
-        setInterval(() => {
-            this.graphsUpdate();
-        }, 100)
+        // setInterval(() => {
+        //     this.graphsUpdate();
+        // }, 100)
+
+
+        socket.emit('setGraphsData', 5000, {test: 11});
+        socket.on('getGraphsData', (data) => {
+            // console.log('getGraphsData', data, 1)
+            this.graphsUpdate(data);
+        });
 
     }
 
@@ -47,8 +59,8 @@ class ElementsCarouselVertical extends Component {
         const y0 = 80;
         const width = canvas.width - 200;
         const height = canvas.height - 100;
-        const stepY = Math.round(height / bodySize.offsetHeight*10);
-        const stepX = Math.round(width / bodySize.offsetWidth*10);
+        const stepY = Math.round(height / bodySize.offsetHeight * 10);
+        const stepX = Math.round(width / bodySize.offsetWidth * 10);
 
 //рисуются кривые
         //TODO Сделать нормальный обход данных
@@ -57,7 +69,7 @@ class ElementsCarouselVertical extends Component {
 
             for (let counData in graficsArray[graph]) {
                 //Чистим графики
-                if(this.state._testArrayGraphs_1.length > 80){
+                if (this.state._testArrayGraphs_1.length > 80) {
                     this.setState({_testArrayGraphs_1: []});
                     this.setState({_testArrayGraphs_2: []});
                     this.setState({_testArrayGraphs_3: []});
@@ -82,25 +94,35 @@ class ElementsCarouselVertical extends Component {
         return Math.floor(Math.random() * Math.floor(max));
     }
 
-    graphsUpdate() {
+    stubDataGraphsGenerator(graphsName, graphValue, graphMaxValue) {
         this.updateCanvasGraphs();
-        if (this.state._testArrayGraphs_1.length < 100) {
-            this.state._testArrayGraphs_1.push(this.getRandomInt(30));
-            this.state._testArrayGraphs_2.push(this.getRandomInt(50));
-            this.state._testArrayGraphs_3.push(this.getRandomInt(40));
-            this.state._testArrayGraphs_4.push(this.getRandomInt(60));
+        if (this.state[graphsName].length < 100) {
+            this.state[graphsName] = graphValue;
         }
-        this.setState({_testArrayGraphs_1: this.state._testArrayGraphs_1});
-        this.setState({_testArrayGraphs_2: this.state._testArrayGraphs_2});
-        this.setState({_testArrayGraphs_3: this.state._testArrayGraphs_3});
-        this.setState({_testArrayGraphs_4: this.state._testArrayGraphs_4});
+        this.setState({graphsName: this.state[graphsName], [graphsName+'_maxValue']: graphMaxValue});
+    }
+
+    graphsUpdate(graphsData) {
+        for(let graph in graphsData.dataGraphs){
+            const graphs = graphsData.dataGraphs[graph];
+            const graphValue = graphs.stubGraphsData;
+            const graphMaxValue = graphs.maxValueGraphs;
+            console.log(graph, graphValue, graphMaxValue);
+            this.stubDataGraphsGenerator(graph, graphValue, graphMaxValue)
+
+        }
+
+        // this.stubDataGraphsGenerator('_testArrayGraphs_1', 'dataGraph_1', 30);
+        // this.stubDataGraphsGenerator('_testArrayGraphs_2', 'dataGraph_2', 50);
+        // this.stubDataGraphsGenerator('_testArrayGraphs_3', 'dataGraph_3', 70);
+        // this.stubDataGraphsGenerator('_testArrayGraphs_4', 'dataGraph_4', 40);
     }
 
     updateCanvasGraphs() {
-        this.drawsGraphs(1, this.state._testArrayGraphs_1,0);
-        this.drawsGraphs(2, this.state._testArrayGraphs_2,1);
-        this.drawsGraphs(3, this.state._testArrayGraphs_3,2);
-        this.drawsGraphs(4, this.state._testArrayGraphs_4,3);
+        this.drawsGraphs(1, this.state._testArrayGraphs_1, 0);
+        this.drawsGraphs(2, this.state._testArrayGraphs_2, 1);
+        this.drawsGraphs(3, this.state._testArrayGraphs_3, 2);
+        this.drawsGraphs(4, this.state._testArrayGraphs_4, 3);
     }
 
     carouselMoveDown(length) {
@@ -119,8 +141,16 @@ class ElementsCarouselVertical extends Component {
 
     render() {
         const style = {top: this.state.elementShift};
-        const test = [{id: 1, name: 'Давление', value: 1}, {id: 2, name: 'Температура', value: 2},
-            {id: 3, name: 'Радиационный фон', value: 3}, {id: 4, name: 'Концентрация вредных веществ', value: 4}];
+        const test = [{id: 1, name: 'Давление', value: this.state.dataGraph_1}, {
+            id: 2,
+            name: 'Температура',
+            value: this.state.dataGraph_2
+        },
+            {id: 3, name: 'Радиационный фон', value: this.state.dataGraph_3}, {
+                id: 4,
+                name: 'Концентрация вредных веществ',
+                value: this.state.dataGraph_4
+            }];
         const elementContainerWidth = 300;
         const lengthArrayData = test.length * elementContainerWidth;
         return (
@@ -131,8 +161,10 @@ class ElementsCarouselVertical extends Component {
                         {test.map(function (object) {
                             return <div key={object.id} className="list-group-item carousel_vertical_line_element">
                                 <div className="carousel_vertical_line_element__dataContainer">
-                                <div className="carousel_vertical_line_element__dataContainer-name">{object.name}</div>
-                                <div className="carousel_vertical_line_element__dataContainer-value">{object.value}</div>
+                                    <div
+                                        className="carousel_vertical_line_element__dataContainer-name">{object.name}</div>
+                                    <div
+                                        className="carousel_vertical_line_element__dataContainer-value">{object.value}</div>
                                 </div>
                                 <canvas id={object.id}></canvas>
                             </div>;
@@ -157,9 +189,7 @@ class ElementsCarouselVertical extends Component {
 
         );
     }
-
 }
-
 
 export default ElementsCarouselVertical
 
