@@ -1,5 +1,5 @@
 .carousel_vertical {
-  max-height: 60em;
+  max-height: 70em;
   overflow: hidden;
   background-color: #1C1F2B;
   border: 1px solid;
@@ -38,7 +38,7 @@
 .carousel_vertical_line_element__dataContainer-value {
   color: white;
   text-align: center;
-  font-size: 10px;
+  font-size: 25px;
 }
 .carousel_vertical .carousel-control {
   width: 3.5em;

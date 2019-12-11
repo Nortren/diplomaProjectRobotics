@@ -16,7 +16,7 @@ export default class Generator {
             const graphsData = {};
             let graphsValue = 'stubGraphsData';
             let maxValue = 'maxValueGraphs';
-            graphsData[graphsValue] = this.generatorRandomDataNumber(10, i * 10);
+            graphsData[graphsValue] = this.generatorRandomDataNumber(80, i * 20);
             graphsData[maxValue] = this.maxDataNumber(graphsData[graphsValue]);
             graph[graphName] = graphsData;
         }
@@ -26,7 +26,7 @@ export default class Generator {
 
     /**
      * генерация массива случайных чисел
-     * @param lengthArray
+     * @param lengthArray количество сгенерированных данных
      * @param diapasonNumber в каком диапазоне будут генерироваться числа для массива(максимальное значение)
      * @returns {Array}
      */
@@ -44,12 +44,14 @@ export default class Generator {
      * @returns {any}
      */
     maxDataNumber(arrayData) {
+
         let min = arrayData[0];
         let max = min;
         for (let i = 1; i < arrayData.length; ++i) {
             if (arrayData[i] > max) max = arrayData[i];
             if (arrayData[i] < min) min = arrayData[i];
         }
+        console.log(min,max);
         return max;
     }
 

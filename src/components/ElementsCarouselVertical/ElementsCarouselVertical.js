@@ -13,10 +13,6 @@ class ElementsCarouselVertical extends Component {
         super(props);
         this.state = {
             elementShift: 0,
-            _testArrayGraphs_1: [],
-            _testArrayGraphs_2: [],
-            _testArrayGraphs_3: [],
-            _testArrayGraphs_4: []
         };
     }
 
@@ -26,7 +22,7 @@ class ElementsCarouselVertical extends Component {
         // }, 100)
 
 
-        socket.emit('setGraphsData', 5000, {test: 11});
+        socket.emit('setGraphsData', 150, {test: 11});
         socket.on('getGraphsData', (data) => {
             // console.log('getGraphsData', data, 1)
             this.graphsUpdate(data);
@@ -69,7 +65,7 @@ class ElementsCarouselVertical extends Component {
 
             for (let counData in graficsArray[graph]) {
                 //Чистим графики
-                if (this.state._testArrayGraphs_1.length > 80) {
+                if (this.state.stubGraphsName_1.length > 80) {
                     this.setState({_testArrayGraphs_1: []});
                     this.setState({_testArrayGraphs_2: []});
                     this.setState({_testArrayGraphs_3: []});
@@ -96,10 +92,10 @@ class ElementsCarouselVertical extends Component {
 
     stubDataGraphsGenerator(graphsName, graphValue, graphMaxValue) {
         this.updateCanvasGraphs();
-        if (this.state[graphsName].length < 100) {
+        if (this.state[graphsName] && this.state[graphsName].length < 100) {
             this.state[graphsName] = graphValue;
         }
-        this.setState({graphsName: this.state[graphsName], [graphsName+'_maxValue']: graphMaxValue});
+        this.setState({[graphsName]: graphValue, [graphsName+'_maxValue']: graphMaxValue});
     }
 
     graphsUpdate(graphsData) {
@@ -107,22 +103,18 @@ class ElementsCarouselVertical extends Component {
             const graphs = graphsData.dataGraphs[graph];
             const graphValue = graphs.stubGraphsData;
             const graphMaxValue = graphs.maxValueGraphs;
-            console.log(graph, graphValue, graphMaxValue);
             this.stubDataGraphsGenerator(graph, graphValue, graphMaxValue)
 
         }
-
-        // this.stubDataGraphsGenerator('_testArrayGraphs_1', 'dataGraph_1', 30);
-        // this.stubDataGraphsGenerator('_testArrayGraphs_2', 'dataGraph_2', 50);
-        // this.stubDataGraphsGenerator('_testArrayGraphs_3', 'dataGraph_3', 70);
-        // this.stubDataGraphsGenerator('_testArrayGraphs_4', 'dataGraph_4', 40);
     }
 
     updateCanvasGraphs() {
-        this.drawsGraphs(1, this.state._testArrayGraphs_1, 0);
-        this.drawsGraphs(2, this.state._testArrayGraphs_2, 1);
-        this.drawsGraphs(3, this.state._testArrayGraphs_3, 2);
-        this.drawsGraphs(4, this.state._testArrayGraphs_4, 3);
+        if(this.state.stubGraphsName_1) {
+            this.drawsGraphs(1, this.state.stubGraphsName_1, 0);
+            this.drawsGraphs(2, this.state.stubGraphsName_2, 1);
+            this.drawsGraphs(3, this.state.stubGraphsName_3, 2);
+            this.drawsGraphs(4, this.state.stubGraphsName_4, 3);
+        }
     }
 
     carouselMoveDown(length) {
@@ -141,15 +133,15 @@ class ElementsCarouselVertical extends Component {
 
     render() {
         const style = {top: this.state.elementShift};
-        const test = [{id: 1, name: 'Давление', value: this.state.dataGraph_1}, {
+        const test = [{id: 1, name: 'Давление', value: this.state.stubGraphsName_1_maxValue}, {
             id: 2,
             name: 'Температура',
-            value: this.state.dataGraph_2
+            value: this.state.stubGraphsName_2_maxValue
         },
-            {id: 3, name: 'Радиационный фон', value: this.state.dataGraph_3}, {
+            {id: 3, name: 'Радиационный фон', value: this.state.stubGraphsName_3_maxValue}, {
                 id: 4,
                 name: 'Концентрация вредных веществ',
-                value: this.state.dataGraph_4
+                value: this.state.stubGraphsName_4_maxValue
             }];
         const elementContainerWidth = 300;
         const lengthArrayData = test.length * elementContainerWidth;

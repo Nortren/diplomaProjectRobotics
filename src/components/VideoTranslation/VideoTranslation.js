@@ -5,12 +5,12 @@ class VideoTranslation extends Component {
       const canvas = document.querySelector('#canvas');
       let ctx = canvas.getContext('2d');
 
-      setInterval((a) => {
-         this.cameraRecording(this.ctx);
-      }, 1000);
-      setInterval((a) => {
-         this.drawCanvasCamera(ctx);
-      }, 100);
+      // setInterval((a) => {
+      //    this.cameraRecording(this.ctx);
+      // }, 1000);
+      // setInterval((a) => {
+      //    this.drawCanvasCamera(ctx);
+      // }, 100);
 
    }
 
