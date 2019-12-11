@@ -17,7 +17,7 @@ io.on('connection', (client) => {
         console.log('setGraphsDataEvent', data);
         const generator = new Generator();
         setInterval(() => {
-            const dataGraphs = generator.stubDataGraphsGenerator(4);
+            const dataGraphs = generator.stubDataGraphsGenerator(5);
             io.emit('getGraphsData', { dataGraphs});
         }, interval);
     });
