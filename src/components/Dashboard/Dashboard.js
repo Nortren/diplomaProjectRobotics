@@ -1,7 +1,7 @@
 import React, {Component, PureComponent} from "react";
 import ReactDOM from 'react-dom';
 class ElementsCarouselHorizontal extends Component {
-
+    //http://cleanjs.ru/articles/cvetnoj-progress-bar-v-vide-okruzhnosti-na-javascript.html
     constructor(props) {
         super(props);
         this.state = {
