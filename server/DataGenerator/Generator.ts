@@ -12,12 +12,21 @@ export default class Generator {
     stubDataGraphsGenerator(numberOfSensors: number) {
         const graph = {};
         for (let i = 1; i < numberOfSensors; i++) {
-            const graphName =  'stubGraphsName_' + i;
+            const graphName = 'stubGraphsName_' + i;
             const graphsData = {};
             let graphsValue = 'stubGraphsData';
-            let maxValue = 'maxValueGraphs';
-            graphsData[graphsValue] = this.generatorRandomDataNumber(80, i * 20);
-            graphsData[maxValue] = this.maxDataNumber(graphsData[graphsValue]);
+            // graphsData[graphsValue] = this.generatorRandomDataNumber(80, i * 20);
+            if (i === 2) {
+                graphsData[graphsValue] = this.getRandomInt(i * 7,5);
+            }
+            else if (i === 3) {
+                graphsData[graphsValue] = this.getRandomInt(i * 7,2);
+            }
+            else {
+                graphsData[graphsValue] = this.getRandomInt(i * 15,false);
+
+            }
+
             graph[graphName] = graphsData;
         }
 
@@ -38,30 +47,20 @@ export default class Generator {
         return dataArray;
     }
 
-    /**
-     * Нахождение максимального числа в массиве
-     * @param arrayData
-     * @returns {any}
-     */
-    maxDataNumber(arrayData) {
-
-        let min = arrayData[0];
-        let max = min;
-        for (let i = 1; i < arrayData.length; ++i) {
-            if (arrayData[i] > max) max = arrayData[i];
-            if (arrayData[i] < min) min = arrayData[i];
-        }
-        console.log(min,max);
-        return max;
-    }
 
     /**
-     * генерация случайного числа
+     *  генерация случайного числа
      * @param max
-     * @returns {number}
+     * @param delay задержка для правдоподобной эмуляции данных
      */
-    getRandomInt(max) {
-        return Math.floor(Math.random() * Math.floor(max));
+
+
+    getRandomInt(max, delay) {
+        let resultNumber = Math.floor(Math.random() * Math.floor(max));
+        if (delay && resultNumber % delay === 0) {
+            resultNumber = null;
+        }
+        return resultNumber;
     }
 
 }
