@@ -1,6 +1,6 @@
 import React, {Component, PureComponent} from "react";
 import ElementsCarouselVertical from '../ElementsCarouselVertical/ElementsCarouselVertical'
-import Chart from '../Chart/Chart'
+import Chart from '../Chart/Chart';
 class VisualParams extends Component {
 
     render(){
@@ -26,9 +26,6 @@ class VisualParams extends Component {
 
         return(
             <div className="col-lg-3 col-md-12 col-12 container  p-4 VisualParams">
-                <div className="card-header">
-                    Список параметров
-                </div>
                <ElementsCarouselVertical source={graphsDataArray} template={Chart}/>
             </div>
         );

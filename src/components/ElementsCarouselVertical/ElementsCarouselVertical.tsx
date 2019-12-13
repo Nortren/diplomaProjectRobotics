@@ -1,6 +1,10 @@
 import * as React from 'react';
 import './ElementsCarouselVertical.css';
-import Chart from '../Chart/Chart'
+
+//TODO доделать горизонтальный и переключение опциями
+/**
+ * Универсальный компонент слайдера(вертикальный/горизонтальный)
+ */
 
 class ElementsCarouselVertical extends React.Component {
     constructor(props) {
@@ -30,14 +34,14 @@ class ElementsCarouselVertical extends React.Component {
 
         const elementContainerWidth = 300;
         const lengthArrayData = this.props.source.length * elementContainerWidth;
+        const ComponentRender = this.props.template;
         return (
             <div>
                 <div className="carousel_vertical card-body card col-12 sensorsList  list-group-flush">
                     <div style={style} className="carousel_vertical_line">
 
-                        {this.props.source.map(function (object) {
-                            // return <Chart name={object.name} id={object.id} key={object.id}/>
-                            return <Chart name={object.name} id={object.id} key={object.id}/>
+                        {this.props.source.map( (object) => {
+                            return <ComponentRender name={object.name} id={object.id} key={object.id}/>
                         })}
 
                     </div>

@@ -4,8 +4,10 @@ import './Chart.css';
 import * as openSocket from 'socket.io-client';
 
 const socket = openSocket('http://localhost:8010');
-
-class ElementsCarouselVertical extends React.Component {
+/**
+ * Компонент построения графиков в режими реального времени
+ */
+export default class Chart extends React.Component {
 
     constructor(props) {
         super(props);
@@ -43,10 +45,10 @@ class ElementsCarouselVertical extends React.Component {
         //Тут мы узнаем текущий размер окна где распологается график чтоб отрисовать размеры canvas
         const bodySize = document.getElementsByClassName('carousel_vertical_line_element')[0];
         canvas.setAttribute('width', bodySize.offsetWidth);
-        canvas.setAttribute('height', bodySize.offsetHeight * 0.65);
+        canvas.setAttribute('height', bodySize.offsetHeight * 0.6);
         const maxCount = 35 + 10;
         const x0 = 30;
-        const y0 = 80;
+        const y0 = 60;
         const width = canvas.width - 200;
         const height = canvas.height - 100;
         const stepY = Math.round(height / bodySize.offsetHeight * 10);
@@ -79,14 +81,15 @@ class ElementsCarouselVertical extends React.Component {
      * @returns {any}
      */
     maxDataNumber(arrayData: number): number {
-
-        let min = arrayData[0];
-        let max = min;
-        for (let i = 1; i < arrayData.length; ++i) {
-            if (arrayData[i] > max) max = arrayData[i];
-            if (arrayData[i] < min) min = arrayData[i];
-        }
-        return max;
+if(arrayData) {
+    let min = arrayData[0];
+    let max = min;
+    for (let i = 1; i < arrayData.length; ++i) {
+        if (arrayData[i] > max) max = arrayData[i];
+        if (arrayData[i] < min) min = arrayData[i];
+    }
+    return max;
+}
     }
 
     /**
@@ -105,8 +108,11 @@ class ElementsCarouselVertical extends React.Component {
         if (!this.state[graphsName]) {
             this.state[graphsName] = [];
         }
-        if (graphValue) {
+        if (typeof graphValue === 'number') {
             this.state[graphsName].push(graphValue);
+        }
+        if ((typeof graphValue === 'object') && graphValue !== null) {
+            this.state[graphsName] = (graphValue);
         }
         this.setState({
             [graphsName]: this.state[graphsName],
@@ -148,5 +154,5 @@ class ElementsCarouselVertical extends React.Component {
     }
 }
 
-export default ElementsCarouselVertical;
+
 
