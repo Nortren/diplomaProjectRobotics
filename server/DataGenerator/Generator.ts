@@ -17,10 +17,10 @@ export default class Generator {
             let graphsValue = 'stubGraphsData';
             // graphsData[graphsValue] = this.generatorRandomDataNumber(80, i * 20);
             if (i === 2) {
-                graphsData[graphsValue] = this.getRandomInt(i * 7,5);
+                graphsData[graphsValue] = this.getRandomInt(i * 7,2);
             }
             else if (i === 3) {
-                graphsData[graphsValue] = this.getRandomInt(i * 7,2);
+                graphsData[graphsValue] = this.getRandomInt(i * 8,5);
             }
             else {
                 graphsData[graphsValue] = this.getRandomInt(i * 15,false);
