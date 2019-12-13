@@ -81,15 +81,20 @@ export default class Chart extends React.Component {
      * @returns {any}
      */
     maxDataNumber(arrayData: number): number {
-if(arrayData) {
-    let min = arrayData[0];
-    let max = min;
-    for (let i = 1; i < arrayData.length; ++i) {
-        if (arrayData[i] > max) max = arrayData[i];
-        if (arrayData[i] < min) min = arrayData[i];
-    }
-    return max;
-}
+
+
+        let min = arrayData[0];
+        let max = min;
+        for (let i = 1; i < arrayData.length; ++i) {
+            if (arrayData[i] > max) max = arrayData[i];
+            if (arrayData[i] < min) min = arrayData[i];
+        }
+        //Т.к при возвращении цифры 0 текст не отрисовывается то возвращаем текст 0 чтобы не происходиле не планируемая перерисовка компонента
+        if(!max){
+            max = "0";
+        }
+        return max;
+
     }
 
     /**
