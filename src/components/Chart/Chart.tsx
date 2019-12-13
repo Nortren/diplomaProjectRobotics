@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './ElementsCarouselVertical.css';
+import './Chart.css';
 
 import * as openSocket from 'socket.io-client';
 
@@ -134,42 +134,20 @@ class ElementsCarouselVertical extends React.Component {
     }
 
     render() {
-        const style = {top: this.state.elementShift};
-        //TODO эти данные должен отдавать сервер
-        const test = [{
-            id: 1,
-            name: 'Давление',
-            value: this.state.maxValueGraphs_1
-        }, {
-            id: 2,
-            name: 'Температура',
-            value: this.state.maxValueGraphs_2
-        },
-            {
-                id: 3,
-                name: 'Радиационный фон',
-                value: this.state.maxValueGraphs_3
-            }, {
-                id: 4,
-                name: 'Концентрация вредных веществ',
-                value: this.state.maxValueGraphs_4
-            }];
-        const elementContainerWidth = 300;
-        const lengthArrayData = test.length * elementContainerWidth;
+
         return (
             <div>
-       
-                        {test.map(function (object) {
-                            return <div key={object.id} className="list-group-item carousel_vertical_line_element">
+
+                             <div key={this.props.id} className="list-group-item carousel_vertical_line_element">
                                 <div className="carousel_vertical_line_element__dataContainer">
                                     <div
-                                        className="carousel_vertical_line_element__dataContainer-name">{object.name}</div>
+                                        className="carousel_vertical_line_element__dataContainer-name">{this.props.name}</div>
                                     <div
-                                        className="carousel_vertical_line_element__dataContainer-value">{object.value}</div>
+                                        className="carousel_vertical_line_element__dataContainer-value">{this.state['maxValueGraphs_'+this.props.id]}</div>
                                 </div>
-                                <canvas id={object.id}></canvas>
-                            </div>;
-                        })}
+                                <canvas id={this.props.id}></canvas>
+                            </div>
+
 
 
             </div>
