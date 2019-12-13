@@ -2,12 +2,7 @@ import * as React from 'react';
 import './ElementsCarouselVertical.css';
 import Chart from '../Chart/Chart'
 
-import * as openSocket from 'socket.io-client';
-
-const socket = openSocket('http://localhost:8010');
-
 class ElementsCarouselVertical extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -41,16 +36,8 @@ class ElementsCarouselVertical extends React.Component {
                     <div style={style} className="carousel_vertical_line">
 
                         {this.props.source.map(function (object) {
+                            // return <Chart name={object.name} id={object.id} key={object.id}/>
                             return <Chart name={object.name} id={object.id} key={object.id}/>
-                            {/*<div key={object.id} className="list-group-item carousel_vertical_line_element">*/}
-                                {/*<div className="carousel_vertical_line_element__dataContainer">*/}
-                                    {/*<div*/}
-                                        {/*className="carousel_vertical_line_element__dataContainer-name">{object.name}</div>*/}
-                                    {/*<div*/}
-                                        {/*className="carousel_vertical_line_element__dataContainer-value">{object.value}</div>*/}
-                                {/*</div>*/}
-                                {/*<canvas id={object.id}></canvas>*/}
-                            {/*</div>;*/}
                         })}
 
                     </div>

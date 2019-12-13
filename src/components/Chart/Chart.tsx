@@ -9,9 +9,7 @@ class ElementsCarouselVertical extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            elementShift: 0,
-        };
+        this.state = {};
     }
 
     componentDidMount() {
@@ -24,7 +22,7 @@ class ElementsCarouselVertical extends React.Component {
      * @param data данные для отправки на сервер
      */
 
-    getBlGraphsData(interval: number, data: object) {
+    getBlGraphsData(interval: number, data: object): void {
         socket.emit('setGraphsData', interval, data);
         socket.on('getGraphsData', (data) => {
             this.graphsUpdate(data);
@@ -37,7 +35,7 @@ class ElementsCarouselVertical extends React.Component {
      * @param dataGraphs данны с для отрисовки
      * @param color цвет линии графика
      */
-    drawsGraphs(idCanvas: number, dataGraphs: number | [], color: number) {
+    drawsGraphs(idCanvas: number, dataGraphs: number | [], color: number): void {
         //цвета линий
         const colors = ['#2196f3', '#1CC39C', '#FF5F62', '#2196f3'];
         const canvas = document.getElementById(idCanvas);
@@ -80,7 +78,7 @@ class ElementsCarouselVertical extends React.Component {
      * @param arrayData
      * @returns {any}
      */
-    maxDataNumber(arrayData: number) {
+    maxDataNumber(arrayData: number): number {
 
         let min = arrayData[0];
         let max = min;
@@ -98,7 +96,7 @@ class ElementsCarouselVertical extends React.Component {
      * @param graphMaxValue
      * @param serialNumber if графика чтобы мы могли манипулировать его цветом и порядком
      */
-    parseData(graphsName: string, graphValue: number, graphMaxValue: number, serialNumber: number) {
+    parseData(graphsName: string, graphValue: number, graphMaxValue: number, serialNumber: number): void {
         //Чистим графики
         if (this.state[graphsName] && this.state[graphsName].length > 79) {
             this.state[graphsName] = [];
@@ -121,7 +119,7 @@ class ElementsCarouselVertical extends React.Component {
      * записываем данные пришедшие с сервера по переменным
      * @param graphsData
      */
-    graphsUpdate(graphsData: object) {
+    graphsUpdate(graphsData: object): void {
         let serialNumber = 0;
         for (let graph in graphsData.dataGraphs) {
             serialNumber++;
@@ -129,29 +127,23 @@ class ElementsCarouselVertical extends React.Component {
             const graphValue = graphs.stubGraphsData;
             const graphMaxValue = graphs.maxValueGraphs;
             this.parseData(graph, graphValue, graphMaxValue, serialNumber);
-
         }
     }
 
     render() {
-
         return (
             <div>
-
-                             <div key={this.props.id} className="list-group-item carousel_vertical_line_element">
-                                <div className="carousel_vertical_line_element__dataContainer">
-                                    <div
-                                        className="carousel_vertical_line_element__dataContainer-name">{this.props.name}</div>
-                                    <div
-                                        className="carousel_vertical_line_element__dataContainer-value">{this.state['maxValueGraphs_'+this.props.id]}</div>
-                                </div>
-                                <canvas id={this.props.id}></canvas>
-                            </div>
-
-
+                <div key={this.props.id} className="list-group-item carousel_vertical_line_element">
+                    <div className="carousel_vertical_line_element__dataContainer">
+                        <div
+                            className="carousel_vertical_line_element__dataContainer-name">{this.props.name}</div>
+                        <div
+                            className="carousel_vertical_line_element__dataContainer-value">{this.state['maxValueGraphs_' + this.props.id]}</div>
+                    </div>
+                    <canvas id={this.props.id}></canvas>
+                </div>
 
             </div>
-
         );
     }
 }
