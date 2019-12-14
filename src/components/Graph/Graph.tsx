@@ -66,7 +66,7 @@ export default class Chart extends React.Component {
         // длительность отрисовки одного сектора
         canvasOptions.duration = speedDrawn,
             // массив со значениями цвета начала и конца градиента секторов
-        canvasOptions.colors = ['#2196f3','#1343F3','#1CC39C', '#F32C1E'];
+        canvasOptions.colors = ['#1343F3','#2196f3','#1CC39C', '#FF5F62'];
         // шаг отрисовки цветов (размер сектора) в радианах
 
         // получаем угол начала прогресс бара в радианах
@@ -79,7 +79,7 @@ export default class Chart extends React.Component {
         // очищаем canvas
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         // рисуем подложку без анимации
-        this.drawSector('#2196f3', canvasOptions.width,null,ctx,canvasOptions);
+        this.drawSector('#214387', canvasOptions.width,null,ctx,canvasOptions);
         // // объект кнопки, запускающей прогресс бар
         // this.buttonStart = document.getElementById('buttonStart');
         // this.buttonRemove = document.getElementById('buttonRemove');
@@ -91,7 +91,7 @@ export default class Chart extends React.Component {
             canvasOptions.start = 0;
             canvasOptions.step = this.getRadians(this.getRandomInt(300,null));
             ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-            this.drawSector('#2196f3', canvasOptions.width,null,ctx,canvasOptions);
+            this.drawSector('#214387', canvasOptions.width,null,ctx,canvasOptions);
             this.draw(count,ctx,canvasOptions)
         },3000);
 
