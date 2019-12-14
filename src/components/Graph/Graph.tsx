@@ -29,10 +29,10 @@ export default class Chart extends React.Component {
 
 
     componentDidMount() {
-      this.createCanvas(1,300,this.getRandomInt(50));
-      this.createCanvas(2,1000,this.getRandomInt(-100));
+      this.createCanvas(1,300,this.getRandomInt(-500));
+      this.createCanvas(2,500,this.getRandomInt(100));
       this.createCanvas(3,2000,this.getRandomInt(40));
-      this.createCanvas(4,500,this.getRandomInt(50));
+      this.createCanvas(4,1000,this.getRandomInt(50));
     }
     getRandomInt(max, delay) {
         let resultNumber = Math.floor(Math.random() * Math.floor(max));
@@ -184,7 +184,14 @@ export default class Chart extends React.Component {
         // и задаётся конечный угол прогресс бара
         let end = (inc === null) ? this.getRadians(427.5) : canvasOptions.start + inc;
         // создаётся дуга, где xc и yc центр окружности, далее радиус, начальный и конечный угол
-        ctx.arc(this.xc, this.yc, canvasOptions.r, canvasOptions.start, end);
+
+        //Тутидёт проверка если точка начала больше точки конца значит унас идут данные на уменьшения
+        if(canvasOptions.start > end){
+            ctx.arc(this.xc, this.yc, canvasOptions.r,  end,canvasOptions.start);
+        }
+        else {
+            ctx.arc(this.xc, this.yc, canvasOptions.r,canvasOptions.start,  end);
+        }
         // рисуется дуга (часть сектора), с параметрами заданными с помощью
         // strokeStyle, lineWidth и arc
         ctx.stroke();
