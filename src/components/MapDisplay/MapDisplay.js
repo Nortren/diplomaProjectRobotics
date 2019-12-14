@@ -3,7 +3,7 @@ import {YMaps, Map, Placemark,Polyline} from "react-yandex-maps";
 
 const mapData = {
     center: [55.824604, 37.648588],
-    zoom: 17,
+    zoom: 18,
 };
 
 const coordinates = [
@@ -21,9 +21,9 @@ class MapDisplay extends Component {
 
     componentDidMount(prevProps) {
 
-        // setInterval(() => {
-        //     this.mapUpdate();
-        // }, 500)
+        setInterval(() => {
+            this.mapUpdate();
+        }, 500)
 
     }
 
