@@ -21,7 +21,7 @@ export default class Generator {
             }
             else if (i === 3) {
                 // graphsData[graphsValue] = this.getRandomInt(i * 8,5);
-                graphsData[graphsValue] = this.generatorRandomDataNumber(79,50);
+                graphsData[graphsValue] = this.generatorRandomDataNumber(79,50,5);
             }
             else {
                 graphsData[graphsValue] = this.getRandomInt(i * 15,false);
@@ -40,10 +40,10 @@ export default class Generator {
      * @param diapasonNumber в каком диапазоне будут генерироваться числа для массива(максимальное значение)
      * @returns {Array}
      */
-    generatorRandomDataNumber(lengthArray, diapasonNumber) {
+    generatorRandomDataNumber(lengthArray, diapasonNumber, delay) {
         const dataArray = [];
         for (let i = 0; i < lengthArray; i++) {
-            dataArray.push(this.getRandomInt(diapasonNumber));
+            dataArray.push(this.getRandomInt(diapasonNumber, delay));
         }
         return dataArray;
     }

@@ -15,7 +15,7 @@ export default class Chart extends React.Component {
     }
 
     componentDidMount() {
-        this.getBlGraphsData(100, {test: 123})
+        // this.getBlGraphsData(100, {test: 123});
     }
 
     /**

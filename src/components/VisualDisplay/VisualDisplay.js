@@ -1,6 +1,7 @@
 import React, {Component, PureComponent} from "react";
 import ElementsCarouselHorizontal from "../ElementsCarouselHorizontal/ElementsCarouselHorizontal";
 import Dashboard from "../Dashboard/Dashboard";
+import Graph from "../Graph/Graph";
 import VideoTranslation from "../VideoTranslation/VideoTranslation";
 import MapDisplay from "../MapDisplay/MapDisplay";
 
@@ -14,7 +15,7 @@ class VisualDisplay extends Component {
                    <MapDisplay/>
                 </div>
                 <div className=' card-body VisualDisplay-Dashboard'>
-                    <Dashboard/>
+                    <Graph/>
                     {/*<ElementsCarouselHorizontal/>*/}
                 </div>
             </div>
