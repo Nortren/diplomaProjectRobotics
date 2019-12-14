@@ -38,11 +38,11 @@ export default class Chart extends React.Component {
 
         let count = 0;
         // длительность отрисовки одного сектора
-        this['Canvas_'+idCanvas].options.duration = 1000,
+        this['Canvas_'+idCanvas].options.duration = 300,
             // массив со значениями цвета начала и конца градиента секторов
             this['Canvas_'+idCanvas].options.colors = ['#f00', '#ff2f00', '#ff7e00', '#ffde00', '#dffc00', '#7ae000', '#2cbb00', '#15b200'];
         // шаг отрисовки цветов (размер сектора) в радианах
-        this['Canvas_'+idCanvas].options.step = this.getRadians(55);
+        this['Canvas_'+idCanvas].options.step = this.getRadians(51.7);
         // получаем угол начала прогресс бара в радианах
         this['Canvas_'+idCanvas].options.start = Math.PI / 180;
         // ширина прогресс бара в px
@@ -158,7 +158,7 @@ export default class Chart extends React.Component {
         ctx.lineWidth = widthWheel;
         // вычисляем конечный угол, если inc не задан, значит рисуется подложка
         // и задаётся конечный угол прогресс бара
-        var end = (inc === undefined) ? this.getRadians(427.5) : this['Canvas_'+idCanvas].options.start + inc;
+        var end = (inc === null) ? this.getRadians(427.5) : this['Canvas_'+idCanvas].options.start + inc;
         // создаётся дуга, где xc и yc центр окружности, далее радиус, начальный и конечный угол
         ctx.arc(this.xc, this.yc, this['Canvas_'+idCanvas].options.r, this['Canvas_'+idCanvas].options.start, end);
         // рисуется дуга (часть сектора), с параметрами заданными с помощью
@@ -218,15 +218,16 @@ export default class Chart extends React.Component {
 
     render() {
         return (
-            <div>
-                <div key="canvas" className="wrap">
+            <div className="GraphsAll">
+                <div key="canvas"  className="Graphs">
                     <canvas id="canvasTest1" width="150" height="150"></canvas>
                     <canvas id="canvasTest2" width="150" height="150"></canvas>
                     <canvas id="canvasTest3" width="150" height="150"></canvas>
                     <canvas id="canvasTest4" width="150" height="150"></canvas>
-                    <button id="buttonStart" type="button" className="button">start</button>
-                    <button id="buttonRemove" type="button" className="button ">remove</button>
+
                 </div>
+                <button id="buttonStart" type="button" className="button">start</button>
+                <button id="buttonRemove" type="button" className="button ">remove</button>
             </div>
         );
     }
