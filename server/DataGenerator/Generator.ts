@@ -21,7 +21,7 @@ export default class Generator {
             }
             else if (i === 3) {
                 // graphsData[graphsValue] = this.getRandomInt(i * 8,5);
-                graphsData[graphsValue] = this.generatorRandomDataNumber(79,50,5);
+                graphsData[graphsValue] = this.generatorRandomDataNumber(79,30,5);
             }
             else {
                 graphsData[graphsValue] = this.getRandomInt(i * 15,false);

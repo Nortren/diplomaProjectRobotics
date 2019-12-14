@@ -27,27 +27,32 @@ export default class Chart extends React.Component {
         });
     }
 
-
+//Движение графиков может отличаться в зависимости от сгенерированныхслучайночисел
     componentDidMount() {
-      this.createCanvas(1,300,this.getRandomInt(-500));
-      this.createCanvas(2,500,this.getRandomInt(100));
-      this.createCanvas(3,2000,this.getRandomInt(40));
-      this.createCanvas(4,1000,this.getRandomInt(50));
+      this.createCanvas(1,1000);
+      this.createCanvas(2,300);
+      this.createCanvas(3,800);
+      this.createCanvas(4,900);
     }
     getRandomInt(max, delay) {
-        let resultNumber = Math.floor(Math.random() * Math.floor(max));
+        let negativeValue = 1;
+
+        let resultNumber = Math.floor(Math.random() * Math.floor(max*negativeValue));
         if (delay && resultNumber % delay === 0) {
             resultNumber = null;
         }
+        if(resultNumber % 7){
+            resultNumber *= -1;
+        }
         return resultNumber;
     }
-    createCanvas(idCanvas,speedDrawn,data) {
+    createCanvas(idCanvas,speedDrawn) {
         this.canvas = document.getElementById('canvasTest'+idCanvas);
         // контекст, через который будем управлять содержимым canvas
         const ctx = this.canvas.getContext('2d');
-        this.setCanvass(ctx,idCanvas,speedDrawn,data);
+        this.setCanvass(ctx,idCanvas,speedDrawn);
     }
-    setCanvass(ctx,idCanvas,speedDrawn,data) {
+    setCanvass(ctx,idCanvas,speedDrawn) {
         // объект содержащий настройки
         this['Canvas_'+idCanvas]= {};
         this['Canvas_'+idCanvas].options = {};
@@ -61,9 +66,9 @@ export default class Chart extends React.Component {
         // длительность отрисовки одного сектора
         canvasOptions.duration = speedDrawn,
             // массив со значениями цвета начала и конца градиента секторов
-        canvasOptions.colors = ['#f00', '#ff2f00', '#ff7e00', '#ffde00', '#dffc00', '#7ae000', '#2cbb00', '#15b200'];
+        canvasOptions.colors = ['#2196f3','#1343F3','#1CC39C', '#F32C1E'];
         // шаг отрисовки цветов (размер сектора) в радианах
-        canvasOptions.step = this.getRadians(data);
+
         // получаем угол начала прогресс бара в радианах
         canvasOptions.start = Math.PI / 180;
         // ширина прогресс бара в px
@@ -75,19 +80,27 @@ export default class Chart extends React.Component {
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         // рисуем подложку без анимации
         this.drawSector('#2196f3', canvasOptions.width,null,ctx,canvasOptions);
-        // объект кнопки, запускающей прогресс бар
-        this.buttonStart = document.getElementById('buttonStart');
-        this.buttonRemove = document.getElementById('buttonRemove');
-        // запускаем рисование прогресс бара
-        this.buttonStart.addEventListener('click', () => {
-            this.draw(count,ctx,canvasOptions);
-        });
-
-        this.buttonRemove.addEventListener('click', () => {
+        // // объект кнопки, запускающей прогресс бар
+        // this.buttonStart = document.getElementById('buttonStart');
+        // this.buttonRemove = document.getElementById('buttonRemove');
+        // // запускаем рисование прогресс бара
+        // this.buttonStart.addEventListener('click', () => {
+        //     this.draw(count,ctx,canvasOptions);
+        // });
+        setInterval(() => {
             canvasOptions.start = 0;
+            canvasOptions.step = this.getRadians(this.getRandomInt(300,null));
             ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
             this.drawSector('#2196f3', canvasOptions.width,null,ctx,canvasOptions);
-        });
+            this.draw(count,ctx,canvasOptions)
+        },3000);
+
+
+        // this.buttonRemove.addEventListener('click', () => {
+        //     canvasOptions.start = 0;
+        //     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        //     this.drawSector('#2196f3', canvasOptions.width,null,ctx,canvasOptions);
+        // });
     }
     getRadians(degree) {
         // переводим градусы в радианы
@@ -151,11 +164,11 @@ export default class Chart extends React.Component {
                 // все сектора отрисованы, заканчиваем работу функции
                 if (count >= canvasOptions.colors.length - 1) {
                     // делаем кнопку запуска прогресс бара неактивно
-                    this.buttonStart.classList.add('disable');
-                    // удаляем зарегистрированный обработчик события
-                    this.buttonStart.removeEventListener('click', () => {
-                        this.draw()
-                    });
+                    // this.buttonStart.classList.add('disable');
+                    // // удаляем зарегистрированный обработчик события
+                    // this.buttonStart.removeEventListener('click', () => {
+                    //     this.draw()
+                    // });
                     // выходим из функции рисования прогресс бара
                     return;
                 }
@@ -209,7 +222,7 @@ export default class Chart extends React.Component {
         // цвет текста
         ctx.fillStyle = '#666';
         // параметры шрифта и текста
-        ctx.font = '400 20px Roboto';
+        ctx.font = '100 14px Verdana';
         // центрирование текста по горизонтали
         ctx.textAlign = 'center';
         // центрирование текста по вертикали
@@ -219,9 +232,10 @@ export default class Chart extends React.Component {
         // область представлена в виде прямоугольника заданного
         // начальной точкой (120px,125px), шириной и высотой (60px,30px)
         // отсчёт координат идёт от верхнего левого угла canvas
-        ctx.clearRect(50, 50, 60, 30);
+        ctx.clearRect(43, 50, 65, 50);
         // выводим текст в центр canvas
-        ctx.fillText(percents + '%', this.xc, this.yc);
+        ctx.fillText(i, this.xc*1, this.yc*0.9);
+        ctx.fillText('Значение', this.xc, this.yc*1.1);
     }
 
     drawLine(i,ctx,canvasOptions) {
@@ -259,8 +273,8 @@ export default class Chart extends React.Component {
                     <canvas id="canvasTest4" width="150" height="150"></canvas>
 
                 </div>
-                <button id="buttonStart" type="button" className="button">start</button>
-                <button id="buttonRemove" type="button" className="button ">remove</button>
+                {/*<button id="buttonStart" type="button" className="button">start</button>*/}
+                {/*<button id="buttonRemove" type="button" className="button ">remove</button>*/}
             </div>
         );
     }

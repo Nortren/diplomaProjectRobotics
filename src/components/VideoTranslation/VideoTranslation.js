@@ -65,8 +65,8 @@ class VideoTranslation extends Component {
             <br/>
 
 
-            <button onClick={e => this.startBroadcasting()}>Start Broadcasting</button>
-            <button onClick={e => this.stopBroadcasting()}>Stop Broadcasting</button>
+            {/*<button onClick={e => this.startBroadcasting()}>Start Broadcasting</button>*/}
+            {/*<button onClick={e => this.stopBroadcasting()}>Stop Broadcasting</button>*/}
          </div>
       );
    }
