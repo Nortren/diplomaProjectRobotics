@@ -209,7 +209,7 @@ export default class Chart extends React.Component {
      */
     drawSector(colorFill: string, widthWheel: number, renderingDegree: number | null, contextCanvas: CanvasRenderingContext2D, canvasOptions: object): null {
         // beginPath используется чтобы начать серию действий, описывающих отрисовку фигуры.
-         // каждый новый вызов этого метода сбрасывает все действия предыдущего и начинает
+        // каждый новый вызов этого метода сбрасывает все действия предыдущего и начинает
         // рисовать заново
         contextCanvas.beginPath();
         // устанавливаем цвет или стиль, используемый при выполнении обводки
