@@ -14,6 +14,10 @@ export default class Chart extends React.Component {
         this.state = {};
     }
 
+    canvas:object;
+    x_position:number;
+    y_position:number;
+
     /**
      * Запрос на бизнес логику для получения данных и построения по ним графиков
      * @param interval частота обращения на БЛ
@@ -29,44 +33,49 @@ export default class Chart extends React.Component {
 
 //Движение графиков может отличаться в зависимости от сгенерированныхслучайночисел
     componentDidMount() {
-      this.createCanvas(1,1000);
-      this.createCanvas(2,300);
-      this.createCanvas(3,800);
-      this.createCanvas(4,900);
+        this.createCanvas(1, 1000);
+        this.createCanvas(2, 300);
+        this.createCanvas(3, 800);
+        this.createCanvas(4, 900);
     }
+
+
     getRandomInt(max, delay) {
         let negativeValue = 1;
 
-        let resultNumber = Math.floor(Math.random() * Math.floor(max*negativeValue));
+        let resultNumber = Math.floor(Math.random() * Math.floor(max * negativeValue));
         if (delay && resultNumber % delay === 0) {
             resultNumber = null;
         }
-        if(resultNumber % 7){
+        if (resultNumber % 7) {
             resultNumber *= -1;
         }
         return resultNumber;
     }
-    createCanvas(idCanvas,speedDrawn) {
-        this.canvas = document.getElementById('canvasTest'+idCanvas);
-        // контекст, через который будем управлять содержимым canvas
-        const ctx = this.canvas.getContext('2d');
-        this.setCanvass(ctx,idCanvas,speedDrawn);
-    }
-    setCanvass(ctx,idCanvas,speedDrawn) {
-        // объект содержащий настройки
-        this['Canvas_'+idCanvas]= {};
-        this['Canvas_'+idCanvas].options = {};
 
-        const canvasOptions =  this['Canvas_'+idCanvas].options;
+    createCanvas(idCanvas: number, speedDrawn: number): void {
+        this.canvas = document.getElementById('canvasTest' + idCanvas);
+        // контекст, через который будем управлять содержимым canvas
+        const contextCanvas = this.canvas.getContext('2d');
+        this.setCanvas(contextCanvas, idCanvas, speedDrawn);
+    }
+
+
+    setCanvas(contextCanvas: CanvasRenderingContext2D, idCanvas: number, speedDrawn: number): void {
+        // объект содержащий настройки
+        this['Canvas_' + idCanvas] = {};
+        this['Canvas_' + idCanvas].options = {};
+
+        const canvasOptions = this['Canvas_' + idCanvas].options;
         // центр по горизонтали и вертикали
-        this.xc = this.canvas.width / 2;
-        this.yc = this.canvas.height / 2;
+        this.x_position = this.canvas.width / 2;
+        this.y_position = this.canvas.height / 2;
 
         let count = 0;
         // длительность отрисовки одного сектора
         canvasOptions.duration = speedDrawn,
             // массив со значениями цвета начала и конца градиента секторов
-        canvasOptions.colors = ['#1343F3','#2196f3','#1CC39C', '#FF5F62'];
+            canvasOptions.colors = ['#1343F3', '#2196f3', '#1CC39C', '#FF5F62'];
         // шаг отрисовки цветов (размер сектора) в радианах
 
         // получаем угол начала прогресс бара в радианах
@@ -74,41 +83,28 @@ export default class Chart extends React.Component {
         // ширина прогресс бара в px
         canvasOptions.width = 20,
             // радиус прогресс бара в px
-            canvasOptions.r = this.xc - canvasOptions.width;
+            canvasOptions.r = this.x_position - canvasOptions.width;
 
         // очищаем canvas
-        ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        contextCanvas.clearRect(0, 0, this.canvas.width, this.canvas.height);
         // рисуем подложку без анимации
-        this.drawSector('#214387', canvasOptions.width,null,ctx,canvasOptions);
-        // // объект кнопки, запускающей прогресс бар
-        // this.buttonStart = document.getElementById('buttonStart');
-        // this.buttonRemove = document.getElementById('buttonRemove');
-        // // запускаем рисование прогресс бара
-        // this.buttonStart.addEventListener('click', () => {
-        //     this.draw(count,ctx,canvasOptions);
-        // });
+        this.drawSector('#214387', canvasOptions.width, null, contextCanvas, canvasOptions);
         setInterval(() => {
             canvasOptions.start = 0;
-            canvasOptions.step = this.getRadians(this.getRandomInt(300,null));
-            ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-            this.drawSector('#214387', canvasOptions.width,null,ctx,canvasOptions);
-            this.draw(count,ctx,canvasOptions)
-        },3000);
-
-
-        // this.buttonRemove.addEventListener('click', () => {
-        //     canvasOptions.start = 0;
-        //     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        //     this.drawSector('#2196f3', canvasOptions.width,null,ctx,canvasOptions);
-        // });
+            canvasOptions.step = this.getRadians(this.getRandomInt(300, null));
+            contextCanvas.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            this.drawSector('#214387', canvasOptions.width, null, contextCanvas, canvasOptions);
+            this.draw(count, contextCanvas, canvasOptions)
+        }, 3000);
     }
-    getRadians(degree) {
+
+    getRadians(degree: number): number {
         // переводим градусы в радианы
         return Math.PI / 180 * degree;
     }
 
 
-    draw(count,ctx,canvasOptions) {
+    draw(count, contextCanvas: CanvasRenderingContext2D, canvasOptions: object): void {
         // получаем из массива пару цветов, которая будет использоваться
         // для создания градиента i-го сектора прогресс бара
         let startColor = canvasOptions.colors[count],
@@ -116,15 +112,15 @@ export default class Chart extends React.Component {
         const startPosition = canvasOptions.start;
         const radius = canvasOptions.r;
         // получаем координаты X, Y точек начала и конца i-го сектора прогресс бара
-        let x0 = this.xc + Math.cos(startPosition) * radius,
-            y0 = this.yc + Math.sin(startPosition) * radius,
-            x1 = this.xc + Math.cos(startPosition + canvasOptions.step) * radius,
-            y1 = this.yc + Math.sin(startPosition + canvasOptions.step) * radius;
+        let x0 = this.x_position + Math.cos(startPosition) * radius,
+            y0 = this.y_position + Math.sin(startPosition) * radius,
+            x1 = this.x_position + Math.cos(startPosition + canvasOptions.step) * radius,
+            y1 = this.y_position + Math.sin(startPosition + canvasOptions.step) * radius;
 
         // используя метод createLinearGradient, создаём объект линейного градиента,
         // в качестве аргументов метод принимает значения координат начала и конца
         // сектора, к которому он будет применён
-        let gradient = ctx.createLinearGradient(x0, y0, x1, y1);
+        let gradient = contextCanvas.createLinearGradient(x0, y0, x1, y1);
         // используя метод addColorStop определяем цвет
         // в начале объекта градиента
         gradient.addColorStop(0, startColor);
@@ -146,14 +142,14 @@ export default class Chart extends React.Component {
 
             // предварительно закрашиваем текущий сектор белым цветом на угол равный inc
             // толщину берём на 2px больше, чтобы закрасить возможные артефакты
-            this.drawSector('#31364c', canvasOptions.width + 8, inc,ctx,canvasOptions);
+            this.drawSector('#31364c', canvasOptions.width + 8, inc, contextCanvas, canvasOptions);
             // закрашиваем текущий сектор градиентом на угол равный inc
-            this.drawSector(gradient, canvasOptions.width, inc,ctx,canvasOptions);
+            this.drawSector(gradient, canvasOptions.width, inc, contextCanvas, canvasOptions);
 
-            this.showPercents(count, inc,ctx,canvasOptions);
+            this.showPercents(count, inc, contextCanvas, canvasOptions);
 
 // закрашиваем стыки секторов
-            this.drawLine(count,ctx,canvasOptions);
+            this.drawLine(count, contextCanvas, canvasOptions);
             // если текущее время меньше времени анимации, продолжаем
             // рисование текущего сектора
             if (now < canvasOptions.duration) {
@@ -176,7 +172,7 @@ export default class Chart extends React.Component {
                 canvasOptions.start += canvasOptions.step;
                 // запускаем рисование следующего сектора, рекурсивно
                 // вызывая функцию draw
-                return this.draw(count,ctx,canvasOptions);
+                return this.draw(count, contextCanvas, canvasOptions);
             }
         };
 
@@ -184,34 +180,34 @@ export default class Chart extends React.Component {
         requestAnimationFrame(fn);
     }
 
-    drawSector(colorFill, widthWheel, inc,ctx,canvasOptions) {
+    drawSector(colorFill: string, widthWheel: number, inc: number | null, contextCanvas: CanvasRenderingContext2D, canvasOptions: object): null {
         // beginPath используется чтобы начать серию действий, описывающих отрисовку фигуры.
         // каждый новый вызов этого метода сбрасывает все действия предыдущего и начинает
         // рисовать заново
-        ctx.beginPath();
+        contextCanvas.beginPath();
         // устанавливаем цвет или стиль, используемый при выполнении обводки
-        ctx.strokeStyle = colorFill;
+        contextCanvas.strokeStyle = colorFill;
         // устанавливается ширина линии, которой будет рисоваться дуга
-        ctx.lineWidth = widthWheel;
+        contextCanvas.lineWidth = widthWheel;
         // вычисляем конечный угол, если inc не задан, значит рисуется подложка
         // и задаётся конечный угол прогресс бара
         let end = (inc === null) ? this.getRadians(427.5) : canvasOptions.start + inc;
-        // создаётся дуга, где xc и yc центр окружности, далее радиус, начальный и конечный угол
+        // создаётся дуга, где x_position и y_position центр окружности, далее радиус, начальный и конечный угол
 
         //Тутидёт проверка если точка начала больше точки конца значит унас идут данные на уменьшения
-        if(canvasOptions.start > end){
-            ctx.arc(this.xc, this.yc, canvasOptions.r,  end,canvasOptions.start);
+        if (canvasOptions.start > end) {
+            contextCanvas.arc(this.x_position, this.y_position, canvasOptions.r, end, canvasOptions.start);
         }
         else {
-            ctx.arc(this.xc, this.yc, canvasOptions.r,canvasOptions.start,  end);
+            contextCanvas.arc(this.x_position, this.y_position, canvasOptions.r, canvasOptions.start, end);
         }
         // рисуется дуга (часть сектора), с параметрами заданными с помощью
         // strokeStyle, lineWidth и arc
-        ctx.stroke();
+        contextCanvas.stroke();
         return;
     }
 
-    showPercents(i, inc, ctx,canvasOptions) {
+    showPercents(i: number, inc: number, contextCanvas: CanvasRenderingContext2D, canvasOptions: object): void {
         // угол в радианах, на который отрисован прогресс бар
         // на текущий момент
         let angle = canvasOptions.step * i + inc,
@@ -220,45 +216,45 @@ export default class Chart extends React.Component {
             percents = Math.ceil(angle / 0.0549779);
 
         // цвет текста
-        ctx.fillStyle = '#666';
+        contextCanvas.fillStyle = '#666';
         // параметры шрифта и текста
-        ctx.font = '100 14px Verdana';
+        contextCanvas.font = '100 14px Verdana';
         // центрирование текста по горизонтали
-        ctx.textAlign = 'center';
+        contextCanvas.textAlign = 'center';
         // центрирование текста по вертикали
-        ctx.textBaseline = 'center';
+        contextCanvas.textBaseline = 'center';
 
         // очищаем область canvas в которую будет выведен текст
         // область представлена в виде прямоугольника заданного
         // начальной точкой (120px,125px), шириной и высотой (60px,30px)
         // отсчёт координат идёт от верхнего левого угла canvas
-        ctx.clearRect(43, 50, 65, 50);
+        contextCanvas.clearRect(43, 50, 65, 50);
         // выводим текст в центр canvas
-        ctx.fillText(i, this.xc*1, this.yc*0.9);
-        ctx.fillText('Значение', this.xc, this.yc*1.1);
+        contextCanvas.fillText(i, this.x_position * 1, this.y_position * 0.9);
+        contextCanvas.fillText('Значение', this.x_position, this.y_position * 1.1);
     }
 
-    drawLine(i,ctx,canvasOptions) {
+    drawLine(i:number, contextCanvas:CanvasRenderingContext2D, canvasOptions:object): null {
         const start = canvasOptions.start;
         const radius = canvasOptions.r;
         // определяем координаты начала и конца линии границы текущего сектора
-        let x0 = this.xc + Math.cos(start) * (radius + 10),
-            y0 = this.yc + Math.sin(start) * (radius + 10),
-            x1 = this.xc + Math.cos(start) * (radius - 10),
-            y1 = this.yc + Math.sin(start) * (radius - 10);
+        let x0 = this.x_position + Math.cos(start) * (radius + 10),
+            y0 = this.y_position + Math.sin(start) * (radius + 10),
+            x1 = this.x_position + Math.cos(start) * (radius - 10),
+            y1 = this.y_position + Math.sin(start) * (radius - 10);
 
-        ctx.beginPath();
+        contextCanvas.beginPath();
         // Вариант 1 - назначаем цвет границы стыка всех секторов
-        //ctx.strokeStyle = '#fff';
+        //contextCanvas.strokeStyle = '#fff';
         // Вариант 2 - выбираем цвет стыка текущего и следующего секторов из массива
-        ctx.strokeStyle = canvasOptions.colors[i];
+        contextCanvas.strokeStyle = canvasOptions.colors[i];
         // устанавливаем координаты начала и конца рисуемой линии и
         // её толщину
-        ctx.moveTo(x0, y0);
-        ctx.lineTo(x1, y1);
-        ctx.lineWidth = 1;
+        contextCanvas.moveTo(x0, y0);
+        contextCanvas.lineTo(x1, y1);
+        contextCanvas.lineWidth = 1;
         // рисуем границу секторов
-        ctx.stroke();
+        contextCanvas.stroke();
         return;
     }
 
@@ -266,7 +262,7 @@ export default class Chart extends React.Component {
     render() {
         return (
             <div className="GraphsAll">
-                <div key="canvas"  className="Graphs">
+                <div key="canvas" className="Graphs">
                     <canvas id="canvasTest1" width="150" height="150"></canvas>
                     <canvas id="canvasTest2" width="150" height="150"></canvas>
                     <canvas id="canvasTest3" width="150" height="150"></canvas>
