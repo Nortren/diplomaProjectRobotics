@@ -3,7 +3,7 @@
  * Класс генерации  Stub данных для эмуляции поведения реальных датчиков и устройств
  */
 
-export default class Generator {
+export default class SensorGenerator {
 
     /**
      * Генерация данных по графикам датчиков и приборов учета

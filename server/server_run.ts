@@ -1,4 +1,5 @@
-import Generator from '../server/DataGenerator/Generator';
+import SensorGenerator from './DataGenerator/SensorGenerator';
+import StatusGenerator from './DataGenerator/StatusGenerator';
 
 const express = require('express');
 const io = require('socket.io')();
@@ -10,14 +11,22 @@ const server = http.createServer(app);
 io.on('connection', (client) => {
     client.on('setGraphsData', (interval, data) => {
         console.log('setGraphsDataEvent', data);
-        const generator = new Generator();
+        const generator = new SensorGenerator();
         setInterval(() => {
             const dataGraphs = generator.stubDataGraphsGenerator(5);
             io.emit('getGraphsData', { dataGraphs});
         }, interval);
     });
 
+    client.on('setChartData', (interval, data) => {
+        console.log('setChartData', data);
+        const generator = new StatusGenerator();
+        setInterval(() => {
+            const dataGraphs = generator.stubDataChartGenerator(5);
 
+            io.emit('getChartData', { dataGraphs});
+        }, interval);
+    });
 });
 
 

@@ -27,19 +27,28 @@ export default class Chart extends React.Component {
     getBlGraphsData(interval: number, data: object): void {
         socket.emit('setGraphsData', interval, data);
         socket.on('getGraphsData', (data) => {
-            this.graphsUpdate(data);
+
+            this.dataProcessing(data);
+            // this.graphsUpdate(data);
         });
     }
 
 
     componentDidMount() {
+        // this.getBlGraphsData(1000, {test: 123});
         //Движение графиков может отличаться в зависимости от сгенерированныхслучайночисел
         this.createCanvas(1, 1000);
-        this.createCanvas(2, 300);
-        this.createCanvas(3, 800);
-        this.createCanvas(4, 900);
     }
 
+    dataProcessing(data) {
+        console.log(data);
+        let countGraphs = 0;
+        for (let graphs in data.dataGraphs) {
+            this.createCanvas(graphs, 1000, data.dataGraphs[graphs]);
+            countGraphs++;
+        }
+        this.setState({graphsCount: countGraphs});
+    }
 
     getRandomInt(max, delay) {
         let negativeValue = 1;
@@ -59,7 +68,7 @@ export default class Chart extends React.Component {
      * @param idCanvas
      * @param speedDrawn скорость отрисовки
      */
-    createCanvas(idCanvas: number, speedDrawn: number): void {
+    createCanvas(idCanvas: number, speedDrawn: number, data: object): void {
         this.canvas = document.getElementById('canvasTest' + idCanvas);
         // контекст, через который будем управлять содержимым canvas
         const contextCanvas = this.canvas.getContext('2d');
@@ -199,6 +208,7 @@ export default class Chart extends React.Component {
         // старт анимации отрисовки одного сектора
         requestAnimationFrame(fn);
     }
+
     /**
      * Метод отрисовка сектора на Canvas
      * @param colorFill
@@ -233,6 +243,7 @@ export default class Chart extends React.Component {
         contextCanvas.stroke();
         return;
     }
+
     /**
      * Метод отрисовка процентов в центре Диаграммы
      * @param sectorNumber номер рисуемого сектора
@@ -266,6 +277,7 @@ export default class Chart extends React.Component {
         contextCanvas.fillText(sectorNumber, this.x_position * 1, this.y_position * 0.9);
         contextCanvas.fillText('Значение', this.x_position, this.y_position * 1.1);
     }
+
     /**
      * отрисовка линии между секторами для того чтобы скрыть разрыв и диаграмма казалась бесшовной
      * @param sectorNumber номер рисуемого сектора
@@ -300,17 +312,11 @@ export default class Chart extends React.Component {
 
     render() {
         return (
-            <div className="GraphsAll">
+
                 <div key="canvas" className="Graphs">
                     <canvas id="canvasTest1" width="150" height="150"></canvas>
-                    <canvas id="canvasTest2" width="150" height="150"></canvas>
-                    <canvas id="canvasTest3" width="150" height="150"></canvas>
-                    <canvas id="canvasTest4" width="150" height="150"></canvas>
-
                 </div>
-                {/*<button id="buttonStart" type="button" className="button">start</button>*/}
-                {/*<button id="buttonRemove" type="button" className="button ">remove</button>*/}
-            </div>
+
         );
     }
 }

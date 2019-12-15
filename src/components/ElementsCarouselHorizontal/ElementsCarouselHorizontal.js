@@ -1,6 +1,7 @@
 import React, {Component, PureComponent} from "react";
+//TODO перенести в библиотеку стилей
 import './ElementsCarouselHorizontal.css'
-import ReactDOM from 'react-dom';
+
 class ElementsCarouselHorizontal extends Component {
 
     constructor(props) {

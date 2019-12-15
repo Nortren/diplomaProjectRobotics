@@ -15,7 +15,7 @@ export default class Chart extends React.Component {
     }
 
     componentDidMount() {
-        this.getBlGraphsData(100, {test: 123});
+        this.getBlChartData(100, {test: 123});
     }
 
     /**
@@ -24,9 +24,9 @@ export default class Chart extends React.Component {
      * @param data данные для отправки на сервер
      */
 
-    getBlGraphsData(interval: number, data: object): void {
-        socket.emit('setGraphsData', interval, data);
-        socket.on('getGraphsData', (data) => {
+    getBlChartData(interval: number, data: object): void {
+        socket.emit('setChartData', interval, data);
+        socket.on('getChartData', (data) => {
             this.graphsUpdate(data);
         });
     }
