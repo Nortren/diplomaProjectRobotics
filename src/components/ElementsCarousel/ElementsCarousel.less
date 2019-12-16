@@ -1,0 +1,156 @@
+.carousel_vertical {
+  max-height: 70em;
+  overflow: hidden; //почитать
+  background-color: #1C1F2B;
+  border: 1px solid;
+  &_line {
+    hidden: 5000px;
+    min-width: 200px;
+    position: relative;
+    left: 0;
+    transition: all ease 1s; //почитать
+
+    &_elements::after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+    &_element {
+      background-color: #1C1F2B;
+      margin-bottom: 1em;
+      min-height: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      &__dataContainer {
+        border: 1px solid;
+        border-radius: 5px;
+        width: 100%;
+        &-name {
+          color: rgba(255, 255, 255, 0.6);;
+          text-align: center;
+          font-size: 20px;
+        }
+        &-value {
+          color: white;
+          text-align: center;
+          font-size: 25px;
+        }
+      }
+    }
+  }
+  .carousel-control {
+
+    width: 3.5em;
+    filter: none;
+    opacity: 1;
+    text-shadow: none;
+    &:hover {
+      filter: none;
+      opacity: 1;
+      text-shadow: none;
+    }
+
+    .buttonSettings {
+      background-image: none;
+      position: inherit;
+      color: #2196f3;
+      &_glyphicon_chevron {
+        font-size: 16px;
+        height: 32px;
+        line-height: 32px;
+        width: 32px;
+        @media (min-width: 768px) {
+          font-size: 20px;
+          height: 50px;
+          line-height: 50px;
+          margin-top: -25px;
+          width: 50px;
+        }
+      }
+    }
+    &_right {
+      .buttonSettings;
+      margin: 1em;
+    }
+    &_left {
+      .buttonSettings;
+      margin: 1em;
+
+    }
+  }
+}
+.carousel_horizontal {
+  width: 100%;
+  overflow: hidden; //почитать
+  background-color: #1C1F2B;
+  border: 1px solid;
+  &_line {
+    top: 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    min-width: 200px;
+    position: relative;
+    left: 0;
+    transition: all ease 1s; //почитать
+
+    &_elements::after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+    &_element {
+      background-color: #1C1F2B;
+      border: 1px solid;
+      margin-right: 1em;
+      width: 10em;
+      height: 10em;
+    }
+  }
+
+  .carousel-control {
+    width: 3.5em;
+    filter: none;
+    opacity: 1;
+    text-shadow: none;
+
+    &:hover {
+      filter: none;
+      opacity: 1;
+      text-shadow: none;
+    }
+
+    .buttonSettings {
+      background-image: none;
+      color: #2196f3;
+      &_glyphicon_chevron {
+        font-size: 16px;
+        height: 32px;
+        line-height: 32px;
+        width: 32px;
+        margin: -1em;
+        @media (min-width: 768px) {
+          font-size: 20px;
+          height: 50px;
+          line-height: 50px;
+          margin-top: -25px;
+          width: 50px;
+        }
+      }
+    }
+    &_right {
+      .buttonSettings
+    }
+    &_left {
+      .buttonSettings
+    }
+  }
+}
+.control_position {
+  justify-content: space-between;
+  display: flex;
+
+}
