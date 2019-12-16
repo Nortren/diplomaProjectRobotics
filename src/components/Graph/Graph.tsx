@@ -17,38 +17,16 @@ export default class Chart extends React.Component {
     canvas: object;
     x_position: number;
     y_position: number;
-
-    /**
-     * Запрос на бизнес логику для получения данных и построения по ним графиков
-     * @param interval частота обращения на БЛ
-     * @param data данные для отправки на сервер
-     */
-
-    getBlGraphsData(interval: number, data: object): void {
-        socket.emit('setGraphsData', interval, data);
-        socket.on('getGraphsData', (data) => {
-
-            this.dataProcessing(data);
-            // this.graphsUpdate(data);
-        });
-    }
+    _canvasData: object;
 
 
     componentDidMount() {
-        // this.getBlGraphsData(1000, {test: 123});
+
         //Движение графиков может отличаться в зависимости от сгенерированныхслучайночисел
-        this.createCanvas(1, 1000);
+        this.createCanvas(this.props.id, 1000);
     }
 
-    dataProcessing(data) {
-        console.log(data);
-        let countGraphs = 0;
-        for (let graphs in data.dataGraphs) {
-            this.createCanvas(graphs, 1000, data.dataGraphs[graphs]);
-            countGraphs++;
-        }
-        this.setState({graphsCount: countGraphs});
-    }
+
 
     getRandomInt(max, delay) {
         let negativeValue = 1;
@@ -69,10 +47,10 @@ export default class Chart extends React.Component {
      * @param speedDrawn скорость отрисовки
      */
     createCanvas(idCanvas: number, speedDrawn: number, data: object): void {
-        this.canvas = document.getElementById('canvasTest' + idCanvas);
+        this.canvas = document.getElementById('canvas_' + idCanvas);
         // контекст, через который будем управлять содержимым canvas
         const contextCanvas = this.canvas.getContext('2d');
-        this.setCanvas(contextCanvas, idCanvas, speedDrawn);
+        this.setCanvas(contextCanvas, idCanvas, speedDrawn, data);
     }
 
     /**
@@ -81,7 +59,7 @@ export default class Chart extends React.Component {
      * @param idCanvas
      * @param speedDrawn скорость отрисовки
      */
-    setCanvas(contextCanvas: CanvasRenderingContext2D, idCanvas: number, speedDrawn: number): void {
+    setCanvas(contextCanvas: CanvasRenderingContext2D, idCanvas: number, speedDrawn: number, data: object): void {
         // объект содержащий настройки
         this['Canvas_' + idCanvas] = {};
         this['Canvas_' + idCanvas].options = {};
@@ -90,7 +68,7 @@ export default class Chart extends React.Component {
         // центр по горизонтали и вертикали
         this.x_position = this.canvas.width / 2;
         this.y_position = this.canvas.height / 2;
-
+        this._canvasData = data;
         let count = 0;
         // длительность отрисовки одного сектора
         canvasOptions.duration = speedDrawn,
@@ -175,7 +153,7 @@ export default class Chart extends React.Component {
             // закрашиваем текущий сектор градиентом на угол равный renderingDegree
             this.drawSector(gradient, canvasOptions.width, renderingDegree, contextCanvas, canvasOptions);
 
-            this.showPercents(count, renderingDegree, contextCanvas, canvasOptions);
+            this.showPercents(count, 'TETETETE', renderingDegree, contextCanvas, canvasOptions);
 
 // закрашиваем стыки секторов
             this.drawLine(count, contextCanvas, canvasOptions);
@@ -251,7 +229,7 @@ export default class Chart extends React.Component {
      * @param contextCanvas на сколько должен быть отрисован текущий сектор
      * @param canvasOptions
      */
-    showPercents(sectorNumber: number, renderingDegree: number, contextCanvas: CanvasRenderingContext2D, canvasOptions: object): void {
+    showPercents(sectorNumber: number, sectorName: string, renderingDegree: number, contextCanvas: CanvasRenderingContext2D, canvasOptions: object): void {
         // угол в радианах, на который отрисован прогресс бар
         // на текущий момент
         let angle = canvasOptions.step * sectorNumber + renderingDegree,
@@ -275,7 +253,7 @@ export default class Chart extends React.Component {
         contextCanvas.clearRect(43, 50, 65, 50);
         // выводим текст в центр canvas
         contextCanvas.fillText(sectorNumber, this.x_position * 1, this.y_position * 0.9);
-        contextCanvas.fillText('Значение', this.x_position, this.y_position * 1.1);
+        contextCanvas.fillText(this.props.name, this.x_position, this.y_position * 1.1);
     }
 
     /**
@@ -313,9 +291,9 @@ export default class Chart extends React.Component {
     render() {
         return (
 
-                <div key="canvas" className="Graphs">
-                    <canvas id="canvasTest1" width="150" height="150"></canvas>
-                </div>
+            <div key="canvas" className="Graphs">
+                <canvas id={'canvas_'+this.props.id} width="150" height="150"></canvas>
+            </div>
 
         );
     }

@@ -9,43 +9,47 @@ export default class ElementsCarousel extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            elementShift: 0,
+            elementShiftVertical: 0,
+            elementShiftHorizontal: 0,
         };
     }
 
     carouselMoveDown(length: number) {
-        this.setState({elementShift: this.state.elementShift - 150});
-        if (this.state.elementShift <= -length) {
-            this.setState({elementShift: 0});
+        this.setState({elementShiftVertical: this.state.elementShiftVertical - 150});
+        if (this.state.elementShiftVertical <= -length) {
+            this.setState({elementShiftVertical: 0});
         }
     }
 
     carouselMoveUp() {
-        this.setState({elementShift: this.state.elementShift - 150});
-        if (this.state.elementShift <= 0) {
-            this.setState({elementShift: 0});
+        this.setState({elementShiftVertical: this.state.elementShiftVertical - 150});
+        if (this.state.elementShiftVertical <= 0) {
+            this.setState({elementShiftVertical: 0});
         }
     }
+
     carouselMoveLeft() {
-        this.setState({ elementShift: this.state.elementShift+128 });
-        if(this.state.elementShift >= 0){
-            this.setState({ elementShift:0 });
+        this.setState({elementShiftHorizontal: this.state.elementShiftHorizontal + 128});
+        if (this.state.elementShiftHorizontal >= 0) {
+            this.setState({elementShiftHorizontal: 0});
         }
     }
+
     carouselMoveRight(length) {
-        this.setState({ elementShift: this.state.elementShift-128 });
-        if(this.state.elementShift <= -length){
-            this.setState({ elementShift:0 });
+        this.setState({elementShiftHorizontal: this.state.elementShiftHorizontal - 128});
+        if (this.state.elementShiftHorizontal <= -length) {
+            this.setState({elementShiftHorizontal: 0});
         }
     }
-    getVerticalCarousel(componentRender,lengthArrayData,style){
+
+    getVerticalCarousel(componentRender, lengthArrayData, style) {
         const ComponentRender = componentRender;
         return (
             <div>
                 <div className="carousel_vertical card-body card col-12 sensorsList  list-group-flush">
                     <div style={style} className="carousel_vertical_line">
 
-                        {this.props.source.map( (object) => {
+                        {this.props.source.map((object) => {
                             return <ComponentRender name={object.name} id={object.id} key={object.id}/>
                         })}
 
@@ -68,42 +72,56 @@ export default class ElementsCarousel extends React.Component {
 
         );
     }
-    getHorizontalCarousel(componentRender,lengthArrayData,style){
+
+    getHorizontalCarousel(componentRender, lengthArrayData, style) {
         const ComponentRender = componentRender;
+        let countIDElement = 0;
         return (
             <div className="carousel_horizontal">
-                <div  className=" card-body  col-12">
-                    <div  style={ style } className="carousel_horizontal_line">
-                        {this.props.source.map( (object) => {
-                            return <ComponentRender name={object.name} id={object.id} key={object.id}/>
-                        })}
-                    </div>
+                <div className=" card-body  col-12">
+                    <div style={style} className="carousel_horizontal_line">
+                        {
+                            Object.keys(this.props.source).map((objectData) =>
+                            {
 
+                                return <ComponentRender name={this.props.source[objectData].stubGraphsName}
+                                                        id={countIDElement++}
+                                                        key={countIDElement}/>
+                            })
+                            }
+                    </div>
+                    {/*return <ComponentRender name={this.props.source[objectData].name} id={this.props.source[objectData].id} key={this.props.source[objectData].id}/>*/}
                 </div>
                 <div className="carousel-control_position carousel_horizontal card-body  col-12 ">
-                    <a className="carousel-control_left left carousel-control" href="#carousel-id" role="button" data-slide="prev">
-                        <span className="carousel-control_left_glyphicon_chevron  glyphicon glyphicon-chevron-left" aria-hidden="true" onClick={e => this.carouselMoveLeft()}></span>
+                    <a className="carousel-control_left left carousel-control" href="#carousel-id" role="button"
+                       data-slide="prev">
+                        <span className="carousel-control_left_glyphicon_chevron  glyphicon glyphicon-chevron-left"
+                              aria-hidden="true" onClick={e => this.carouselMoveLeft()}></span>
                     </a>
-                    <a className=" carousel-control_right  right carousel-control" href="#carousel-id" role="button" data-slide="next">
-                        <span className="carousel-control_right_glyphicon_chevron glyphicon glyphicon-chevron-right" aria-hidden="true" onClick={e => this.carouselMoveRight(lengthArrayData)}></span>
+                    <a className=" carousel-control_right  right carousel-control" href="#carousel-id" role="button"
+                       data-slide="next">
+                        <span className="carousel-control_right_glyphicon_chevron glyphicon glyphicon-chevron-right"
+                              aria-hidden="true" onClick={e => this.carouselMoveRight(lengthArrayData)}></span>
                     </a>
                 </div>
             </div>
         );
     }
+
     render() {
-        const style = {top: this.state.elementShift};
+        const styleVertical = {top: this.state.elementShiftVertical};
+        const styleHorizontal = {left: this.state.elementShiftHorizontal};
         //TODO эти данные должен отдавать сервер
 
         const elementContainerWidth = 300;
         const lengthArrayData = this.props.source.length * elementContainerWidth;
         const ComponentRender = this.props.template;
         const type = this.props.type;
-        if(type === "vertical") {
-            return this.getVerticalCarousel(ComponentRender, lengthArrayData, style);
+        if (type === "vertical") {
+            return this.getVerticalCarousel(ComponentRender, lengthArrayData, styleVertical);
         }
-        if(type === "horizontal") {
-            return this.getHorizontalCarousel(ComponentRender, lengthArrayData, style);
+        if (type === "horizontal") {
+            return this.getHorizontalCarousel(ComponentRender, lengthArrayData, styleHorizontal);
         }
     }
 }

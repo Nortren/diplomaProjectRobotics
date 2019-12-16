@@ -9,7 +9,7 @@ export default class SensorGenerator {
      * Генерация данных по графикам датчиков и приборов учета
      * @param numberOfSensors количество графиков которые надо с эмулировать
      */
-    stubDataGraphsGenerator(numberOfSensors: number) {
+    stubDataChartGenerator(numberOfSensors: number) {
         const graph = {};
         for (let i = 1; i < numberOfSensors; i++) {
             const graphName = 'stubGraphsName_' + i;
@@ -21,7 +21,7 @@ export default class SensorGenerator {
             }
             else if (i === 3) {
                 // graphsData[graphsValue] = this.getRandomInt(i * 8,5);
-                graphsData[graphsValue] = this.generatorRandomDataNumber(79,30,5);
+                graphsData[graphsValue] = this.generatorRandomDataNumber(120,30,5);
             }
             else {
                 graphsData[graphsValue] = this.getRandomInt(i * 15,false);

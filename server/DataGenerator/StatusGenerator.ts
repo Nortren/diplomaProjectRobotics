@@ -9,22 +9,26 @@ export default class StatusGenerator {
      * Генерация данных по диаграммам датчиков
      * @param numberOfSensors количество диаграмм которые надо с эмулировать
      */
-    stubDataChartGenerator(numberOfSensors: number) {
+    stubDataGraphsGenerator(numberOfSensors: number) {
+        const name = ['Заряд', 'Сигнал', 'Дистанция', 'Отклик мс', 'Прочие'];
+
+
         const graph = {};
-        for (let i = 1; i < numberOfSensors; i++) {
+        for (let i = 0; i < numberOfSensors; i++) {
             const graphName = 'stubGraphsName_' + i;
             const graphsData = {};
+            let graphsValueName = 'stubGraphsName';
             let graphsValue = 'stubGraphsData';
-            // graphsData[graphsValue] = this.generatorRandomDataNumber(80, i * 20);
+            graphsData[graphsValueName] = name[i];
             if (i === 2) {
-                graphsData[graphsValue] = this.getRandomInt(i * 7,2);
+                graphsData[graphsValue] = this.getRandomInt(i * 7, 2);
             }
             else if (i === 3) {
                 // graphsData[graphsValue] = this.getRandomInt(i * 8,5);
-                graphsData[graphsValue] = this.generatorRandomDataNumber(79,30,5);
+                graphsData[graphsValue] = this.generatorRandomDataNumber(79, 30, 5);
             }
             else {
-                graphsData[graphsValue] = this.getRandomInt(i * 15,false);
+                graphsData[graphsValue] = this.getRandomInt(i * 15, false);
 
             }
 

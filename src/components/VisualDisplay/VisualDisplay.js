@@ -1,32 +1,44 @@
 import React, {Component, PureComponent} from "react";
-import ElementsCarouselHorizontal from "../ElementsCarouselHorizontal/ElementsCarouselHorizontal";
+//TODO странное поведение не могу вынести из этого класса
+import '../ElementsCarousel/BootstrapModule.css'
 import ElementsCarousel from "../ElementsCarousel/ElementsCarousel";
 import Dashboard from "../Dashboard/Dashboard";
 import Graph from "../Graph/Graph";
 import VideoTranslation from "../VideoTranslation/VideoTranslation";
 import MapDisplay from "../MapDisplay/MapDisplay";
+import * as openSocket from 'socket.io-client';
 
+const socket = openSocket('http://localhost:8010');
 class VisualDisplay extends Component {
+   constructor(props) {
+      super(props);
+      this.state = {
+         graphsDataArray: {},
+
+      };
+
+   }
+
+   /**
+    * Запрос на бизнес логику для получения данных и построения по ним графиков
+    * @param interval частота обращения на БЛ
+    * @param data данные для отправки на сервер
+    */
+
+   getBlGraphsData(interval, data) {
+      socket.emit('setGraphsData', interval, data);
+      socket.on('getGraphsData', (data) => {
+
+         this.setState({graphsDataArray: data.dataGraphs});
+         // this.graphsUpdate(data);
+      });
+   }
+
+   componentDidMount(){
+       this.getBlGraphsData(1000, {test: 123});
+    }
 
     render() {
-        const graphsDataArray = [{
-            id: 1,
-            name: 'Давление',
-            // value: this.state.maxValueGraphs_1
-        }, {
-            id: 2,
-            name: 'Температура',
-            // value: this.state.maxValueGraphs_2
-        },
-            {
-                id: 3,
-                name: 'Радиационный фон',
-                // value: this.state.maxValueGraphs_3
-            }, {
-                id: 4,
-                name: 'Концентрация вредных веществ',
-                // value: this.state.maxValueGraphs_4
-            }];
 
         return (
             <div className=" col-xl-8 col-md-12 col-12  container p-4 VisualDisplay">
@@ -35,7 +47,7 @@ class VisualDisplay extends Component {
                    <MapDisplay/>
                 </div>
                 <div className=' card-body VisualDisplay-Dashboard'>
-                    <ElementsCarousel source={graphsDataArray} template={Graph} type="horizontal"/>
+                    <ElementsCarousel source={this.state.graphsDataArray} template={Graph} type="horizontal" />
                     {/*<ElementsCarouselHorizontal/>*/}
                 </div>
             </div>

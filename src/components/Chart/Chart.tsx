@@ -43,16 +43,17 @@ export default class Chart extends React.Component {
         const canvas = document.getElementById(idCanvas);
         const gr = canvas.getContext('2d');
         //Тут мы узнаем текущий размер окна где распологается график чтоб отрисовать размеры canvas
-        const bodySize = document.getElementsByClassName('carousel_vertical_line_element')[0];
-        canvas.setAttribute('width', bodySize.offsetWidth);
-        canvas.setAttribute('height', bodySize.offsetHeight * 0.6);
+        const bodySizeWidth = document.getElementsByClassName('carousel_vertical_line_element__dataContainer')[0];
+        const bodySizeHeight = document.getElementsByClassName('list-group-item carousel_vertical_line_element')[0];
+        canvas.setAttribute('width', bodySizeWidth.offsetWidth);
+        canvas.setAttribute('height', bodySizeHeight.offsetHeight * 0.6);
         const maxCount = 35 + 10;
         const x0 = 30;
         const y0 = 60;
         const width = canvas.width - 200;
         const height = canvas.height - 100;
-        const stepY = Math.round(height / bodySize.offsetHeight * 10);
-        const stepX = Math.round(width / bodySize.offsetWidth * 10);
+        const stepY = Math.round(height / bodySizeHeight.offsetHeight * 10);
+        const stepX = Math.round(width / bodySizeWidth.offsetWidth * 10);
 
         //рисуются кривые
 
@@ -106,7 +107,7 @@ export default class Chart extends React.Component {
      */
     parseData(graphsName: string, graphValue: number, graphMaxValue: number, serialNumber: number): void {
         //Чистим графики
-        if (this.state[graphsName] && this.state[graphsName].length > 79) {
+        if (this.state[graphsName] && this.state[graphsName].length > 120) {
             this.state[graphsName] = [];
         }
         //Инициализируем массив если его еще нет в который будет пушить данные с сервера

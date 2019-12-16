@@ -11,7 +11,7 @@ const server = http.createServer(app);
 io.on('connection', (client) => {
     client.on('setGraphsData', (interval, data) => {
         console.log('setGraphsDataEvent', data);
-        const generator = new SensorGenerator();
+        const generator = new StatusGenerator();
         setInterval(() => {
             const dataGraphs = generator.stubDataGraphsGenerator(5);
             io.emit('getGraphsData', { dataGraphs});
@@ -20,7 +20,7 @@ io.on('connection', (client) => {
 
     client.on('setChartData', (interval, data) => {
         console.log('setChartData', data);
-        const generator = new StatusGenerator();
+        const generator = new SensorGenerator();
         setInterval(() => {
             const dataGraphs = generator.stubDataChartGenerator(5);
 
