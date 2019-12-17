@@ -10,10 +10,13 @@ export default class SensorGenerator {
      * @param numberOfSensors количество графиков которые надо с эмулировать
      */
     stubDataChartGenerator(numberOfSensors: number) {
+        const name = ['','Давление', 'Температура', 'Радиационный фон', 'Концентрация вредных веществ', 'Прочие'];
         const graph = {};
         for (let i = 1; i < numberOfSensors; i++) {
             const graphName = 'stubGraphsName_' + i;
             const graphsData = {};
+            let graphsValueName = 'stubGraphsName';
+            graphsData[graphsValueName] = name[i];
             let graphsValue = 'stubGraphsData';
             // graphsData[graphsValue] = this.generatorRandomDataNumber(80, i * 20);
             if (i === 2) {
@@ -24,7 +27,7 @@ export default class SensorGenerator {
                 graphsData[graphsValue] = this.generatorRandomDataNumber(120,30,5);
             }
             else {
-                graphsData[graphsValue] = this.getRandomInt(i * 15,false);
+                graphsData[graphsValue] = this.getRandomInt(i * 5,false);
 
             }
 

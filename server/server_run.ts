@@ -13,7 +13,7 @@ io.on('connection', (client) => {
         console.log('setGraphsDataEvent', data);
         const generator = new StatusGenerator();
         setInterval(() => {
-            const dataGraphs = generator.stubDataGraphsGenerator(5);
+            const dataGraphs = generator.stubDataGraphsGenerator(6);
             io.emit('getGraphsData', { dataGraphs});
         }, interval);
     });

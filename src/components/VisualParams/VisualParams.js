@@ -1,35 +1,45 @@
 import React, {Component, PureComponent} from "react";
 import ElementsCarousel from '../ElementsCarousel/ElementsCarousel'
 import Chart from '../Chart/Chart';
-class VisualParams extends Component {
-
-    render(){
-        const graphsDataArray = [{
-            id: 1,
-            name: 'Давление',
-            // value: this.state.maxValueGraphs_1
-        }, {
-            id: 2,
-            name: 'Температура',
-            // value: this.state.maxValueGraphs_2
-        },
-            {
-                id: 3,
-                name: 'Радиационный фон',
-                // value: this.state.maxValueGraphs_3
-            }, {
-                id: 4,
-                name: 'Концентрация вредных веществ',
-                // value: this.state.maxValueGraphs_4
-            }];
+import * as openSocket from 'socket.io-client';
+const socket = openSocket('http://localhost:8010');
 
 
+export default class VisualParams extends Component {
+
+   constructor(props) {
+      super(props);
+      this.state = {
+         graphsDataArray: {},
+
+      };
+
+   }
+
+   /**
+    * Запрос на бизнес логику для получения данных и построения по ним графиков
+    * @param interval частота обращения на БЛ
+    * @param data данные для отправки на сервер
+    */
+
+   getBlChartData(interval, data) {
+      socket.emit('setChartData', interval, data);
+      socket.on('getChartData', (data) => {
+         this.setState({graphsDataArray: data.dataGraphs});
+      });
+   }
+
+   componentDidMount(){
+      this.getBlChartData(100, {test: 123});
+   }
+
+   render() {
         return(
             <div className="col-lg-3 col-md-12 col-12 container  p-4 VisualParams">
-               <ElementsCarousel source={graphsDataArray} template={Chart} type="vertical"/>
+               <ElementsCarousel source={this.state.graphsDataArray} template={Chart} type="vertical"/>
             </div>
         );
     }
 
 }
-export default VisualParams
+

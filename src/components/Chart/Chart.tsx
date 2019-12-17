@@ -15,21 +15,11 @@ export default class Chart extends React.Component {
     }
 
     componentDidMount() {
-        this.getBlChartData(100, {test: 123});
+        setInterval(()=>{ this.parseData(this.props.value.stubGraphsName,this.props.value.stubGraphsData,this.props.id);},100)
+
     }
 
-    /**
-     * Запрос на бизнес логику для получения данных и построения по ним графиков
-     * @param interval частота обращения на БЛ
-     * @param data данные для отправки на сервер
-     */
 
-    getBlChartData(interval: number, data: object): void {
-        socket.emit('setChartData', interval, data);
-        socket.on('getChartData', (data) => {
-            this.graphsUpdate(data);
-        });
-    }
 
     /**
      * Отрисовка графиков на Canvas
@@ -102,10 +92,10 @@ export default class Chart extends React.Component {
      * Записываем данные по контролу с графиками в state
      * @param graphsName
      * @param graphValue
-     * @param graphMaxValue
      * @param serialNumber if графика чтобы мы могли манипулировать его цветом и порядком
      */
-    parseData(graphsName: string, graphValue: number, graphMaxValue: number, serialNumber: number): void {
+    parseData(graphsName: string, graphValue: number, serialNumber: number): void {
+
         //Чистим графики
         if (this.state[graphsName] && this.state[graphsName].length > 120) {
             this.state[graphsName] = [];
@@ -124,23 +114,9 @@ export default class Chart extends React.Component {
             [graphsName]: this.state[graphsName],
             ['maxValueGraphs_' + serialNumber]: this.maxDataNumber(this.state[graphsName])
         });
-        this.drawsGraphs(serialNumber, this.state[graphsName], serialNumber - 1);
+        this.drawsGraphs(serialNumber, this.state[graphsName], serialNumber);
     }
 
-    /**
-     * записываем данные пришедшие с сервера по переменным
-     * @param graphsData
-     */
-    graphsUpdate(graphsData: object): void {
-        let serialNumber = 0;
-        for (let graph in graphsData.dataGraphs) {
-            serialNumber++;
-            const graphs = graphsData.dataGraphs[graph];
-            const graphValue = graphs.stubGraphsData;
-            const graphMaxValue = graphs.maxValueGraphs;
-            this.parseData(graph, graphValue, graphMaxValue, serialNumber);
-        }
-    }
 
     render() {
         return (
@@ -148,7 +124,7 @@ export default class Chart extends React.Component {
                 <div key={this.props.id} className="list-group-item carousel_vertical_line_element">
                     <div className="carousel_vertical_line_element__dataContainer">
                         <div
-                            className="carousel_vertical_line_element__dataContainer-name">{this.props.name}</div>
+                            className="carousel_vertical_line_element__dataContainer-name">{this.props.value.stubGraphsName}</div>
                         <div
                             className="carousel_vertical_line_element__dataContainer-value">{this.state['maxValueGraphs_' + this.props.id]}</div>
                     </div>

@@ -44,14 +44,21 @@ export default class ElementsCarousel extends React.Component {
 
     getVerticalCarousel(componentRender, lengthArrayData, style) {
         const ComponentRender = componentRender;
+        let countIDElement = 0;
         return (
             <div>
                 <div className="carousel_vertical card-body card col-12 sensorsList  list-group-flush">
                     <div style={style} className="carousel_vertical_line">
 
-                        {this.props.source.map((object) => {
-                            return <ComponentRender name={object.name} id={object.id} key={object.id}/>
-                        })}
+                        {
+                            Object.keys(this.props.source).map((objectData) =>
+                            {
+
+                                return <ComponentRender value={this.props.source[objectData]}
+                                                        id={countIDElement++}
+                                                        key={countIDElement}/>
+                            })
+                        }
 
                     </div>
 
@@ -85,6 +92,7 @@ export default class ElementsCarousel extends React.Component {
                             {
 
                                 return <ComponentRender name={this.props.source[objectData].stubGraphsName}
+                                                        value={this.props.source[objectData].stubGraphsData}
                                                         id={countIDElement++}
                                                         key={countIDElement}/>
                             })

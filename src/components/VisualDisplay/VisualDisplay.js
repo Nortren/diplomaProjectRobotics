@@ -7,9 +7,10 @@ import Graph from "../Graph/Graph";
 import VideoTranslation from "../VideoTranslation/VideoTranslation";
 import MapDisplay from "../MapDisplay/MapDisplay";
 import * as openSocket from 'socket.io-client';
-
 const socket = openSocket('http://localhost:8010');
+
 class VisualDisplay extends Component {
+
    constructor(props) {
       super(props);
       this.state = {

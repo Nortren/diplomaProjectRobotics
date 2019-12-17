@@ -26,7 +26,27 @@ export default class Chart extends React.Component {
         this.createCanvas(this.props.id, 1000);
     }
 
+    /**
+     * Нахождение максимального числа в массиве
+     * @param arrayData
+     * @returns {any}
+     */
+    maxDataNumber(arrayData: number): number {
+        arrayData = arrayData ? arrayData : 0;
 
+        let min = arrayData[0];
+        let max = min;
+        for (let i = 1; i < arrayData.length; ++i) {
+            if (arrayData[i] > max) max = arrayData[i];
+            if (arrayData[i] < min) min = arrayData[i];
+        }
+        //Т.к при возвращении цифры 0 текст не отрисовывается то возвращаем текст 0 чтобы не происходиле не планируемая перерисовка компонента
+        if (!max) {
+            max = "0";
+        }
+        return max;
+
+    }
 
     getRandomInt(max, delay) {
         let negativeValue = 1;
@@ -252,7 +272,12 @@ export default class Chart extends React.Component {
         // отсчёт координат идёт от верхнего левого угла canvas
         contextCanvas.clearRect(43, 50, 65, 50);
         // выводим текст в центр canvas
-        contextCanvas.fillText(sectorNumber, this.x_position * 1, this.y_position * 0.9);
+        let valueGraph = this.props.value;
+        if (typeof valueGraph === "object") {
+            valueGraph = 'MAX ' + this.maxDataNumber(valueGraph);
+        }
+
+        contextCanvas.fillText(valueGraph, this.x_position * 1, this.y_position * 0.9);
         contextCanvas.fillText(this.props.name, this.x_position, this.y_position * 1.1);
     }
 
@@ -292,7 +317,7 @@ export default class Chart extends React.Component {
         return (
 
             <div key="canvas" className="Graphs">
-                <canvas id={'canvas_'+this.props.id} width="150" height="150"></canvas>
+                <canvas id={'canvas_' + this.props.id} width="150" height="150"></canvas>
             </div>
 
         );
