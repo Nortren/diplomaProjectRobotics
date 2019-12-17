@@ -91,8 +91,7 @@ export default class ElementsCarousel extends React.Component {
                             Object.keys(this.props.source).map((objectData) =>
                             {
 
-                                return <ComponentRender name={this.props.source[objectData].stubGraphsName}
-                                                        value={this.props.source[objectData].stubGraphsData}
+                                return <ComponentRender value={this.props.source[objectData]}
                                                         id={countIDElement++}
                                                         key={countIDElement}/>
                             })

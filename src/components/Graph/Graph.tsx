@@ -21,9 +21,12 @@ export default class Chart extends React.Component {
 
 
     componentDidMount() {
+        //Для болнн красивой отрисовки можно поиграться с настройками запросов на сервер и времени рисования Canvas
 
-        //Движение графиков может отличаться в зависимости от сгенерированныхслучайночисел
-        this.createCanvas(this.props.id, 1000);
+        setInterval(() => {
+            //Движение графиков может отличаться в зависимости от сгенерированныхслучайночисел
+            this.createCanvas(this.props.id, 2000);
+        }, 1000);
     }
 
     /**
@@ -106,14 +109,29 @@ export default class Chart extends React.Component {
         // очищаем canvas
         contextCanvas.clearRect(0, 0, this.canvas.width, this.canvas.height);
         // рисуем подложку без анимации
-        this.drawSector('#214387', canvasOptions.width, null, contextCanvas, canvasOptions);
-        setInterval(() => {
-            canvasOptions.start = 0;
-            canvasOptions.step = this.getRadians(this.getRandomInt(300, null));
-            contextCanvas.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+
+        let valueGraph = this.props.value.stubGraphsData;
+        if (typeof valueGraph === "object") {
+            valueGraph = this.maxDataNumber(valueGraph);
+        }
+
+        canvasOptions.start = 0;
+        canvasOptions.step = this.getRadians(valueGraph);
+        contextCanvas.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        // рисуем подложку без анимации
+        if (!this.props.value.startValue) {
+
             this.drawSector('#214387', canvasOptions.width, null, contextCanvas, canvasOptions);
-            this.draw(count, contextCanvas, canvasOptions)
-        }, 3000);
+        }
+        else {
+            valueGraph = this.props.value.startValue;
+            canvasOptions.step = this.getRadians(valueGraph);
+            this.drawSector('#1CC39C', canvasOptions.width, null, contextCanvas, canvasOptions);
+        }
+
+        this.draw(count, contextCanvas, canvasOptions)
+
     }
 
     /**
@@ -169,11 +187,13 @@ export default class Chart extends React.Component {
 
             // предварительно закрашиваем текущий сектор белым цветом на угол равный renderingDegree
             // толщину берём на 2px больше, чтобы закрасить возможные артефакты
-            this.drawSector('#31364c', canvasOptions.width + 8, renderingDegree, contextCanvas, canvasOptions);
+
+                this.drawSector('#31364c', canvasOptions.width + 8, renderingDegree, contextCanvas, canvasOptions);
+
             // закрашиваем текущий сектор градиентом на угол равный renderingDegree
             this.drawSector(gradient, canvasOptions.width, renderingDegree, contextCanvas, canvasOptions);
 
-            this.showPercents(count, 'TETETETE', renderingDegree, contextCanvas, canvasOptions);
+            this.showPercents(count, renderingDegree, contextCanvas, canvasOptions);
 
 // закрашиваем стыки секторов
             this.drawLine(count, contextCanvas, canvasOptions);
@@ -195,8 +215,13 @@ export default class Chart extends React.Component {
                     // выходим из функции рисования прогресс бара
                     return;
                 }
-                // угол, с которого начинает отрисовываться следующий сектор
-                canvasOptions.start += canvasOptions.step;
+                ;
+                if (this.props.value.startValue) {
+                    canvasOptions.start += this.getRadians(this.props.value.startValue);
+                } else {
+                    // угол, с которого начинает отрисовываться следующий сектор
+                    canvasOptions.start += canvasOptions.step;
+                }
                 // запускаем рисование следующего сектора, рекурсивно
                 // вызывая функцию draw
                 return this.draw(count, contextCanvas, canvasOptions);
@@ -227,9 +252,13 @@ export default class Chart extends React.Component {
         // вычисляем конечный угол, если renderingDegree не задан, значит рисуется подложка
         // и задаётся конечный угол прогресс бара
         let end = (renderingDegree === null) ? this.getRadians(427.5) : canvasOptions.start + renderingDegree;
+        if (this.props.value.startValue) {
+            end = (renderingDegree === null) ? this.getRadians(427.5) : canvasOptions.start + renderingDegree;
+        }
+
         // создаётся дуга, где x_position и y_position центр окружности, далее радиус, начальный и конечный угол
 
-        //Тутидёт проверка если точка начала больше точки конца значит унас идут данные на уменьшения
+        //Тут идёт проверка если точка начала больше точки конца значит унас идут данные на уменьшения
         if (canvasOptions.start > end) {
             contextCanvas.arc(this.x_position, this.y_position, canvasOptions.r, end, canvasOptions.start);
         }
@@ -249,7 +278,7 @@ export default class Chart extends React.Component {
      * @param contextCanvas на сколько должен быть отрисован текущий сектор
      * @param canvasOptions
      */
-    showPercents(sectorNumber: number, sectorName: string, renderingDegree: number, contextCanvas: CanvasRenderingContext2D, canvasOptions: object): void {
+    showPercents(sectorNumber: number, renderingDegree: number, contextCanvas: CanvasRenderingContext2D, canvasOptions: object): void {
         // угол в радианах, на который отрисован прогресс бар
         // на текущий момент
         let angle = canvasOptions.step * sectorNumber + renderingDegree,
@@ -272,13 +301,16 @@ export default class Chart extends React.Component {
         // отсчёт координат идёт от верхнего левого угла canvas
         contextCanvas.clearRect(43, 50, 65, 50);
         // выводим текст в центр canvas
-        let valueGraph = this.props.value;
+        let valueGraph = this.props.value.stubGraphsData;
         if (typeof valueGraph === "object") {
             valueGraph = 'MAX ' + this.maxDataNumber(valueGraph);
         }
+        if(this.props.value.startValue){
+            valueGraph =  this.props.value.startValue;
+        }
 
         contextCanvas.fillText(valueGraph, this.x_position * 1, this.y_position * 0.9);
-        contextCanvas.fillText(this.props.name, this.x_position, this.y_position * 1.1);
+        contextCanvas.fillText(this.props.value.stubGraphsName, this.x_position, this.y_position * 1.1);
     }
 
     /**

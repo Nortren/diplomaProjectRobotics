@@ -19,19 +19,32 @@ export default class StatusGenerator {
             const graphsData = {};
             let graphsValueName = 'stubGraphsName';
             let graphsValue = 'stubGraphsData';
+            let graphsStartValue = 'startValue';
+            /*Значение которое должно снижаться
+            логика такая, значала
+            */
+            // let revertValue()
+
+            let dataTestValue = 90;
+
+
+            setInterval(()=>{dataTestValue--},1000);
+
             graphsData[graphsValueName] = name[i];
-            if (i === 2) {
-                graphsData[graphsValue] = this.getRandomInt(i * 7, 2);
+            if (i === 1) {
+                graphsData[graphsValue] = this.getRandomInt(i * 300, false);
+                graphsData[graphsStartValue] = dataTestValue+new Date().getSeconds();
             }
             if (i === 2) {
-                graphsData[graphsValue] = this.getRandomInt(i * 7, 2);
+                graphsData[graphsValue] = this.getRandomInt(i * -170, false);
+                graphsData[graphsStartValue] = dataTestValue-new Date().getSeconds();
             }
             else if (i === 3) {
                 // graphsData[graphsValue] = this.getRandomInt(i * 8,5);
                 graphsData[graphsValue] = this.generatorRandomDataNumber(79, 30, 5);
             }
             else {
-                graphsData[graphsValue] = this.getRandomInt(i * 15, false);
+                graphsData[graphsValue] = this.getRandomInt(i * 300, false);
 
             }
 
