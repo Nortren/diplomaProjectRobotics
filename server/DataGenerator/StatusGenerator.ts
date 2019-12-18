@@ -10,10 +10,11 @@ export default class StatusGenerator {
      * @param numberOfSensors количество диаграмм которые надо с эмулировать
      */
     stubDataGraphsGenerator(numberOfSensors: number) {
-        const name = ['','Заряд', 'Сигнал', 'Дистанция', 'Отклик мс', 'Прочие'];
+        const name = ['', 'Заряд', 'Сигнал', 'Дистанция', 'Отклик мс', 'Прочие'];
 
 
         const graph = {};
+
         for (let i = 1; i < numberOfSensors; i++) {
             const graphName = 'stubGraphsName_' + i;
             const graphsData = {};
@@ -28,25 +29,41 @@ export default class StatusGenerator {
             let dataTestValue = 90;
 
 
-            setInterval(()=>{dataTestValue--},1000);
+            setInterval(() => {
+                dataTestValue--
+            }, 1000);
 
             graphsData[graphsValueName] = name[i];
             if (i === 1) {
                 graphsData[graphsValue] = this.getRandomInt(i * 300, false);
-                graphsData[graphsStartValue] = dataTestValue+new Date().getSeconds();
+                graphsData[graphsStartValue] = dataTestValue + new Date().getSeconds();
             }
             if (i === 2) {
                 graphsData[graphsValue] = this.getRandomInt(i * -170, false);
-                graphsData[graphsStartValue] = dataTestValue-new Date().getSeconds();
+                graphsData[graphsStartValue] = dataTestValue - new Date().getSeconds();
             }
-            else if (i === 3) {
+            if (i === 3) {
                 // graphsData[graphsValue] = this.getRandomInt(i * 8,5);
-                graphsData[graphsValue] = this.generatorRandomDataNumber(79, 30, 5);
+                let t = 30;
+                graphsData[graphsValue] = t;
+                console.log(dataTestValue + new Date().getSeconds());
             }
-            else {
-                graphsData[graphsValue] = this.getRandomInt(i * 300, false);
+            if (i === 4) {
+                let testNumberConst = 30;
+                let time = new Date().getSeconds();
+                if (time > 30) {
+                    testNumberConst = time * 4;
+                }
+                else {
+                    testNumberConst = time * 2;
+                }
 
+                graphsData[graphsValue] = testNumberConst;
             }
+            // else {
+            //     graphsData[graphsValue] = this.getRandomInt(i * 300, false);
+            //
+            // }
 
             graph[graphName] = graphsData;
         }

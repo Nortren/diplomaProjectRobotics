@@ -21,12 +21,12 @@ export default class Chart extends React.Component {
 
 
     componentDidMount() {
-        //Для болнн красивой отрисовки можно поиграться с настройками запросов на сервер и времени рисования Canvas
+        //Для болнее красивой отрисовки можно поиграться с настройками запросов на сервер и времени рисования Canvas
 
         setInterval(() => {
             //Движение графиков может отличаться в зависимости от сгенерированныхслучайночисел
-            this.createCanvas(this.props.id, 2000);
-        }, 1000);
+            this.createCanvas(this.props.id, 1000);
+        }, 500);
     }
 
     /**
@@ -123,10 +123,24 @@ export default class Chart extends React.Component {
         if (!this.props.value.startValue) {
 
             this.drawSector('#214387', canvasOptions.width, null, contextCanvas, canvasOptions);
+
+
         }
         else {
             valueGraph = this.props.value.startValue;
             canvasOptions.step = this.getRadians(valueGraph);
+            if (this.props.value.startValue > 90) {
+                canvasOptions.colors =  ['#FF5F62', '#FF5F62', '#2196f3', '#1343F3'];
+            }
+            else if (this.props.value.startValue > 60) {
+                canvasOptions.colors =  ['#FF5F62', '#FF5F62', '#FF5F62', '#2196f3'];
+            }
+            else if (this.props.value.startValue > 35) {
+                canvasOptions.colors =  ['#FF5F62', '#FF5F62', '#1CC39C', '#1CC39C'];
+            }
+            else if (this.props.value.startValue <= 35) {
+                canvasOptions.colors =  ['#FF5F62', '#FF5F62', '#FF5F62', '#FF5F62'];
+            }
             this.drawSector('#1CC39C', canvasOptions.width, null, contextCanvas, canvasOptions);
         }
 
@@ -143,6 +157,22 @@ export default class Chart extends React.Component {
         return Math.PI / 180 * deg;
     }
 
+    //Очень странная функция
+    getColor() {
+        const fullRadius = 2 * Math.PI;
+        let colorCount = this.props.value.startValue / fullRadius;
+        let resCount = colorCount.toString().split(".")[1][0] + colorCount.toString().split(".")[1][1];
+
+        if (parseInt(resCount) < 25) {
+            return 1;
+        }
+        if (parseInt(resCount) < 50) {
+            return 2;
+        }
+        if (parseInt(resCount) < 75) {
+            return 3;
+        }
+    }
     /**
      * Метод отрисовки Canvas
      * @param count
@@ -188,7 +218,7 @@ export default class Chart extends React.Component {
             // предварительно закрашиваем текущий сектор белым цветом на угол равный renderingDegree
             // толщину берём на 2px больше, чтобы закрасить возможные артефакты
 
-                this.drawSector('#31364c', canvasOptions.width + 8, renderingDegree, contextCanvas, canvasOptions);
+            this.drawSector('#31364c', canvasOptions.width + 8, renderingDegree, contextCanvas, canvasOptions);
 
             // закрашиваем текущий сектор градиентом на угол равный renderingDegree
             this.drawSector(gradient, canvasOptions.width, renderingDegree, contextCanvas, canvasOptions);
@@ -305,8 +335,8 @@ export default class Chart extends React.Component {
         if (typeof valueGraph === "object") {
             valueGraph = 'MAX ' + this.maxDataNumber(valueGraph);
         }
-        if(this.props.value.startValue){
-            valueGraph =  this.props.value.startValue;
+        if (this.props.value.startValue) {
+            valueGraph = this.props.value.startValue;
         }
 
         contextCanvas.fillText(valueGraph, this.x_position * 1, this.y_position * 0.9);
