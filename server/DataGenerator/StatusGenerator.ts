@@ -43,27 +43,35 @@ export default class StatusGenerator {
                 graphsData[graphsStartValue] = dataTestValue - new Date().getSeconds();
             }
             if (i === 3) {
-                // graphsData[graphsValue] = this.getRandomInt(i * 8,5);
-                let t = 30;
-                graphsData[graphsValue] = t;
-                console.log(dataTestValue + new Date().getSeconds());
+                graphsData[graphsValue] = this.getRandomInt(i * 300, false);
+                graphsData[graphsStartValue] = dataTestValue + new Date().getSeconds()*2;
             }
             if (i === 4) {
-                let testNumberConst = 30;
-                let time = new Date().getSeconds();
-                if (time > 30) {
-                    testNumberConst = time * 4;
-                }
-                else {
-                    testNumberConst = time * 2;
-                }
-
-                graphsData[graphsValue] = testNumberConst;
+                graphsData[graphsValue] = this.getRandomInt(i * -170, false);
+                graphsData[graphsStartValue] = dataTestValue - new Date().getSeconds()*2;
             }
-            // else {
-            //     graphsData[graphsValue] = this.getRandomInt(i * 300, false);
-            //
+            // if (i === 3) {
+            //     // graphsData[graphsValue] = this.getRandomInt(i * 8,5);
+            //     let t = 30;
+            //     graphsData[graphsValue] = t;
+            //     console.log(dataTestValue + new Date().getSeconds());
             // }
+            // if (i === 4) {
+            //     let testNumberConst = 30;
+            //     let time = new Date().getSeconds();
+            //     if (time > 30) {
+            //         testNumberConst = time * 4;
+            //     }
+            //     else {
+            //         testNumberConst = time * 2;
+            //     }
+            //
+            //     graphsData[graphsValue] = testNumberConst;
+            // }
+            else {
+                graphsData[graphsValue] = this.getRandomInt(i * 300, 4);
+
+            }
 
             graph[graphName] = graphsData;
         }

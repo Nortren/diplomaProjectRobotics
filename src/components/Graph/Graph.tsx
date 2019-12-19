@@ -129,16 +129,16 @@ export default class Chart extends React.Component {
         else {
             valueGraph = this.props.value.startValue;
             canvasOptions.step = this.getRadians(valueGraph);
-            if (this.props.value.startValue > 90) {
+            if (this.props.value.startValue > 75) {
                 canvasOptions.colors =  ['#FF5F62', '#2196f3', '#1343F3', '#1343F3'];
             }
             else if (this.props.value.startValue > 60) {
                 canvasOptions.colors =  ['#FF5F62', '#FF5F62', '#2196f3', '#2196f3'];
             }
-            else if (this.props.value.startValue > 45) {
+            else if (this.props.value.startValue > 35) {
                 canvasOptions.colors =  ['#FF5F62', '#FF5F62', '#FF5F62', '#2196f3'];
             }
-            else if (this.props.value.startValue <= 45) {
+            else if (this.props.value.startValue <= 35) {
                 canvasOptions.colors =  ['#FF5F62', '#FF5F62', '#FF5F62', '#FF5F62'];
             }
             this.drawSector('#214387', canvasOptions.width, null, contextCanvas, canvasOptions);
