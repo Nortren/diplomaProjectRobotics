@@ -47,9 +47,9 @@ export default class StatusGenerator {
             }
             if (i === 3) {
                 if(new Date().getSeconds() > 30){
-                    graphsData[graphsStartValue] = 3000 - new Date().getSeconds()*30;
+                    graphsData[graphsStartValue] = 3000 - new Date().getSeconds()*45;
                 }else {
-                    graphsData[graphsStartValue] = 3000 + new Date().getSeconds()*30;
+                    graphsData[graphsStartValue] = 3000 + new Date().getSeconds()*25;
                 }
                 graphsData[graphsValue] = this.getRandomInt(i * 300, false);
 
