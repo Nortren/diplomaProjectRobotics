@@ -127,18 +127,21 @@ export default class Chart extends React.Component {
 
         }
         else {
+            //Вычисляем значение датчиков в процентах
+            this._percentageValue = this.props.value.startValue/(this.props.value.maxValue/100);
+
             valueGraph = this.props.value.startValue;
-            canvasOptions.step = this.getRadians(valueGraph);
-            if (this.props.value.startValue > 75) {
-                canvasOptions.colors =  ['#FF5F62', '#2196f3', '#1343F3', '#1343F3'];
+            canvasOptions.step = this.getRadians(this._percentageValue);
+            if (this._percentageValue > 75) {
+                canvasOptions.colors =  ['#2196f3', '#2196f3', '#1343F3', '#1343F3'];
             }
-            else if (this.props.value.startValue > 60) {
+            else if (this._percentageValue > 60) {
                 canvasOptions.colors =  ['#FF5F62', '#FF5F62', '#2196f3', '#2196f3'];
             }
-            else if (this.props.value.startValue > 35) {
+            else if (this._percentageValue > 35) {
                 canvasOptions.colors =  ['#FF5F62', '#FF5F62', '#FF5F62', '#2196f3'];
             }
-            else if (this.props.value.startValue <= 35) {
+            else if (this._percentageValue <= 35) {
                 canvasOptions.colors =  ['#FF5F62', '#FF5F62', '#FF5F62', '#FF5F62'];
             }
             this.drawSector('#214387', canvasOptions.width, null, contextCanvas, canvasOptions);
@@ -157,22 +160,6 @@ export default class Chart extends React.Component {
         return Math.PI / 180 * deg;
     }
 
-    //Очень странная функция
-    getColor() {
-        const fullRadius = 2 * Math.PI;
-        let colorCount = this.props.value.startValue / fullRadius;
-        let resCount = colorCount.toString().split(".")[1][0] + colorCount.toString().split(".")[1][1];
-
-        if (parseInt(resCount) < 25) {
-            return 1;
-        }
-        if (parseInt(resCount) < 50) {
-            return 2;
-        }
-        if (parseInt(resCount) < 75) {
-            return 3;
-        }
-    }
     /**
      * Метод отрисовки Canvas
      * @param count
@@ -247,7 +234,7 @@ export default class Chart extends React.Component {
                 }
                 ;
                 if (this.props.value.startValue) {
-                    canvasOptions.start += this.getRadians(this.props.value.startValue);
+                    canvasOptions.start += this.getRadians(this._percentageValue);
                 } else {
                     // угол, с которого начинает отрисовываться следующий сектор
                     canvasOptions.start += canvasOptions.step;

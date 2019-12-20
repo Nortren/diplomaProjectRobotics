@@ -36,7 +36,7 @@ class VisualDisplay extends Component {
    }
 
    componentDidMount(){
-       this.getBlGraphsData(1000, {test: 123});
+       this.getBlGraphsData(100, {test: 123});
     }
 
     render() {
