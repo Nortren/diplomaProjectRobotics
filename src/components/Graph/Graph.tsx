@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './Graph.css';
+
 
 import * as openSocket from 'socket.io-client';
 
@@ -25,8 +25,8 @@ export default class Chart extends React.Component {
 
         setInterval(() => {
             //Движение графиков может отличаться в зависимости от сгенерированныхслучайночисел
-            this.createCanvas(this.props.id, 1000);
-        }, 500);
+            this.createCanvas(this.props.id, 800);
+        }, 400);
     }
 
     /**

@@ -46,13 +46,23 @@ export default class StatusGenerator {
                 graphsData[graphsMaxValue] = 1000;
             }
             if (i === 3) {
+                if(new Date().getSeconds() > 30){
+                    graphsData[graphsStartValue] = 3000 - new Date().getSeconds()*30;
+                }else {
+                    graphsData[graphsStartValue] = 3000 + new Date().getSeconds()*30;
+                }
                 graphsData[graphsValue] = this.getRandomInt(i * 300, false);
-                graphsData[graphsStartValue] = this.getRandomInt(new Date().getSeconds()+1, false) ;
-                graphsData[graphsMaxValue] = 60;
+
+                graphsData[graphsMaxValue] = 3000;
             }
             if (i === 4) {
-                graphsData[graphsValue] = this.getRandomInt(i * -170, false);
-                graphsData[graphsStartValue] = 300 - new Date().getSeconds()*10;
+                graphsData[graphsValue] = this.getRandomInt(i * 300, false);
+                graphsData[graphsStartValue] = 60 - new Date().getSeconds();
+                graphsData[graphsMaxValue] = 60;
+            }
+            if (i === 5) {
+                graphsData[graphsValue] = this.getRandomInt(i * 300, false);
+                graphsData[graphsStartValue] = 240 - new Date().getSeconds();
                 graphsData[graphsMaxValue] = 300;
             }
             else {

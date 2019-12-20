@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './Chart.css';
+
 
 import * as openSocket from 'socket.io-client';
 
