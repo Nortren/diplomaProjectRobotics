@@ -57,7 +57,7 @@ export default class StatusGenerator {
             }
             if (i === 4) {
                 graphsData[graphsValue] = this.getRandomInt(i * 300, false);
-                graphsData[graphsStartValue] = 60 - new Date().getSeconds();
+                graphsData[graphsStartValue] = -60 + new Date().getSeconds() * 4;
                 graphsData[graphsMaxValue] = 60;
             }
             if (i === 5) {
