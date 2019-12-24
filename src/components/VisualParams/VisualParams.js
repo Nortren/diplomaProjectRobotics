@@ -34,9 +34,14 @@ export default class VisualParams extends Component {
    }
 
    render() {
+      let typePosition = "vertical";
+      if(screen.width < 1024){
+         typePosition = "horizontal"
+      }
+
         return(
-            <div className="col-lg-3 col-md-12 col-12 container  p-4 VisualParams">
-               <ElementsCarousel source={this.state.graphsDataArray} template={Chart} type="vertical"/>
+            <div className="col-lg-12 col-xl-3  col-md-12 col-12 container  p-4 VisualParams">
+               <ElementsCarousel source={this.state.graphsDataArray} template={Chart} type={typePosition}/>
             </div>
         );
     }
