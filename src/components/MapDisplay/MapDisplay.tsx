@@ -1,4 +1,4 @@
-import React, {Component, PureComponent} from "react";
+import * as React from 'react';
 import {YMaps, Map, Placemark,Polyline} from "react-yandex-maps";
 
 const mapData = {
@@ -11,7 +11,7 @@ const coordinates = [
     [55.825120, 37.649305]
 ];
 
-class MapDisplay extends Component {
+export default class MapDisplay extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -67,7 +67,7 @@ class MapDisplay extends Component {
         return (
             <div className="dataVisualisation card-body col-lg-6 col-md-12 col-12">
                 <YMaps className="dataVisualisation">
-                    <Map defaultState={mapData} style={{width: '100%', height: '100%'}}>
+                    <Map defaultState={mapData} style={{width: '100%', height: '110%'}}>
                         <Polyline
                             geometry={this.state.coordinate}
                             options={{
@@ -84,4 +84,3 @@ class MapDisplay extends Component {
         )
     }
 }
-export default MapDisplay

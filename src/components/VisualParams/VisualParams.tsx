@@ -1,11 +1,11 @@
-import React, {Component, PureComponent} from "react";
+import * as React from 'react';
 import ElementsCarousel from '../ElementsCarousel/ElementsCarousel'
 import Chart from '../Chart/Chart';
 import * as openSocket from 'socket.io-client';
 const socket = openSocket('http://localhost:8010');
 
 
-export default class VisualParams extends Component {
+export default class VisualParams extends React.Component {
 
    constructor(props) {
       super(props);

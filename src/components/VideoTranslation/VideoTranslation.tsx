@@ -1,16 +1,16 @@
-import React, { Component, PureComponent } from 'react';
+import * as React from 'react';
 
-class VideoTranslation extends Component {
+export default class VideoTranslation  extends React.Component {
    componentDidMount() {
       const canvas = document.querySelector('#canvas');
       let ctx = canvas.getContext('2d');
 
-      // setInterval((a) => {
-      //    this.cameraRecording(this.ctx);
-      // }, 1000);
-      // setInterval((a) => {
-      //    this.drawCanvasCamera(ctx);
-      // }, 100);
+      setInterval((a) => {
+         this.cameraRecording(this.ctx);
+      }, 1000);
+      setInterval((a) => {
+         this.drawCanvasCamera(ctx);
+      }, 100);
 
    }
 
@@ -71,5 +71,3 @@ class VideoTranslation extends Component {
       );
    }
 }
-
-export default VideoTranslation;

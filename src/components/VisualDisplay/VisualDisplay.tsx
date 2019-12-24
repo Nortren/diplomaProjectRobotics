@@ -1,4 +1,4 @@
-import React, {Component, PureComponent} from "react";
+import * as React from 'react';
 //TODO странное поведение не могу вынести из этого класса
 import '../ElementsCarousel/BootstrapModule.css'
 import ElementsCarousel from "../ElementsCarousel/ElementsCarousel";
@@ -9,7 +9,7 @@ import MapDisplay from "../MapDisplay/MapDisplay";
 import * as openSocket from 'socket.io-client';
 const socket = openSocket('http://localhost:8010');
 
-class VisualDisplay extends Component {
+export default class VisualDisplay extends React.Component {
 
    constructor(props) {
       super(props);
@@ -56,4 +56,3 @@ class VisualDisplay extends Component {
     }
 
 }
-export default VisualDisplay
