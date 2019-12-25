@@ -1,10 +1,16 @@
 import * as React from 'react';
 import ElementsCarousel from '../ElementsCarousel/ElementsCarousel'
+import BusinessLogic from "../BusinessLogic";
 import Chart from '../Chart/Chart';
 import * as openSocket from 'socket.io-client';
 const socket = openSocket('http://localhost:8010');
 
-
+interface Interface {
+    
+}
+/**
+ * Компонент отображения гор
+ */
 export default class VisualParams extends React.Component {
 
    constructor(props) {
@@ -16,21 +22,8 @@ export default class VisualParams extends React.Component {
 
    }
 
-   /**
-    * Запрос на бизнес логику для получения данных и построения по ним графиков
-    * @param interval частота обращения на БЛ
-    * @param data данные для отправки на сервер
-    */
-
-   getBlChartData(interval, data) {
-      socket.emit('setChartData', interval, data);
-      socket.on('getChartData', (data) => {
-         this.setState({graphsDataArray: data.dataGraphs});
-      });
-   }
-
    componentDidMount(){
-      this.getBlChartData(100, {test: 123});
+       new BusinessLogic().getBlChartData(100, {test: 123},(data)=>{this.setState({graphsDataArray: data.dataGraphs})});
    }
 
    render() {

@@ -6,6 +6,7 @@ import Dashboard from "../Dashboard/Dashboard";
 import Graph from "../Graph/Graph";
 import VideoTranslation from "../VideoTranslation/VideoTranslation";
 import MapDisplay from "../MapDisplay/MapDisplay";
+import BusinessLogic from "../BusinessLogic";
 import * as openSocket from 'socket.io-client';
 const socket = openSocket('http://localhost:8010');
 
@@ -20,25 +21,11 @@ export default class VisualDisplay extends React.Component {
 
    }
 
-   /**
-    * Запрос на бизнес логику для получения данных и построения по ним графиков
-    * @param interval частота обращения на БЛ
-    * @param data данные для отправки на сервер
-    */
-
-   getBlGraphsData(interval, data) {
-      socket.emit('setGraphsData', interval, data);
-      socket.on('getGraphsData', (data) => {
-
-         this.setState({graphsDataArray: data.dataGraphs});
-         // this.graphsUpdate(data);
-      });
-   }
-
    componentDidMount(){
-       this.getBlGraphsData(100, {test: 123});
+       new BusinessLogic().getBlGraphsData(1000, {testData: 'test'},(data)=>{
+           this.setState({graphsDataArray: data.dataGraphs});
+       });
     }
-
     render() {
 
         return (
