@@ -6,6 +6,7 @@ import Dashboard from "../Dashboard/Dashboard";
 import Graph from "../Graph/Graph";
 import VideoTranslation from "../VideoTranslation/VideoTranslation";
 import MapDisplay from "../MapDisplay/MapDisplay";
+import MapOfBuilding from "../MapOfBuilding/MapOfBuilding";
 import BusinessLogic from "../BusinessLogic";
 import * as openSocket from 'socket.io-client';
 const socket = openSocket('http://localhost:8010');
@@ -32,7 +33,7 @@ export default class VisualDisplay extends React.Component {
             <div className=" col-xl-8 col-md-12 col-12  container p-4 VisualDisplay">
                 <div className="row  card-body ">
                     <VideoTranslation />
-                   <MapDisplay/>
+                   <MapOfBuilding/>
                 </div>
                 <div className=' card-body VisualDisplay-Dashboard'>
                     <ElementsCarousel source={this.state.graphsDataArray} template={Graph} type="horizontal" />
