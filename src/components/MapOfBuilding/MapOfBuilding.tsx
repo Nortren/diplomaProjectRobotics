@@ -11,52 +11,32 @@ export default class MapOfBuilding extends React.Component {
 
     componentDidMount(prevProps) {
 
-        setInterval(() => {
-            this.mapUpdate();
-        }, 500)
-
+        // setInterval(() => {
+        //     //Движение графиков может отличаться в зависимости от сгенерированныхслучайночисел
+        //     this.createCanvas(1, 800);
+        // }, 400);
+        this.createCanvas();
     }
 
-    componentDidUpdate(prevProps) {
-        // console.log('componentDidUpdate');
-    }
-    getRandomInt(max) {
-        return Math.floor(Math.random(max) * Math.floor(max));
-    }
-    mapUpdate() {
-
-        this.state.coordinate =[this.state.coordinate[1] || [55.824604, 37.648588],
-            this.state.coordinate[2] || [55.824604, 37.648588],
-            this.state.coordinate[3] || [55.824604, 37.648588],
-            this.state.coordinate[4] || [55.824604, 37.648588],
-            this.state.coordinate[5] || [55.824604, 37.648588],
-            this.state.coordinate[6] || [55.824604, 37.648588],
-            this.state.coordinate[7] || [55.824604, 37.648588],
-            this.state.coordinate[8] || [55.824604, 37.648588],
-            this._returnArrayLine()];
-        if (this.state.coordinate.length < 100) {
-
-
-
-
-        }
-        this.setState({coordinate: this.state.coordinate});
-
-
-    }
-    _returnArrayLine(){
-        let randomNumberX = this.getRandomInt(999);
-        let randomNumberY = this.getRandomInt(999);
-        const x = "55.824"+randomNumberX;
-        const y = "37.648"+randomNumberY;
-        return [x,y]
+    /**
+     * Метод создания Canvas
+     * @param idCanvas
+     * @param speedDrawn скорость отрисовки
+     */
+    createCanvas(idCanvas: number, speedDrawn: number, data: object): void {
+        var img = new Image();
+        img.src = "src/images/plan.jpg";
+        this.canvas = document.getElementById('canvas_1777');
+        // контекст, через который будем управлять содержимым canvas
+        const contextCanvas = this.canvas.getContext('2d');
+        contextCanvas.drawImage(img,100,100);
     }
 
     render() {
 
         return (
             <div className="dataVisualisation card-body col-lg-6 col-md-12 col-12">
-123
+                <canvas id='canvas_1777' width="150" height="150"></canvas>
             </div>
         )
     }
