@@ -28,11 +28,12 @@ export default class MapOfBuilding extends React.Component {
         img.src = "src/images/plan.png";
         this.canvas = document.getElementById('canvas_1777');
         // контекст, через который будем управлять содержимым canvas
-        const width = document.getElementsByClassName('dataVisualisation')[1].offsetWidth;
-        const height = document.getElementsByClassName('dataVisualisation')[1].offsetHeight;
-        this.setState({width: width,height:height});
+        const width = document.getElementsByClassName('dataVisualisation')[1].offsetWidth * 0.95;
+        const height = document.getElementsByClassName('dataVisualisation')[1].offsetHeight * 0.75;
+        this.setState({width: width, height: height});
         const contextCanvas = this.canvas.getContext('2d');
-        img.onload = function () {
+
+        img.onload = ()=> {
             //	оператор try..catch используем для обработки ошибок, например если холст не найден
             //	в некоторых случах было замечено ошибочный вызов исключений при получении холста
             try {
@@ -40,12 +41,8 @@ export default class MapOfBuilding extends React.Component {
 
                 // Рисуем изображение от точки с координатами 10, 40
                 contextCanvas.drawImage(img, 0, 0, width, height);
-                contextCanvas.beginPath();
-                contextCanvas.moveTo(30,96);
-                contextCanvas.lineTo(70,66);
-                contextCanvas.lineTo(103,76);
-                contextCanvas.lineTo(170,15);
-                contextCanvas.stroke();
+
+                this.drawMove(contextCanvas,img, 0, 0, width, height);
             }
             catch (err) {
                 //	выводит необходимую ошибку
@@ -53,6 +50,47 @@ export default class MapOfBuilding extends React.Component {
             }
         }
 
+
+    }
+    getRandomInt(max, delay) {
+        let resultNumber = Math.floor(Math.random() * Math.floor(max));
+        if (delay && resultNumber % delay === 0) {
+            resultNumber = null;
+        }
+        return resultNumber;
+    }
+    drawMove(contextCanvas,img, a, b, widthA, heightB) {
+        let moveX = 100;
+        let moveY = 250;
+        let moveCheckY = 250;
+        let moveCheckX = 250;
+        setInterval(()=>{
+            contextCanvas.drawImage(img, 0, 0, widthA, heightB);
+
+
+            if(moveY < 310 && moveCheckY < 310){
+                moveY++;
+
+            }
+            else{
+                moveCheckY++;
+                moveY--;
+            }
+            if( moveX < 270){
+
+                moveX++;
+            }
+
+
+
+            contextCanvas.beginPath();
+            contextCanvas.arc(moveX, moveY, 5, 0, 2 * Math.PI, false);
+            contextCanvas.fillStyle = 'red';
+            contextCanvas.fill();
+            contextCanvas.lineWidth = 1;
+            contextCanvas.strokeStyle = 'red';
+            contextCanvas.stroke();
+        },100)
 
     }
 
