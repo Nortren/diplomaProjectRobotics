@@ -42,7 +42,7 @@ export default class MapOfBuilding extends React.Component {
                 // Рисуем изображение от точки с координатами 10, 40
                 contextCanvas.drawImage(img, 0, 0, width, height);
 
-                this.drawMove(contextCanvas,img, 0, 0, width, height);
+                this.drawMove(contextCanvas,img, width, height);
             }
             catch (err) {
                 //	выводит необходимую ошибку
@@ -59,29 +59,57 @@ export default class MapOfBuilding extends React.Component {
         }
         return resultNumber;
     }
-    drawMove(contextCanvas,img, a, b, widthA, heightB) {
+    drawMove(contextCanvas,img, widthA, heightB) {
         let moveX = 100;
-        let moveY = 250;
-        let moveCheckY = 250;
-        let moveCheckX = 250;
+        let moveY = 260;
+        let moveCheck = 0;
+        let rand = 1;
         setInterval(()=>{
             contextCanvas.drawImage(img, 0, 0, widthA, heightB);
 
-
-            if(moveY < 310 && moveCheckY < 310){
-                moveY++;
-
+            moveCheck++;
+            if(rand === 1) {
+                if (moveCheck < 50) {
+                    moveY++;
+                    moveX++;
+                }
+                if (moveCheck >= 50) {
+                    moveY--;
+                    moveX--;
+                }
+                if (moveCheck >= 100) {
+                    moveCheck = 0;
+                    rand++;
+                }
             }
-            else{
-                moveCheckY++;
-                moveY--;
+            if(rand === 2) {
+                if (moveCheck < 50) {
+                    moveY++;
+                    moveX++;
+                }
+                if (moveCheck >= 50) {
+                    moveY--;
+                    moveX++;
+                }
+                if (moveCheck >= 100) {
+                    moveCheck = 0;
+                    rand++;
+                }
             }
-            if( moveX < 270){
-
-                moveX++;
+            if(rand === 3) {
+                if (moveCheck < 50) {
+                    moveY--;
+                    moveX--;
+                }
+                if (moveCheck >= 50) {
+                    moveY++;
+                    moveX++;
+                }
+                if (moveCheck >= 100) {
+                    moveCheck = 0;
+                    rand = 1;
+                }
             }
-
-
 
             contextCanvas.beginPath();
             contextCanvas.arc(moveX, moveY, 5, 0, 2 * Math.PI, false);
@@ -90,7 +118,7 @@ export default class MapOfBuilding extends React.Component {
             contextCanvas.lineWidth = 1;
             contextCanvas.strokeStyle = 'red';
             contextCanvas.stroke();
-        },100)
+        },10)
 
     }
 
