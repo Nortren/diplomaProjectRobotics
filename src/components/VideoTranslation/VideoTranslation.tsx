@@ -59,8 +59,8 @@ export default class VideoTranslation  extends React.Component {
    render() {
       return (
          <div className="dataVisualisation  card-body  col-lg-6 col-12">
-            <video width="100%" height="180" id="id" style={{ display: 'none' }}></video>
-            <canvas width="640" height="180" className="canvasVideo" id="canvas"></canvas>
+            <video width="100%" height="480" id="id" style={{ display: 'none' }}></video>
+            <canvas width="640" height="480" className="canvasVideo" id="canvas"></canvas>
             {/*<img src={require('../../images/camera.png')} className="canvasVideo"  alt="fireSpot"/>*/}
             <br/>
 
