@@ -67,7 +67,7 @@ export default class MapDisplay extends React.Component {
         return (
             <div className="dataVisualisation card-body col-lg-6 col-md-12 col-12">
                 <YMaps className="dataVisualisation">
-                    <Map defaultState={mapData} style={{width: '100%', height: '110%'}}>
+                    <Map defaultState={mapData} style={{width: '100%', height: '100%'}}>
                         <Polyline
                             geometry={this.state.coordinate}
                             options={{
