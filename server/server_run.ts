@@ -1,5 +1,6 @@
 import SensorGenerator from './DataGenerator/SensorGenerator';
 import StatusGenerator from './DataGenerator/StatusGenerator';
+import ScreenplayGenerator from "./DataGenerator/ScreenplayGenerator";
 
 const express = require('express');
 const io = require('socket.io')();
@@ -25,6 +26,16 @@ io.on('connection', (client) => {
             const dataGraphs = generator.stubDataChartGenerator(5);
 
             io.emit('getChartData', { dataGraphs});
+        }, interval);
+    });
+
+    client.on('setObjectPositionData', (interval, data) => {
+        console.log('setObjectPositionData', data);
+        const generator = new ScreenplayGenerator();
+        setInterval(() => {
+            const dataObjectPosition = generator.stubScreenplayGenerator(5);
+
+            io.emit('getObjectPositionData', { dataObjectPosition});
         }, interval);
     });
 });

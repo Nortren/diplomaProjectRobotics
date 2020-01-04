@@ -11,11 +11,11 @@ export default class MapOfBuilding extends React.Component {
 
     componentDidMount(prevProps) {
 
-        // setInterval(() => {
-        //     //Движение графиков может отличаться в зависимости от сгенерированныхслучайночисел
-        //     this.createCanvas(1, 800);
-        // }, 400);
-        this.createCanvas();
+        setInterval(() => {
+            //Движение графиков может отличаться в зависимости от сгенерированныхслучайночисел
+            this.createCanvas(this.props.source);
+        }, 400);
+        // this.createCanvas();
     }
 
     /**
@@ -23,13 +23,13 @@ export default class MapOfBuilding extends React.Component {
      * @param idCanvas
      * @param speedDrawn скорость отрисовки
      */
-    createCanvas(idCanvas: number, speedDrawn: number, data: object): void {
+    createCanvas( data: object): void {
         var img = new Image();
-        img.src = "src/images/plan.png";
+        img.src = data.img_src;
         this.canvas = document.getElementById('canvas_1777');
         // контекст, через который будем управлять содержимым canvas
-        const width = document.getElementsByClassName('dataVisualisation')[1].offsetWidth * 0.95;
-        const height = document.getElementsByClassName('dataVisualisation')[1].offsetHeight * 0.75;
+        const width = document.getElementsByClassName('dataVisualisation')[1].offsetWidth * 0.93;
+        const height = document.getElementsByClassName('dataVisualisation')[1].offsetHeight * 0.77;
         this.setState({width: width, height: height});
         const contextCanvas = this.canvas.getContext('2d');
 
@@ -52,16 +52,9 @@ export default class MapOfBuilding extends React.Component {
 
 
     }
-    getRandomInt(max, delay) {
-        let resultNumber = Math.floor(Math.random() * Math.floor(max));
-        if (delay && resultNumber % delay === 0) {
-            resultNumber = null;
-        }
-        return resultNumber;
-    }
     drawMove(contextCanvas,img, widthA, heightB) {
-        let moveX = 100;
-        let moveY = 260;
+        let moveX = 50;
+        let moveY = 160;
         let moveCheck = 0;
         let rand = 1;
         setInterval(()=>{
@@ -69,15 +62,14 @@ export default class MapOfBuilding extends React.Component {
 
             moveCheck++;
             if(rand === 1) {
-                if (moveCheck < 50) {
-                    moveY++;
+                if (moveCheck < 180) {
                     moveX++;
                 }
-                if (moveCheck >= 50) {
+                if (moveCheck >= 180) {
                     moveY--;
                     moveX--;
                 }
-                if (moveCheck >= 100) {
+                if (moveCheck >= 180) {
                     moveCheck = 0;
                     rand++;
                 }
@@ -112,13 +104,13 @@ export default class MapOfBuilding extends React.Component {
             }
 
             contextCanvas.beginPath();
-            contextCanvas.arc(moveX, moveY, 5, 0, 2 * Math.PI, false);
+            contextCanvas.arc(moveX, moveY, 2, 0, 2 * Math.PI, false);
             contextCanvas.fillStyle = 'red';
             contextCanvas.fill();
             contextCanvas.lineWidth = 1;
             contextCanvas.strokeStyle = 'red';
             contextCanvas.stroke();
-        },10)
+        },50)
 
     }
 

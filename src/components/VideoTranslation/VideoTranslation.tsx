@@ -19,13 +19,13 @@ export default class VideoTranslation  extends React.Component {
       ctx.drawImage(videoImg, 0, 0);
       var data = ctx.getImageData(0, 0, canvas.width, canvas.height);
 // инвертируем каждый пиксель
-      for (let n = 0; n < data.width * data.height; n++) {
+   /*   for (let n = 0; n < data.width * data.height; n++) {
          var index = n * 4;
          data.data[index + 0] = 255 - data.data[index + 0];
          data.data[index + 1] = 255 - data.data[index + 1];
          data.data[index + 2] = 255 - data.data[index + 2];
          //don't touch the alpha
-      }
+      }*/
 
 // устанавливаем данные обратно
       ctx.putImageData(data, 0, 0);

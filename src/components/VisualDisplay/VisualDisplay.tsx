@@ -17,14 +17,18 @@ export default class VisualDisplay extends React.Component {
       super(props);
       this.state = {
          graphsDataArray: {},
-
+          mapObjectPosition:{}
       };
 
    }
 
    componentDidMount(){
-       new BusinessLogic().getBlGraphsData(1000, {testData: 'test'},(data)=>{
+       const BL = new BusinessLogic();
+       BL.getBlGraphsData(1000, {testData: 'test'},(data)=>{
            this.setState({graphsDataArray: data.dataGraphs});
+       });
+       BL.getBlObjectPosition(1000, {testData: 'test'},(data)=>{
+           this.setState({mapObjectPosition: data});
        });
     }
     render() {
@@ -34,7 +38,7 @@ export default class VisualDisplay extends React.Component {
                 <div className="row  card-body VisualDisplay_card">
                     <VideoTranslation />
                     {/*<MapDisplay/>*/}
-                   <MapOfBuilding/>
+                   <MapOfBuilding source={this.state.mapObjectPosition.dataObjectPosition} />
                 </div>
                 <div className=' card-body VisualDisplay-Dashboard'>
                     <ElementsCarousel source={this.state.graphsDataArray} template={Graph} type="horizontal" />

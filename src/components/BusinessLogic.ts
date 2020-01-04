@@ -29,4 +29,17 @@ export default class BusinessLogic {
         });
     }
 
+    /**
+     * Запрос на бизнес логику для получения данных геопозиционирования на плане здания
+     * @param interval частота обращения на БЛ
+     * @param data данные для отправки на сервер
+     */
+
+    getBlObjectPosition(interval, data, callback) {
+        socket.emit('setObjectPositionData', interval, data);
+        socket.on('getObjectPositionData', (data) => {
+            callback(data);
+        });
+    }
+
 }
