@@ -32,10 +32,24 @@ io.on('connection', (client) => {
     client.on('setObjectPositionData', (interval, data) => {
         console.log('setObjectPositionData', data);
         const generator = new ScreenplayGenerator();
-        setInterval(() => {
-            const dataObjectPosition = generator.stubScreenplayGenerator(5);
 
-            io.emit('getObjectPositionData', { dataObjectPosition});
+        let moveX = 50;
+        let moveY = 160;
+        let moveCheck = 0;
+        let rand = 1;
+
+        setInterval(() => {
+
+            const dataObjectPosition = generator.stubScreenplayGenerator(moveX,moveY,moveCheck,rand);
+
+            moveX = dataObjectPosition.moveX;
+            moveY = dataObjectPosition.moveY;
+            moveCheck = dataObjectPosition.moveCheck;
+            rand = dataObjectPosition.rand;
+
+
+
+                io.emit('getObjectPositionData', { dataObjectPosition});
         }, interval);
     });
 });

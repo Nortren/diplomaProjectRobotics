@@ -9,14 +9,7 @@ export default class ScreenplayGenerator {
      * Генерация данных по диаграммам датчиков
      * @param numberOfSensors количество диаграмм которые надо с эмулировать
      */
-    stubScreenplayGenerator(numberOfSensors: number) {
-
-
-        let moveX = 50;
-        let moveY = 160;
-        let moveCheck = 0;
-        let rand = 1;
-
+    stubScreenplayGenerator(moveX,moveY,moveCheck,rand) {
         moveCheck++;
         if (rand === 1) {
             if (moveCheck < 180) {
@@ -60,9 +53,9 @@ export default class ScreenplayGenerator {
             }
         }
 
-        let testData = this.getRandomInt(50, false);
+
         let img_src = "src/images/plan.png";
-        return {moveX, moveY, testData,img_src};
+        return {moveX, moveY,moveCheck,rand,img_src};
     }
 
     /**

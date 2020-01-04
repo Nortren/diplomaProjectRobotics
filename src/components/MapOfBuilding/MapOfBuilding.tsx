@@ -12,10 +12,8 @@ export default class MapOfBuilding extends React.Component {
     componentDidMount(prevProps) {
 
         setInterval(() => {
-            //Движение графиков может отличаться в зависимости от сгенерированныхслучайночисел
             this.createCanvas(this.props.source);
-        }, 400);
-        // this.createCanvas();
+        }, 10);
     }
 
     /**
@@ -42,7 +40,14 @@ export default class MapOfBuilding extends React.Component {
                 // Рисуем изображение от точки с координатами 10, 40
                 contextCanvas.drawImage(img, 0, 0, width, height);
 
-                this.drawMove(contextCanvas,img, width, height);
+
+                contextCanvas.beginPath();
+                contextCanvas.arc(data.moveX, data.moveY, 2, 0, 2 * Math.PI, false);
+                contextCanvas.fillStyle = 'red';
+                contextCanvas.fill();
+                contextCanvas.lineWidth = 1;
+                contextCanvas.strokeStyle = 'red';
+                contextCanvas.stroke();
             }
             catch (err) {
                 //	выводит необходимую ошибку
@@ -52,67 +57,7 @@ export default class MapOfBuilding extends React.Component {
 
 
     }
-    drawMove(contextCanvas,img, widthA, heightB) {
-        let moveX = 50;
-        let moveY = 160;
-        let moveCheck = 0;
-        let rand = 1;
-        setInterval(()=>{
-            contextCanvas.drawImage(img, 0, 0, widthA, heightB);
 
-            moveCheck++;
-            if(rand === 1) {
-                if (moveCheck < 180) {
-                    moveX++;
-                }
-                if (moveCheck >= 180) {
-                    moveY--;
-                    moveX--;
-                }
-                if (moveCheck >= 180) {
-                    moveCheck = 0;
-                    rand++;
-                }
-            }
-            if(rand === 2) {
-                if (moveCheck < 50) {
-                    moveY++;
-                    moveX++;
-                }
-                if (moveCheck >= 50) {
-                    moveY--;
-                    moveX++;
-                }
-                if (moveCheck >= 100) {
-                    moveCheck = 0;
-                    rand++;
-                }
-            }
-            if(rand === 3) {
-                if (moveCheck < 50) {
-                    moveY--;
-                    moveX--;
-                }
-                if (moveCheck >= 50) {
-                    moveY++;
-                    moveX++;
-                }
-                if (moveCheck >= 100) {
-                    moveCheck = 0;
-                    rand = 1;
-                }
-            }
-
-            contextCanvas.beginPath();
-            contextCanvas.arc(moveX, moveY, 2, 0, 2 * Math.PI, false);
-            contextCanvas.fillStyle = 'red';
-            contextCanvas.fill();
-            contextCanvas.lineWidth = 1;
-            contextCanvas.strokeStyle = 'red';
-            contextCanvas.stroke();
-        },50)
-
-    }
 
     render() {
 

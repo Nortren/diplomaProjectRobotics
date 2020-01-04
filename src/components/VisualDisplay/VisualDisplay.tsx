@@ -27,7 +27,7 @@ export default class VisualDisplay extends React.Component {
        BL.getBlGraphsData(1000, {testData: 'test'},(data)=>{
            this.setState({graphsDataArray: data.dataGraphs});
        });
-       BL.getBlObjectPosition(1000, {testData: 'test'},(data)=>{
+       BL.getBlObjectPosition(50, {testData: 'test'},(data)=>{
            this.setState({mapObjectPosition: data});
        });
     }
