@@ -15,7 +15,7 @@ io.on('connection', (client) => {
         const generator = new StatusGenerator();
         setInterval(() => {
             const dataGraphs = generator.stubDataGraphsGenerator(6);
-            io.emit('getGraphsData', { dataGraphs});
+            io.emit('getGraphsData', {dataGraphs});
         }, interval);
     });
 
@@ -25,7 +25,7 @@ io.on('connection', (client) => {
         setInterval(() => {
             const dataGraphs = generator.stubDataChartGenerator(5);
 
-            io.emit('getChartData', { dataGraphs});
+            io.emit('getChartData', {dataGraphs});
         }, interval);
     });
 
@@ -33,23 +33,24 @@ io.on('connection', (client) => {
         console.log('setObjectPositionData', data);
         const generator = new ScreenplayGenerator();
 
-        let moveX = 50;
-        let moveY = 160;
-        let moveCheck = 0;
-        let rand = 1;
+        if (!this.moveCheck) {
+            this.moveX = 50;
+            this.moveY = 160;
+            this.moveCheck = 0;
+            this.rand = 1;
+        }
 
         setInterval(() => {
 
-            const dataObjectPosition = generator.stubScreenplayGenerator(moveX,moveY,moveCheck,rand);
+            const dataObjectPosition = generator.stubScreenplayGenerator(this.moveX, this.moveY, this.moveCheck, this.rand);
+            console.log(this.moveX, this.moveY, this.moveCheck, this.rand);
+            this.moveX = dataObjectPosition.moveX;
+            this.moveY = dataObjectPosition.moveY;
+            this.moveCheck = dataObjectPosition.moveCheck;
+            this.rand = dataObjectPosition.rand;
 
-            moveX = dataObjectPosition.moveX;
-            moveY = dataObjectPosition.moveY;
-            moveCheck = dataObjectPosition.moveCheck;
-            rand = dataObjectPosition.rand;
 
-
-
-                io.emit('getObjectPositionData', { dataObjectPosition});
+            io.emit('getObjectPositionData', {dataObjectPosition});
         }, interval);
     });
 });
