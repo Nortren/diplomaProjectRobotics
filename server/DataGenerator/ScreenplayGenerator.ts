@@ -49,10 +49,19 @@ export default class ScreenplayGenerator {
             }
             if (moveCheck >= 100) {
                 moveCheck = 0;
-                rand = 1;
+                rand++;
             }
         }
+        if (rand === 4) {
+            if (moveCheck < 300) {
+                moveX--;
+            }
 
+            if (moveCheck >= 300) {
+                moveCheck = 0;
+                rand=1;
+            }
+        }
 
 
         if(moveX > 400){
