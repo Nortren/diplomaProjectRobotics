@@ -12,7 +12,9 @@ export default class MapOfBuilding extends React.Component {
     componentDidMount(prevProps) {
 
         setInterval(() => {
-            this.createCanvas(this.props.source);
+            if(this.props.source) {
+                this.createCanvas(this.props.source);
+            }
         }, 10);
     }
 

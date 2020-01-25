@@ -37,8 +37,8 @@ export default class VisualDisplay extends React.Component {
             <div className=" col-xl-8 col-md-12 col-12  container p-4 VisualDisplay">
                 <div className="row  card-body VisualDisplay_card">
                     <VideoTranslation />
-                    {/*<MapDisplay/>*/}
-                   <MapOfBuilding source={this.state.mapObjectPosition.dataObjectPosition} />
+                    <MapDisplay/>
+                   {/*<MapOfBuilding source={this.state.mapObjectPosition.dataObjectPosition} />*/}
                 </div>
                 <div className=' card-body VisualDisplay-Dashboard'>
                     <ElementsCarousel source={this.state.graphsDataArray} template={Graph} type="horizontal" />

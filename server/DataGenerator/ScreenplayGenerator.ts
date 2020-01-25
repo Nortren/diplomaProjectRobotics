@@ -54,6 +54,16 @@ export default class ScreenplayGenerator {
         }
 
 
+
+        if(moveX > 400){
+            moveX = 50;
+        }
+
+        if(moveY > 510){
+            moveY = 160;
+        }
+
+
         let img_src = "src/images/plan.png";
         return {moveX, moveY,moveCheck,rand,img_src};
     }
