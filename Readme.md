@@ -1,6 +1,6 @@
 # Firefighter work visualization system
 
-My graduation project, at the moment in its development and further development the Academy is interested in the AGPS
+My graduation project, at the moment the AGPS Academy is interested in its development
 ___
 ![](Readme/view.gif)
 ___
